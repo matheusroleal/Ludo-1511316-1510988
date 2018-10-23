@@ -6,10 +6,20 @@ import java.awt.event.ActionListener;
 public class main extends JFrame{
 	
 	public main() {
-		setBounds(0,0,770,790);
+		setBounds(0,0,1024,756);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);		
+		
 		Tabuleiro t = new Tabuleiro(750,750);
+		Dado d = new Dado();
+		
+		getContentPane().add(d.dado_btn);
 		getContentPane().add(t);
+	
+		d.dado_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				d.get_new_dado_value();
+			}
+		});
 	}
 
 	public static void main(String[] args) {
