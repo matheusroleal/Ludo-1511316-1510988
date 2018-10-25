@@ -23,11 +23,18 @@ public class Vetor {
 	}
 	
 	public void remove_jogadores_na_casa() {
-		if(jogadores_na_casa.firstElement() == 0) {
-			jogadores_na_casa.removeElementAt(0);
+		if(check_last_element_jogadores_na_casa()) {
+			System.out.print("Quantidade máxima de jogadores na peça, não pode passar");
 		}else {
-			jogadores_na_casa.removeElementAt(1);
+			jogadores_na_casa.add(0, 0);
 		}
+	}
+	
+	public boolean check_last_element_jogadores_na_casa() {
+		if(jogadores_na_casa.lastElement() != 0) {
+			return true;
+		}
+		return false;
 	}
 
 }
