@@ -12,14 +12,28 @@ public class main extends JFrame{
 		Tabuleiro t = new Tabuleiro(750,750);
 		Dado d = new Dado();
 		Salvar s = new Salvar();
+		Carregar c = new Carregar();
 		
 		getContentPane().add(d.dado_btn);
-		getContentPane().add(s.salvar_btn);
+		getContentPane().add(s.btn);
+		getContentPane().add(c.btn);
 		getContentPane().add(t);
 	
 		d.dado_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				d.get_new_dado_value();
+			}
+		});
+		
+		s.btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				s.salvar_estado_jogo();
+			}
+		});
+		
+		c.btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.carregar_estado_jogo();
 			}
 		});
 	}
