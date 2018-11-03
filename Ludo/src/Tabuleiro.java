@@ -3,15 +3,11 @@ import java.awt.*;
 import java.awt.geom.*;
 
 public class Tabuleiro extends JPanel {
-	private double larguraTela;
-	private double alturaTela;
+	private double larguraTela = 750;
+	private double alturaTela = 750;
+	public Object [][]casas = new Object[15][15];
 	
-	public Tabuleiro(double w, double h) {
-		larguraTela = w;
-		alturaTela = h;
-	}
-	
-	public void CasaInicial(Graphics2D g2d, Object[][] casas, Color a, int l, int c) {
+	public void CasaInicial(Graphics2D g2d, Color a, int l, int c) {
 		for(int i=l; i<6+l; i++) {
 			for(int j=c; j<6+c; j++) {
 				g2d.setPaint(a);
@@ -31,7 +27,7 @@ public class Tabuleiro extends JPanel {
 		return e;
 	}
 	
-	public void RetaFinal(Graphics2D g2d, Object[][]casas, Color a, int l, int c) {
+	public void RetaFinal(Graphics2D g2d, Color a, int l, int c) {
 		if(l == 7) {
 			for(int i=c; i<c+5; i++) {
 				g2d.setPaint(a);
@@ -51,7 +47,6 @@ public class Tabuleiro extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2d=(Graphics2D) g;
 		Rectangle2D rt;
-		Object [][]casas = new Object[15][15];
 		int[] cordx = new int[3];
 		int[] cordy = new int[3];
 				
@@ -70,10 +65,10 @@ public class Tabuleiro extends JPanel {
 		g2d.fill((Shape) casas[6][13]);
 		g2d.fill((Shape) casas[13][8]);
 		
-		RetaFinal(g2d, casas, Color.RED,7,1);
-		RetaFinal(g2d, casas, Color.YELLOW,7,9);
-		RetaFinal(g2d, casas, Color.GREEN,1,7);
-		RetaFinal(g2d, casas, Color.BLUE,9,7);
+		RetaFinal(g2d, Color.RED,7,1);
+		RetaFinal(g2d, Color.YELLOW,7,9);
+		RetaFinal(g2d, Color.GREEN,1,7);
+		RetaFinal(g2d, Color.BLUE,9,7);
 		
 		g2d.setPaint(Color.RED);
 		g2d.fill((Shape) casas[6][1]);		
@@ -153,10 +148,10 @@ public class Tabuleiro extends JPanel {
 		g2d.draw((Shape) new Polygon(cordx, cordy, 2));
 		
 		//casas iniciais
-		CasaInicial(g2d, casas, Color.RED, 0,0); 
-		CasaInicial(g2d, casas, Color.GREEN, 0,9);
-		CasaInicial(g2d, casas, Color.BLUE, 9,0);		
-		CasaInicial(g2d, casas, Color.YELLOW,9,9);
+		CasaInicial(g2d, Color.RED, 0,0); 
+		CasaInicial(g2d, Color.GREEN, 0,9);
+		CasaInicial(g2d, Color.BLUE, 9,0);		
+		CasaInicial(g2d, Color.YELLOW, 9,9);
 		
 		//locais onde peões ficam no início do jogo
 		casas[1][1] = new Ellipse2D.Double();
