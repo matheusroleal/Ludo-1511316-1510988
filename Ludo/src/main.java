@@ -3,10 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class main extends JFrame{
+public class Main extends JFrame{
 	
-	public main() {
-		setBounds(0,0,960,756);
+	public Main() {
+		setBounds(0,0,960,790);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);		
 		
 		Tabuleiro t = new Tabuleiro(750,750);
@@ -39,7 +39,7 @@ public class main extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		main f=new main();
+		Main f=new Main();
 		f.setVisible(true);
 	}
 }
