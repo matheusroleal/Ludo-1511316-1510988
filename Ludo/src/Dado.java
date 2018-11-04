@@ -12,7 +12,7 @@ public class Dado extends JFrame {
 		
 		dado_btn.setLayout(null);
 		dado_btn.setLocation(752,0);
-		dado_btn.setSize(100, 100);
+		dado_btn.setSize(200, 200);
 	}
 	
 	public int get_new_dado_value() {
