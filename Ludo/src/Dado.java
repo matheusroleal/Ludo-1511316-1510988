@@ -2,7 +2,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Dado extends JFrame {
+public class Dado extends JPanel {
 	public JButton dado_btn;
 	private ImageIcon dado_img;
 

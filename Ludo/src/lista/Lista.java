@@ -39,45 +39,12 @@ public class Lista {
 		tam++;
 	}
 	
-	public Object retIni() {
+	public Object ShowIni() {
 		if(tam == 0) {
 			return null;
 		}
 		
-		Object elem = ini.getElem();
-		ini = ini.getProx();
-		tam--;
-		
-		if(tam == 0) {
-			fin = null;
-		}
-		
-		return elem;
-	}
-	
-	public Object retFin() {
-		if(tam == 0) {
-			return null;
-		}else if(tam == 1) {
-			Object elem = ini.getElem();
-			ini = fin=null;
-			tam = 0;
-			return elem;
-		}
-		
-		
-		No p = ini;
-		No ant = null;
-		
-		while(p != fin) {
-			ant = p;
-			p = p.getProx();
-		}
-		
-		Object elem = p.getElem();
-		ant.setProx(null);
-		tam--;
-		fin=ant;
+		Object elem = corr.getElem();
 		
 		return elem;
 	}
