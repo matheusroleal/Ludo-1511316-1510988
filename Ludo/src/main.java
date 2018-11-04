@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class main extends JFrame{
+public class Main extends JFrame{
 
 	Lista lst = new Lista();
 
-	public main() {
+	public Main() {
 		setBounds(0,0,960,790);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -18,20 +18,18 @@ public class main extends JFrame{
 		Dado d = new Dado();
 		Salvar s = new Salvar();
 		Carregar c = new Carregar();
-		PeÃ§a p = new PeÃ§a();
+		Peça p = new Peça();
 
 		getContentPane().add(d.dado_btn);
 		getContentPane().add(s.btn);
 		getContentPane().add(c.btn);
-		getContentPane().add(p);
 		getContentPane().add(t);
 
 		d.dado_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int movimento = d.get_new_dado_value();
-				System.out.print(movimento);
 				
-				for (int i = 0; i < movimento ; i++ ) {
+				for (int i = 1; i < movimento + 1 ; i++ ) {
 					lst.prox();
 				}
 				
@@ -40,9 +38,12 @@ public class main extends JFrame{
 				int novo_x = testev.show_pos_x();
 				int novo_y = testev.show_pos_y();
 				
-//				p.desenha_peca(novo_x,novo_y,);
+				p.x = novo_x;
+				p.y = novo_y;
 				
+				getContentPane().add(p);
 				
+				lst.posIni();
 			}
 		});
 
@@ -153,7 +154,7 @@ public class main extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		main f=new main();
+		Main f=new Main();
 		f.setVisible(true);
 	}
 }
