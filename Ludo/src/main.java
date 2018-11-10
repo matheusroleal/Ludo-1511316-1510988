@@ -19,15 +19,20 @@ public class Main extends JFrame{
 		Salvar s = new Salvar();
 		Carregar c = new Carregar();
 		Peça p = new Peça();
-
+		
 		getContentPane().add(d.dado_btn);
 		getContentPane().add(s.btn);
 		getContentPane().add(c.btn);
+		getContentPane().add(p);
 		getContentPane().add(t);
 
+		p.a = Color.RED;
+		
 		d.dado_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int movimento = d.get_new_dado_value();
+
+				System.out.println(movimento);
 				
 				for (int i = 1; i < movimento + 1 ; i++ ) {
 					lst.prox();
@@ -41,9 +46,8 @@ public class Main extends JFrame{
 				p.x = novo_x;
 				p.y = novo_y;
 				
-				getContentPane().add(p);
 				
-				lst.posIni();
+				repaint();
 			}
 		});
 
