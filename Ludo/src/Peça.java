@@ -5,8 +5,8 @@ import javax.swing.*;
 public class Peça extends JPanel {
 	int x;
 	int y;
-	Object [][]casas = new Object[15][15];
 	Color a;
+	private Object [][]casas = new Object[15][15];
 	
 	public Peça(){
 		setOpaque(false);
@@ -20,9 +20,7 @@ public class Peça extends JPanel {
 		}
 	}
 	
-
 	public void paintComponent(Graphics g) {
-		System.out.println("entrei");
 		super.paintComponent(g);
 		
 		Graphics2D g2d=(Graphics2D) g;
@@ -32,8 +30,13 @@ public class Peça extends JPanel {
 		g2d.setPaint(a);
 		g2d.fill(e);
 		
-		for(int i=0; i<7; i++) {
-			if(x==7 && y==1+i || y==7 && x==1+i || x==7 && y==9+i || y==7 && x==9+i) {
+		if(x==6 && y==1 || x==1 && y==8 || x==13 && y==6 || x==8 && y==13) {
+			g2d.setPaint(Color.BLACK);
+			g2d.draw(e);
+		}
+		
+		for(int i=0; i<6; i++) {
+			if(x==7 && y==1+i || y==7 && x==1+i || x==7 && y==8+i || y==7 && x==8+i) {
 				g2d.setPaint(Color.BLACK);
 				g2d.draw(e);
 			}
