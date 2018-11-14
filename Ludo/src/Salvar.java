@@ -5,7 +5,7 @@ public class Salvar extends Botao{
 		super("Salvar",752,202);
 	}
 	
-	public void salvar_estado_jogo() {
+	public void SalvaJogo() {
 		System.out.print("Tem que fazer");
 	}
 }

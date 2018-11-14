@@ -15,15 +15,15 @@ public class Dado extends JPanel {
 		dado_btn.setSize(200, 200);
 	}
 	
-	public int get_new_dado_value() {
+	public int GeraValor() {
 		int dado_val = (int)(Math.random() * 6) + 1;
 				
-		change_image(dado_val);
+		MudaImagem(dado_val);
 		
 		return dado_val;
 	}
 	
-	private void change_image(int num) {
+	private void MudaImagem(int num) {
 		dado_img = new ImageIcon(getClass().getResource("/Imagens/Dado"+ num +".png"));
 
 		dado_btn.setIcon(dado_img);
