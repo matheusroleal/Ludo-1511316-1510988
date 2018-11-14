@@ -3,19 +3,24 @@ import lista.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class main extends JFrame{
 	
-	Jogador j1 = new Jogador("vermelho");
 	Regras r = new Regras();
 	Tabuleiro t = new Tabuleiro();
 	Dado d = new Dado();
 	Salvar s = new Salvar();
 	Carregar c = new Carregar();
+	
+	Vector<Jogador> Jogadores;
+	int jogador_turno = 0;
 
 	public main() {
 		setBounds(0,0,960,790);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		CriaJogadores();
 		
 		DesenhaBotoesCores();
 		
@@ -26,66 +31,11 @@ public class main extends JFrame{
 		getContentPane().add(t);
 
 		d.dado_btn.setEnabled(false);
-
-		/*
-		p.a = Color.GREEN;
-		
-		verde.addActionListener(new ActionListener() {
-			public void	 actionPerformed(ActionEvent e) {
-				verde.setEnabled(false);
-				
-				p1.a = Color.GREEN;
-				
-				p.x = 1;
-				p.y = 10;
-				p1.x = 1;
-				p1.y = 8;
-				
-				repaint();
-				d.dado_btn.setEnabled(true);
-			}
-		});
-		
-		p.a = Color.BLUE;
-		
-		azul.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				azul.setEnabled(false); 
-				
-				p1.a = Color.BLUE;
-				
-				p.x = 13;
-				p.y = 4;
-				p1.x = 13;
-				p1.y = 6;
-				
-				repaint();
-				d.dado_btn.setEnabled(true);
-			}
-		});
-		
-		p.a = Color.YELLOW;
-		
-		amarelo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				amarelo.setEnabled(false); 
-				
-				p1.a = Color.YELLOW;
-				
-				p.x = 10;
-				p.y = 13;
-				p1.x = 8;
-				p1.y = 13;
-				
-				repaint();
-				d.dado_btn.setEnabled(true);
-			}
-		});
-		*/
 		
 		d.dado_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int movimento = d.GeraValor();
+				Jogador j = Jogadores.elementAt(jogador_turno); 
 				
 				r.inicio = true;
 
@@ -94,16 +44,16 @@ public class main extends JFrame{
 					int m = d.GeraValor();
 					
 					for (int i = 1; i < m + 1 ; i++) {
-						j1.peoes_do_jogador.elementAt(j1.num_peca).lst.prox();
+						j.peoes_do_jogador.elementAt(j.num_peca).lst.prox();
 					}
 					
-					Vetor testev =  (Vetor) j1.peoes_do_jogador.elementAt(j1.num_peca).lst.ShowIni();
+					Vetor testev =  (Vetor) j.peoes_do_jogador.elementAt(j.num_peca).lst.ShowIni();
 	
 					int novo_x = testev.RetornaX();
 					int novo_y = testev.RetornaY();
 					
-					j1.peoes_do_jogador.elementAt(j1.num_peca).p1.x = novo_x;
-					j1.peoes_do_jogador.elementAt(j1.num_peca).p1.y = novo_y;
+					j.peoes_do_jogador.elementAt(j.num_peca).p1.x = novo_x;
+					j.peoes_do_jogador.elementAt(j.num_peca).p1.y = novo_y;
 					
 					repaint();
 				}
@@ -121,6 +71,21 @@ public class main extends JFrame{
 				c.CarregaJogo();
 			}
 		});
+	}
+	
+	public void CriaJogadores() {
+		Jogadores = new Vector<>();
+		Jogadores.insertElementAt(new Jogador("vermelho"), 0);
+		Jogadores.insertElementAt(new Jogador("verde"), 1);
+		Jogadores.insertElementAt(new Jogador("amarelo"), 2);
+		Jogadores.insertElementAt(new Jogador("azul"), 3);
+	}
+	
+	public void MudaTurno() {
+		if(jogador_turno == 3) {
+			jogador_turno = 0;
+		}
+		jogador_turno += 1;
 	}
 	
 	public void DesenhaBotoesJogo() {
@@ -161,21 +126,74 @@ public class main extends JFrame{
 		
 		vermelho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Jogador j = Jogadores.elementAt(jogador_turno); 
+
 				vermelho.setEnabled(false); 
-				j1.peoes_do_jogador.elementAt(j1.num_peca).p.x = 4;
-				j1.peoes_do_jogador.elementAt(j1.num_peca).p.y = 4;
-				j1.peoes_do_jogador.elementAt(j1.num_peca).p1.x = 6;
-				j1.peoes_do_jogador.elementAt(j1.num_peca).p1.y = 1;
+				j.peoes_do_jogador.elementAt(j.num_peca).p.x = 4;
+				j.peoes_do_jogador.elementAt(j.num_peca).p.y = 4;
+				j.peoes_do_jogador.elementAt(j.num_peca).p1.x = 6;
+				j.peoes_do_jogador.elementAt(j.num_peca).p1.y = 1;
 				
 				repaint();
 				d.dado_btn.setEnabled(true);
 			}
 		});
+				
+		verde.addActionListener(new ActionListener() {
+			public void	 actionPerformed(ActionEvent e) {
+				Jogador j = Jogadores.elementAt(jogador_turno); 
+
+				verde.setEnabled(false);
+								
+				j.peoes_do_jogador.elementAt(j.num_peca).p.x = 1;
+				j.peoes_do_jogador.elementAt(j.num_peca).p.y = 10;
+				j.peoes_do_jogador.elementAt(j.num_peca).p1.x = 1;
+				j.peoes_do_jogador.elementAt(j.num_peca).p1.y = 8;
+				
+				repaint();
+				d.dado_btn.setEnabled(true);
+			}
+		});
+				
+		azul.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Jogador j = Jogadores.elementAt(jogador_turno); 
+
+				azul.setEnabled(false); 
+								
+				j.peoes_do_jogador.elementAt(j.num_peca).p.x = 13;
+				j.peoes_do_jogador.elementAt(j.num_peca).p.y = 4;
+				j.peoes_do_jogador.elementAt(j.num_peca).p1.x = 13;
+				j.peoes_do_jogador.elementAt(j.num_peca).p1.y = 6;
+				
+				repaint();
+				d.dado_btn.setEnabled(true);
+			}
+		});
+				
+		amarelo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Jogador j = Jogadores.elementAt(jogador_turno); 
+
+				amarelo.setEnabled(false); 
+								
+				j.peoes_do_jogador.elementAt(j.num_peca).p.x = 10;
+				j.peoes_do_jogador.elementAt(j.num_peca).p.y = 13;
+				j.peoes_do_jogador.elementAt(j.num_peca).p1.x = 8;
+				j.peoes_do_jogador.elementAt(j.num_peca).p1.y = 13;
+				
+				repaint();
+				d.dado_btn.setEnabled(true);
+			}
+		});
+		
 	}
 	
 	public void DesenhaJogadores() {
-		getContentPane().add(j1.peoes_do_jogador.elementAt(j1.num_peca).p1);
-		getContentPane().add(j1.peoes_do_jogador.elementAt(j1.num_peca).p);
+		Jogador j = Jogadores.elementAt(jogador_turno); 
+
+		getContentPane().add(j.peoes_do_jogador.elementAt(j.num_peca).p1);
+		getContentPane().add(j.peoes_do_jogador.elementAt(j.num_peca).p);
 	}
 
 	public static void main(String[] args) {
