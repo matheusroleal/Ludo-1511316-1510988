@@ -2,13 +2,13 @@ import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
 
-public class Peça extends JPanel {
+public class Peca extends JPanel {
 	int x;
 	int y;
 	Color a;
 	private Object [][]casas = new Object[15][15];
 	
-	public Peça(){
+	public Peca(){
 		setOpaque(false);
 		setBackground(new Color(0,0,0,0));
 		setSize(750,750);

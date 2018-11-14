@@ -11,33 +11,33 @@ public class Vetor {
 		jogadores_na_casa.add(1, 0);
 	}
 	
-	public int show_pos_x() {
+	public int RetornaX() {
 		return this.x;
 	}
 	
-	public int show_pos_y() {
+	public int RetornaY() {
 		return this.y;
 	}
 		
-	public void add_jogadores_na_casa(int j) {
+	public void AdicionaPeca(int j) {
 		if(jogadores_na_casa.firstElement() == 0) {
 			jogadores_na_casa.add(0, j);
 		}else if(jogadores_na_casa.lastElement() == 0){
 			jogadores_na_casa.add(1, j);
 		}else {
-			System.out.print("Quantidade m�xima de jogadores na pe�a");
+			System.out.print("Quantidade maxima de jogadores na peca");
 		}
 	}
 	
-	public void remove_jogadores_na_casa() {
-		if(check_last_element_jogadores_na_casa()) {
-			System.out.print("Quantidade m�xima de jogadores na pe�a, n�o pode passar");
+	public void RemovePeca() {
+		if(VerificaUltimoElemento()) {
+			System.out.print("Quantidade maxima de jogadores na peca, nao pode passar");
 		}else {
 			jogadores_na_casa.add(0, 0);
 		}
 	}
 	
-	public boolean check_last_element_jogadores_na_casa() {
+	public boolean VerificaUltimoElemento() {
 		if(jogadores_na_casa.lastElement() != 0) {
 			return true;
 		}
