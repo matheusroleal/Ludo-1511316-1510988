@@ -39,7 +39,7 @@ public class Lista {
 		tam++;
 	}
 	
-	public Object ShowIni() {
+	public Object posCorr() {
 		if(tam == 0) {
 			return null;
 		}
