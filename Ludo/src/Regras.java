@@ -3,13 +3,10 @@ public class Regras {
 	boolean inicio;
 	
 	public boolean regras(int movimento) {
-		if(inicio == true) {
-			if(movimento != 6)
-				return false;
-			else
-				return true;
+		if(movimento == 5 && inicio == true) {
+			return true;
 		}
 		
-		return true;
+		return false;
 	}
 }
