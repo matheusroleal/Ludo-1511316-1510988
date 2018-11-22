@@ -2,11 +2,11 @@ import java.util.Vector;
 
 public class Jogador {
 	Vector<Peao> peoes_do_jogador;
-	int num_peca;
+	int num_peao;
 	
 	public Jogador(String cor_jogador) {
 		peoes_do_jogador = new Vector<>();
-		num_peca = 0;
+		num_peao = 0;
 		
 		CriaPeoes(cor_jogador);
 	}
@@ -17,9 +17,7 @@ public class Jogador {
 		}
 	}
 	
-	public void ProxPeca() {
-		if(num_peca < 4) {
-			num_peca += 1;
-		}
+	public void mudaPeao(int pos_peao) {
+		num_peao = pos_peao;
 	}
 }

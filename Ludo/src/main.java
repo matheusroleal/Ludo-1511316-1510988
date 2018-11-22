@@ -52,7 +52,8 @@ public class main extends JFrame{
 		d.dado_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int movimento = d.GeraValor();
-
+				
+				System.out.println("Jogador " + jogador_turno + "Tirou: " + movimento);
 				Jogador j1 = Jogadores.elementAt(0);
 				Jogador j2 = Jogadores.elementAt(1);
 				Jogador j3 = Jogadores.elementAt(2);
@@ -60,27 +61,27 @@ public class main extends JFrame{
 
 				if(r.regras(movimento) == true && cinco == false) {
 					if(jogador_turno == 0) {
-						j1.peoes_do_jogador.elementAt(j1.num_peca).p1.a = Color.RED;
-						j1.peoes_do_jogador.elementAt(j1.num_peca).p1.x = 6;
-						j1.peoes_do_jogador.elementAt(j1.num_peca).p1.y = 1;
+						j1.peoes_do_jogador.elementAt(j1.num_peao).p1.a = Color.RED;
+						j1.peoes_do_jogador.elementAt(j1.num_peao).p1.x = 6;
+						j1.peoes_do_jogador.elementAt(j1.num_peao).p1.y = 1;
 						c1 = true;
 					}
 					else if(jogador_turno == 1) {	
-						j2.peoes_do_jogador.elementAt(j2.num_peca).p1.a = Color.GREEN;
-						j2.peoes_do_jogador.elementAt(j2.num_peca).p1.x = 1;
-						j2.peoes_do_jogador.elementAt(j2.num_peca).p1.y = 8;
+						j2.peoes_do_jogador.elementAt(j2.num_peao).p1.a = Color.GREEN;
+						j2.peoes_do_jogador.elementAt(j2.num_peao).p1.x = 1;
+						j2.peoes_do_jogador.elementAt(j2.num_peao).p1.y = 8;
 						c2 = true;
 					}
 					else if(jogador_turno == 2) {
-						j3.peoes_do_jogador.elementAt(j3.num_peca).p1.a = Color.YELLOW;
-						j3.peoes_do_jogador.elementAt(j3.num_peca).p1.x = 8;
-						j3.peoes_do_jogador.elementAt(j3.num_peca).p1.y = 13;
+						j3.peoes_do_jogador.elementAt(j3.num_peao).p1.a = Color.YELLOW;
+						j3.peoes_do_jogador.elementAt(j3.num_peao).p1.x = 8;
+						j3.peoes_do_jogador.elementAt(j3.num_peao).p1.y = 13;
 						c3 = true;
 					}
 					else {
-						j4.peoes_do_jogador.elementAt(j4.num_peca).p1.a = Color.BLUE;
-						j4.peoes_do_jogador.elementAt(j4.num_peca).p1.x = 13;
-						j4.peoes_do_jogador.elementAt(j4.num_peca).p1.y = 6;
+						j4.peoes_do_jogador.elementAt(j4.num_peao).p1.a = Color.BLUE;
+						j4.peoes_do_jogador.elementAt(j4.num_peao).p1.x = 13;
+						j4.peoes_do_jogador.elementAt(j4.num_peao).p1.y = 6;
 						c4 = true;
 					}
 				
@@ -88,8 +89,8 @@ public class main extends JFrame{
 				}
 				
 				if(c1 == true && jogador_turno == 0) {		
-					movimento = d.GeraValor();
-					System.out.println("c1 :" + movimento);
+//					movimento = d.GeraValor();
+					System.out.println("Peao " + j1.num_peao + "c1 :" + movimento);
 					
 					if(movimento == 6)
 						sim = false;
@@ -97,17 +98,17 @@ public class main extends JFrame{
 						sim = true; 
 					
 					for (int i = 1; i < movimento + 1 ; i++) {
-						j1.peoes_do_jogador.elementAt(j1.num_peca).lst.prox();
+						j1.peoes_do_jogador.elementAt(j1.num_peao).lst.prox();
 					}
 					
-					v1 =  (Vetor) j1.peoes_do_jogador.elementAt(j1.num_peca).lst.posCorr();	
+					v1 =  (Vetor) j1.peoes_do_jogador.elementAt(j1.num_peao).lst.posCorr();	
 					
 					novo_x1 = v1.RetornaX();
 					novo_y1 = v1.RetornaY();
 					v1.AdicionaPeca(jogador_turno);
 					
-					j1.peoes_do_jogador.elementAt(j1.num_peca).p1.x = novo_x1;
-					j1.peoes_do_jogador.elementAt(j1.num_peca).p1.y = novo_y1;
+					j1.peoes_do_jogador.elementAt(j1.num_peao).p1.x = novo_x1;
+					j1.peoes_do_jogador.elementAt(j1.num_peao).p1.y = novo_y1;
 					
 					for(int i=0; i<6; i++) {
 						if(novo_x1==7 && novo_y1==1+i){
@@ -119,8 +120,8 @@ public class main extends JFrame{
 					repaint();
 				}
 				else if(c2 == true && jogador_turno == 1) {
-					movimento = d.GeraValor();
-					System.out.println("c2 :" + movimento);
+//					movimento = d.GeraValor();
+					System.out.println("Peao " + j2.num_peao + "c2 :" + movimento);
 					
 					if(movimento == 6)
 						sim = false;
@@ -128,16 +129,16 @@ public class main extends JFrame{
 						sim = true; 
 					
 					for (int i = 1; i < movimento + 1 ; i++) 
-						j2.peoes_do_jogador.elementAt(j2.num_peca).lst.prox();
+						j2.peoes_do_jogador.elementAt(j2.num_peao).lst.prox();
 					
-					v2 =  (Vetor) j2.peoes_do_jogador.elementAt(j2.num_peca).lst.posCorr();
+					v2 =  (Vetor) j2.peoes_do_jogador.elementAt(j2.num_peao).lst.posCorr();
 					v2.AdicionaPeca(jogador_turno);
 					
 					novo_x2 = v2.RetornaX();
 					novo_y2 = v2.RetornaY();
 					
-					j2.peoes_do_jogador.elementAt(j2.num_peca).p1.x = novo_x2;
-					j2.peoes_do_jogador.elementAt(j2.num_peca).p1.y = novo_y2;
+					j2.peoes_do_jogador.elementAt(j2.num_peao).p1.x = novo_x2;
+					j2.peoes_do_jogador.elementAt(j2.num_peao).p1.y = novo_y2;
 					
 					for(int i=0; i<6; i++) {
 						if(novo_y2==7 && novo_x2==1+i){
@@ -149,8 +150,8 @@ public class main extends JFrame{
 					repaint();
 				}
 				else if(c3 == true && jogador_turno == 2) {
-					movimento = d.GeraValor();
-					System.out.println("c3 :" + movimento);
+//					movimento = d.GeraValor();
+					System.out.println("Peao " + j3.num_peao + "c3 :" + movimento);
 					
 					if(movimento == 6)
 						sim = false;
@@ -158,16 +159,16 @@ public class main extends JFrame{
 						sim = true; 
 					
 					for (int i = 1; i < movimento + 1 ; i++)
-						j3.peoes_do_jogador.elementAt(j3.num_peca).lst.prox();
+						j3.peoes_do_jogador.elementAt(j3.num_peao).lst.prox();
 					
-					v3 =  (Vetor) j3.peoes_do_jogador.elementAt(j3.num_peca).lst.posCorr();	
+					v3 =  (Vetor) j3.peoes_do_jogador.elementAt(j3.num_peao).lst.posCorr();	
 					v3.AdicionaPeca(jogador_turno);
 					
 					novo_x3 = v3.RetornaX();
 					novo_y3 = v3.RetornaY();
 					
-					j3.peoes_do_jogador.elementAt(j3.num_peca).p1.x = novo_x3;
-					j3.peoes_do_jogador.elementAt(j3.num_peca).p1.y = novo_y3;
+					j3.peoes_do_jogador.elementAt(j3.num_peao).p1.x = novo_x3;
+					j3.peoes_do_jogador.elementAt(j3.num_peao).p1.y = novo_y3;
 					
 					for(int i=0; i<6; i++) {
 						if(novo_x3==7 && novo_y3==8+i){
@@ -179,8 +180,8 @@ public class main extends JFrame{
 					repaint();
 				}
 				else if(c4 == true && jogador_turno == 3){	
-					movimento = d.GeraValor();
-					System.out.println("c4 :" + movimento);	
+//					movimento = d.GeraValor();
+					System.out.println("Peao " + j4.num_peao + "c4 :" + movimento);	
 					
 					if(movimento == 6)
 						sim = false;
@@ -188,16 +189,16 @@ public class main extends JFrame{
 						sim = true; 
 					
 					for (int i = 1; i < movimento + 1 ; i++)  
-						j4.peoes_do_jogador.elementAt(j4.num_peca).lst.prox();
+						j4.peoes_do_jogador.elementAt(j4.num_peao).lst.prox();
 					
-					v4 =  (Vetor) j4.peoes_do_jogador.elementAt(j4.num_peca).lst.posCorr();
+					v4 =  (Vetor) j4.peoes_do_jogador.elementAt(j4.num_peao).lst.posCorr();
 					v4.AdicionaPeca(jogador_turno);
 					
 					novo_x4 = v4.RetornaX();
 					novo_y4 = v4.RetornaY();
 					
-					j4.peoes_do_jogador.elementAt(j4.num_peca).p1.x = novo_x4;
-					j4.peoes_do_jogador.elementAt(j4.num_peca).p1.y = novo_y4;
+					j4.peoes_do_jogador.elementAt(j4.num_peao).p1.x = novo_x4;
+					j4.peoes_do_jogador.elementAt(j4.num_peao).p1.y = novo_y4;
 					
 					for(int i=0; i<6; i++) {
 						if(novo_y4==7 && novo_x4==8+i){
@@ -212,22 +213,35 @@ public class main extends JFrame{
 				if(fim1 == true && jogador_turno == 0) {
 					movimento = d.GeraValor();
 					
-					fim = j1.peoes_do_jogador.elementAt(j1.num_peca).y_final - ((Vetor) j1.peoes_do_jogador.elementAt(j1.num_peca).lst.posCorr()).RetornaY();
+					fim = j1.peoes_do_jogador.elementAt(j1.num_peao).y_final - ((Vetor) j1.peoes_do_jogador.elementAt(j1.num_peao).lst.posCorr()).RetornaY();
 					System.out.println("fim1: " + fim);
 
 					if((fim - movimento) == 0 || movimento < fim) {
 						for (int i = 1; i < movimento + 1 ; i++) {
-							j1.peoes_do_jogador.elementAt(j1.num_peca).lst.prox();
+							j1.peoes_do_jogador.elementAt(j1.num_peao).lst.prox();
 						}
 						
-						v1 = (Vetor) j1.peoes_do_jogador.elementAt(j1.num_peca).lst.posCorr();	
+						v1 = (Vetor) j1.peoes_do_jogador.elementAt(j1.num_peao).lst.posCorr();	
 						
 						novo_x1 = v1.RetornaX();
 						novo_y1 = v1.RetornaY();
 						
-						j1.peoes_do_jogador.elementAt(j1.num_peca).p1.x = novo_x1;
-						j1.peoes_do_jogador.elementAt(j1.num_peca).p1.y = novo_y1;
+						j1.peoes_do_jogador.elementAt(j1.num_peao).p1.x = novo_x1;
+						j1.peoes_do_jogador.elementAt(j1.num_peao).p1.y = novo_y1;
 						
+					}
+					
+					if(novo_x1 == j1.peoes_do_jogador.elementAt(j1.num_peao).x_final && novo_y1 == j1.peoes_do_jogador.elementAt(j1.num_peao).y_final) {
+						int novo_peao; 
+						
+						fim1 = false;
+						
+						j1.mudaPeao(j1.num_peao+1);
+									
+						novo_peao = j1.num_peao;
+						
+						getContentPane().add(j1.peoes_do_jogador.elementAt(novo_peao).p1);
+						getContentPane().add(j1.peoes_do_jogador.elementAt(novo_peao).p);
 					}
 					
 					repaint();
@@ -236,21 +250,34 @@ public class main extends JFrame{
 				if(fim2 == true && jogador_turno == 1) {
 					movimento = d.GeraValor();
 					
-					fim = j2.peoes_do_jogador.elementAt(j2.num_peca).x_final - ((Vetor) j2.peoes_do_jogador.elementAt(j2.num_peca).lst.posCorr()).RetornaX();
+					fim = j2.peoes_do_jogador.elementAt(j2.num_peao).x_final - ((Vetor) j2.peoes_do_jogador.elementAt(j2.num_peao).lst.posCorr()).RetornaX();
 					System.out.println("fim2: " + fim);
 					
 					if((fim - movimento) == 0 || movimento < fim) {
 						for (int i = 1; i < movimento + 1 ; i++) {
-							j2.peoes_do_jogador.elementAt(j2.num_peca).lst.prox();
+							j2.peoes_do_jogador.elementAt(j2.num_peao).lst.prox();
 						}
 						
-						v2 = (Vetor) j2.peoes_do_jogador.elementAt(j2.num_peca).lst.posCorr();
+						v2 = (Vetor) j2.peoes_do_jogador.elementAt(j2.num_peao).lst.posCorr();
 						
 						novo_x2 = v2.RetornaX();
 						novo_y2 = v2.RetornaY();
 						
-						j2.peoes_do_jogador.elementAt(j2.num_peca).p1.x = novo_x2;
-						j2.peoes_do_jogador.elementAt(j2.num_peca).p1.y = novo_y2;
+						j2.peoes_do_jogador.elementAt(j2.num_peao).p1.x = novo_x2;
+						j2.peoes_do_jogador.elementAt(j2.num_peao).p1.y = novo_y2;
+					}
+					
+					if(novo_x2 == j2.peoes_do_jogador.elementAt(j2.num_peao).x_final && novo_y2 == j2.peoes_do_jogador.elementAt(j2.num_peao).y_final) {
+						int novo_peao; 
+						
+						fim2 = false;
+						
+						j4.mudaPeao(j2.num_peao+1);
+									
+						novo_peao = j2.num_peao;
+						
+						getContentPane().add(j2.peoes_do_jogador.elementAt(novo_peao).p1);
+						getContentPane().add(j2.peoes_do_jogador.elementAt(novo_peao).p);
 					}
 					
 					repaint();
@@ -259,21 +286,34 @@ public class main extends JFrame{
 				if(fim3 == true && jogador_turno == 2) {
 					movimento = d.GeraValor();
 					
-					fim = ((Vetor) j3.peoes_do_jogador.elementAt(j3.num_peca).lst.posCorr()).RetornaY() - j3.peoes_do_jogador.elementAt(j3.num_peca).y_final;
+					fim = ((Vetor) j3.peoes_do_jogador.elementAt(j3.num_peao).lst.posCorr()).RetornaY() - j3.peoes_do_jogador.elementAt(j3.num_peao).y_final;
 					System.out.println("fim3: " + fim);
 					
 					if((fim - movimento) == 0 || movimento < fim) {
 						for (int i = 1; i < movimento + 1 ; i++) {
-							j3.peoes_do_jogador.elementAt(j3.num_peca).lst.prox();
+							j3.peoes_do_jogador.elementAt(j3.num_peao).lst.prox();
 						}
 						
-						v3 = (Vetor) j3.peoes_do_jogador.elementAt(j3.num_peca).lst.posCorr();	
+						v3 = (Vetor) j3.peoes_do_jogador.elementAt(j3.num_peao).lst.posCorr();	
 						
 						novo_x3 = v3.RetornaX();
 						novo_y3 = v3.RetornaY();
 						
-						j3.peoes_do_jogador.elementAt(j3.num_peca).p1.x = novo_x3;
-						j3.peoes_do_jogador.elementAt(j3.num_peca).p1.y = novo_y3;
+						j3.peoes_do_jogador.elementAt(j3.num_peao).p1.x = novo_x3;
+						j3.peoes_do_jogador.elementAt(j3.num_peao).p1.y = novo_y3;
+					}
+					
+					if(novo_x3 == j3.peoes_do_jogador.elementAt(j3.num_peao).x_final && novo_y3 == j3.peoes_do_jogador.elementAt(j3.num_peao).y_final) {
+						int novo_peao; 
+						
+						fim3 = false;
+						
+						j3.mudaPeao(j3.num_peao+1);
+									
+						novo_peao = j3.num_peao;
+						
+						getContentPane().add(j3.peoes_do_jogador.elementAt(novo_peao).p1);
+						getContentPane().add(j3.peoes_do_jogador.elementAt(novo_peao).p);
 					}
 					
 					repaint();
@@ -283,29 +323,42 @@ public class main extends JFrame{
 				if(fim4 == true && jogador_turno == 3) {
 					movimento = d.GeraValor();
 					
-					fim = ((Vetor) j4.peoes_do_jogador.elementAt(j4.num_peca).lst.posCorr()).RetornaX() - j4.peoes_do_jogador.elementAt(j4.num_peca).x_final;
+					fim = ((Vetor) j4.peoes_do_jogador.elementAt(j4.num_peao).lst.posCorr()).RetornaX() - j4.peoes_do_jogador.elementAt(j4.num_peao).x_final;
 					System.out.println("fim4: " + fim);
 					
 					if((fim - movimento) == 0 || movimento < fim) {
 						for (int i = 1; i < movimento + 1 ; i++) {
-							j4.peoes_do_jogador.elementAt(j4.num_peca).lst.prox();
+							j4.peoes_do_jogador.elementAt(j4.num_peao).lst.prox();
 						}
 						
-						v4 = (Vetor) j4.peoes_do_jogador.elementAt(j4.num_peca).lst.posCorr();
+						v4 = (Vetor) j4.peoes_do_jogador.elementAt(j4.num_peao).lst.posCorr();
 						
 						novo_x4 = v4.RetornaX();
 						novo_y4 = v4.RetornaY();
 						
-						j4.peoes_do_jogador.elementAt(j4.num_peca).p1.x = novo_x4;
-						j4.peoes_do_jogador.elementAt(j4.num_peca).p1.y = novo_y4;
+						j4.peoes_do_jogador.elementAt(j4.num_peao).p1.x = novo_x4;
+						j4.peoes_do_jogador.elementAt(j4.num_peao).p1.y = novo_y4;
+						
 					}
 					
+					if(novo_x4 == j4.peoes_do_jogador.elementAt(j4.num_peao).x_final && novo_y4 == j4.peoes_do_jogador.elementAt(j4.num_peao).y_final) {
+						int novo_peao; 
+						
+						fim4 = false;
+						
+						j4.mudaPeao(j4.num_peao+1);
+									
+						novo_peao = j4.num_peao;
+						
+						getContentPane().add(j4.peoes_do_jogador.elementAt(novo_peao).p1);
+						getContentPane().add(j4.peoes_do_jogador.elementAt(novo_peao).p);
+					}
+										
 					repaint();
 						
 				}
 				
-				if(sim == true)
-					MudaTurno();
+				MudaTurno();
 			}
 		});
 
@@ -391,9 +444,9 @@ public class main extends JFrame{
 				
 				vermelho.setEnabled(false); 
 				
-				j1.peoes_do_jogador.elementAt(j1.num_peca).p.a = Color.RED;
-				j1.peoes_do_jogador.elementAt(j1.num_peca).p.x = 4;
-				j1.peoes_do_jogador.elementAt(j1.num_peca).p.y = 4;
+				j1.peoes_do_jogador.elementAt(j1.num_peao).p.a = Color.RED;
+				j1.peoes_do_jogador.elementAt(j1.num_peao).p.x = 4;
+				j1.peoes_do_jogador.elementAt(j1.num_peao).p.y = 4;
 				
 				repaint();
 				
@@ -407,9 +460,9 @@ public class main extends JFrame{
 
 				verde.setEnabled(false);
 				
-				j2.peoes_do_jogador.elementAt(j2.num_peca).p.a = Color.GREEN;
-				j2.peoes_do_jogador.elementAt(j2.num_peca).p.x = 1;
-				j2.peoes_do_jogador.elementAt(j2.num_peca).p.y = 10;
+				j2.peoes_do_jogador.elementAt(j2.num_peao).p.a = Color.GREEN;
+				j2.peoes_do_jogador.elementAt(j2.num_peao).p.x = 1;
+				j2.peoes_do_jogador.elementAt(j2.num_peao).p.y = 10;
 				
 				repaint();
 				d.dado_btn.setEnabled(true);
@@ -422,9 +475,9 @@ public class main extends JFrame{
 
 				azul.setEnabled(false); 
 								
-				j3.peoes_do_jogador.elementAt(j3.num_peca).p.a = Color.BLUE;
-				j3.peoes_do_jogador.elementAt(j3.num_peca).p.x = 13;
-				j3.peoes_do_jogador.elementAt(j3.num_peca).p.y = 4;
+				j3.peoes_do_jogador.elementAt(j3.num_peao).p.a = Color.BLUE;
+				j3.peoes_do_jogador.elementAt(j3.num_peao).p.x = 13;
+				j3.peoes_do_jogador.elementAt(j3.num_peao).p.y = 4;
 				
 				repaint();
 				d.dado_btn.setEnabled(true);
@@ -437,9 +490,9 @@ public class main extends JFrame{
 
 				amarelo.setEnabled(false); 
 								
-				j4.peoes_do_jogador.elementAt(j4.num_peca).p.a = Color.YELLOW;
-				j4.peoes_do_jogador.elementAt(j4.num_peca).p.x = 10;
-				j4.peoes_do_jogador.elementAt(j4.num_peca).p.y = 13;
+				j4.peoes_do_jogador.elementAt(j4.num_peao).p.a = Color.YELLOW;
+				j4.peoes_do_jogador.elementAt(j4.num_peao).p.x = 10;
+				j4.peoes_do_jogador.elementAt(j4.num_peao).p.y = 13;
 				
 				repaint();
 				d.dado_btn.setEnabled(true);
@@ -454,14 +507,14 @@ public class main extends JFrame{
 		Jogador j3 = Jogadores.elementAt(2); 
 		Jogador j4 = Jogadores.elementAt(3);
 
-		getContentPane().add(j4.peoes_do_jogador.elementAt(j4.num_peca).p1);
-		getContentPane().add(j4.peoes_do_jogador.elementAt(j4.num_peca).p);
-		getContentPane().add(j3.peoes_do_jogador.elementAt(j3.num_peca).p1);
-		getContentPane().add(j3.peoes_do_jogador.elementAt(j3.num_peca).p);
-		getContentPane().add(j2.peoes_do_jogador.elementAt(j2.num_peca).p1);
-		getContentPane().add(j2.peoes_do_jogador.elementAt(j2.num_peca).p);
-		getContentPane().add(j1.peoes_do_jogador.elementAt(j1.num_peca).p1);
-		getContentPane().add(j1.peoes_do_jogador.elementAt(j1.num_peca).p);
+		getContentPane().add(j4.peoes_do_jogador.elementAt(0).p1);
+		getContentPane().add(j4.peoes_do_jogador.elementAt(0).p);
+		getContentPane().add(j3.peoes_do_jogador.elementAt(0).p1);
+		getContentPane().add(j3.peoes_do_jogador.elementAt(0).p);
+		getContentPane().add(j2.peoes_do_jogador.elementAt(0).p1);
+		getContentPane().add(j2.peoes_do_jogador.elementAt(0).p);
+		getContentPane().add(j1.peoes_do_jogador.elementAt(0).p1);
+		getContentPane().add(j1.peoes_do_jogador.elementAt(0).p);
 	}
 
 	public static void main(String[] args) {
