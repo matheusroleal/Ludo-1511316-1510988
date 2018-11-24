@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import org.json.JSONException;
+
 import lista.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -364,7 +367,12 @@ public class main extends JFrame{
 
 		s.btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				s.SalvaJogo();
+				try {
+					s.SalvaJogo(jogador_turno,Jogadores);
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 

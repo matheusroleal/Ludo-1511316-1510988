@@ -6,5 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="/Users/matheus.leal/Documents/Matheus/PUC/POO/Ludo-1511316-1510988/java-json.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
