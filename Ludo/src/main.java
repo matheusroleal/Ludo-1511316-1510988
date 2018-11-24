@@ -1,11 +1,14 @@
 import javax.swing.*;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import lista.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Vector;
 
 public class main extends JFrame{
@@ -367,18 +370,32 @@ public class main extends JFrame{
 
 		s.btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					s.SalvaJogo(jogador_turno,Jogadores);
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				s.SalvaJogo(jogador_turno,Jogadores,c1,c2,c3,c4,fim1,fim2,fim3,fim4);
 			}
 		});
 
 		c.btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.CarregaJogo();
+				try {
+					jogador_turno = c.CarregaTurno();
+					
+					c1 = c.CarregaDado("c1");
+					c2 = c.CarregaDado("c2");
+					c3 = c.CarregaDado("c3");
+					c4 = c.CarregaDado("c4");
+					
+					fim1 = c.CarregaDado("fim1");
+					fim2 = c.CarregaDado("fim2");
+					fim3 = c.CarregaDado("fim3");
+					fim4 = c.CarregaDado("fim4");
+					
+					CarregaJogadores();
+
+				} catch (JSONException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
@@ -523,6 +540,43 @@ public class main extends JFrame{
 		getContentPane().add(j2.peoes_do_jogador.elementAt(0).p);
 		getContentPane().add(j1.peoes_do_jogador.elementAt(0).p1);
 		getContentPane().add(j1.peoes_do_jogador.elementAt(0).p);
+	}
+	
+	public void CarregaJogadores() throws IOException, JSONException {
+	    JSONObject jsonObject;
+	    Jogador j_nova_pos;
+		
+		String json_str = c.CarregaJogo();
+		
+		jsonObject = new JSONObject(json_str);
+		
+	    for(int x = 0; x < 4; x++) {
+    	    JSONArray jsonArray = new JSONArray(jsonObject.getString("j"+x));
+
+	    	j_nova_pos = Jogadores.elementAt(x);
+    	    
+	    	for(int y = 0; y < 4; y++) {
+	    		int nova_pos = (int)jsonArray.get(y);
+	    		if(nova_pos > 0) {
+		    		j_nova_pos.peoes_do_jogador.elementAt(y).lst.posIni();
+		    		
+					for (int i = 1; i < nova_pos + 1 ; i++) {
+						j_nova_pos.peoes_do_jogador.elementAt(y).lst.prox();
+					}
+					
+					Vetor v = (Vetor) j_nova_pos.peoes_do_jogador.elementAt(y).lst.posCorr();
+					
+					int novo_x = v.RetornaX();
+					int novo_y = v.RetornaY();
+					
+					j_nova_pos.peoes_do_jogador.elementAt(y).p1.x = novo_x;
+					j_nova_pos.peoes_do_jogador.elementAt(y).p1.y = novo_y;
+					
+					repaint();	
+	    		}
+	    	}
+	    }
+	    
 	}
 
 	public static void main(String[] args) {
