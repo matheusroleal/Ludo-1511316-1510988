@@ -15,25 +15,39 @@ public class Salvar extends Botao{
 		super("Salvar",752,202);
 	}
 	
-	public void SalvaJogo(int jogador_turno, Vector<Jogador> Jogadores) throws JSONException {
-		
+	public void SalvaJogo(int jogador_turno, Vector<Jogador> Jogadores, boolean c1,boolean c2,boolean c3,boolean c4,boolean fim1,boolean fim2,boolean fim3,boolean fim4) {
 	    String json_str = "{}";
-	    JSONObject jsonObject = new JSONObject(json_str);
+	    JSONObject jsonObject;
 	    JSONArray jsonArray = new JSONArray();
 	    Jogador j;
 	    
-	    for(int x = 0; x < 4; x++) {
-	    	j = Jogadores.elementAt(x);
-	    	for(int y = 0; y < 4; y++) {
-	    		 jsonArray.put(y, j.peoes_do_jogador.elementAt(y).lst.pos);
-	    	}
-	    	jsonObject.put("j"+(x+1), jsonArray.toString());
-	    }
-	    
-	    jsonObject.put("turno", jogador_turno);
-	    	    
-	    EscreverJogo(jsonObject);
-	    	    
+		try {
+			jsonObject = new JSONObject(json_str);
+		    for(int x = 0; x < 4; x++) {
+		    	j = Jogadores.elementAt(x);
+		    	for(int y = 0; y < 4; y++) {
+		    		 jsonArray.put(y, j.peoes_do_jogador.elementAt(y).lst.pos);
+		    	}
+		    	jsonObject.put("j"+x, jsonArray.toString());
+		    }
+		    
+		    jsonObject.put("turno", jogador_turno);
+		    
+		    jsonObject.put("c1", c1);
+		    jsonObject.put("c2", c2);
+		    jsonObject.put("c3", c3);
+		    jsonObject.put("c4", c4);
+		    
+		    jsonObject.put("fim1", fim1);
+		    jsonObject.put("fim2", fim2);
+		    jsonObject.put("fim3", fim3);
+		    jsonObject.put("fim4", fim4);		    
+
+		    	    
+		    EscreverJogo(jsonObject);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} 	    
 	}
 	
 	private void EscreverJogo(JSONObject jsonObject) {
@@ -44,7 +58,7 @@ public class Salvar extends Botao{
 			output.write(jsonObject.toString());
 		    output.close();
 
-		} catch (IOException e) {
+	    } catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
