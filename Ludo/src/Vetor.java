@@ -25,13 +25,13 @@ public class Vetor {
 		}else if(jogadores_na_casa.lastElement() == 0){
 			jogadores_na_casa.add(1, j);
 		}else {
-			System.out.print("Quantidade maxima de jogadores na peca");
+			System.out.print("Quantidade maxima de jogadores na casa");
 		}
 	}
 	
 	public void RemovePeca() {
 		if(VerificaUltimoElemento()) {
-			System.out.print("Quantidade maxima de jogadores na peca, nao pode passar");
+			System.out.print("Quantidade maxima de jogadores na casa, nao pode passar");
 		}else {
 			jogadores_na_casa.add(0, 0);
 		}

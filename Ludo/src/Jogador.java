@@ -17,7 +17,8 @@ public class Jogador {
 		}
 	}
 	
-	public void mudaPeao(int pos_peao) {
-		num_peao = pos_peao;
+	public void mudaPeao() {
+		if(num_peao < 4)
+			num_peao++;
 	}
 }

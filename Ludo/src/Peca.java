@@ -30,6 +30,9 @@ public class Peca extends JPanel {
 		g2d.setPaint(a);
 		g2d.fill(e);
 		
+		g2d.setPaint(Color.RED);
+		g2d.fill((Shape) casas[0][0]);
+		
 		if(x==6 && y==1 || x==1 && y==8 || x==13 && y==6 || x==8 && y==13) {
 			g2d.setPaint(Color.BLACK);
 			g2d.draw(e);

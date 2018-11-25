@@ -5,7 +5,6 @@ public class Lista {
 	private No ini=null;
 	private No fin=null;
 	private No corr=null;
-	public int pos = 0;
 	
 	public boolean vazio() {
 		if(tam != 0) {
@@ -58,8 +57,6 @@ public class Lista {
 		if(corr == null) {
 			return null;
 		}
-		
-		pos += 1;
 		
 		Object o = corr.getElem();
 		corr = corr.getProx();
