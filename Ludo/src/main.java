@@ -543,8 +543,14 @@ public class main extends JFrame{
 	}
 	
 	public void CarregaJogadores() throws IOException, JSONException {
+		Vector<Color> cores = new Vector<>();
 	    JSONObject jsonObject;
 	    Jogador j_nova_pos;
+	    
+		cores.insertElementAt(Color.RED, 0);
+		cores.insertElementAt(Color.GREEN, 1);
+		cores.insertElementAt(Color.YELLOW, 2);
+		cores.insertElementAt(Color.BLUE, 3);
 		
 		String json_str = c.CarregaJogo();
 		
@@ -552,7 +558,7 @@ public class main extends JFrame{
 		
 	    for(int x = 0; x < 4; x++) {
     	    JSONArray jsonArray = new JSONArray(jsonObject.getString("j"+x));
-
+ 
 	    	j_nova_pos = Jogadores.elementAt(x);
     	    
 	    	for(int y = 0; y < 4; y++) {
@@ -569,6 +575,7 @@ public class main extends JFrame{
 					int novo_x = v.RetornaX();
 					int novo_y = v.RetornaY();
 					
+					j_nova_pos.peoes_do_jogador.elementAt(y).p1.a = cores.elementAt(x);
 					j_nova_pos.peoes_do_jogador.elementAt(y).p1.x = novo_x;
 					j_nova_pos.peoes_do_jogador.elementAt(y).p1.y = novo_y;
 					
