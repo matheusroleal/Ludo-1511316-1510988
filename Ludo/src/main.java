@@ -1,8 +1,14 @@
 import javax.swing.*;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import lista.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Vector;
 
 public class main extends JFrame{
@@ -421,13 +427,13 @@ public class main extends JFrame{
 
 		s.btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//s.SalvaJogo(jogador_turno,Jogadores,c1,c2,c3,c4,fim1,fim2,fim3,fim4);
+				s.SalvaJogo(jogador_turno,Jogadores,c1,c2,c3,c4,fim1,fim2,fim3,fim4,y1,y2,y3,y4,cinco1,cinco2,cinco3,cinco4);
 			}
 		});
 
 		c.btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*try {
+				try {
 					jogador_turno = c.CarregaTurno();
 					
 					c1 = c.CarregaDado("c1");
@@ -435,10 +441,20 @@ public class main extends JFrame{
 					c3 = c.CarregaDado("c3");
 					c4 = c.CarregaDado("c4");
 					
-					fim1 = c.CarregaDado("fim1");
-					fim2 = c.CarregaDado("fim2");
-					fim3 = c.CarregaDado("fim3");
-					fim4 = c.CarregaDado("fim4");
+					fim1 = c.CarregaFim("fim1");
+					fim2 = c.CarregaFim("fim2");
+					fim3 = c.CarregaFim("fim3");
+					fim4 = c.CarregaFim("fim4");
+					
+					cinco1 = c.CarregaDado("cinco1");
+					cinco2 = c.CarregaDado("cinco2");
+					cinco3 = c.CarregaDado("cinco3");
+					cinco4 = c.CarregaDado("cinco4");
+					
+					y1 = c.CarregaDado("y1");
+					y2 = c.CarregaDado("y2");
+					y3 = c.CarregaDado("y3");
+					y4 = c.CarregaDado("y4");
 					
 					CarregaJogadores();
 
@@ -446,7 +462,7 @@ public class main extends JFrame{
 					e1.printStackTrace();
 				} catch (IOException e1) {
 					e1.printStackTrace();
-				}*/
+				}
 			}
 		});
 	}
@@ -609,7 +625,7 @@ public class main extends JFrame{
 		getContentPane().add(j1.peoes_do_jogador.elementAt(0).p);
 	}
 
-	/*public void CarregaJogadores() throws IOException, JSONException {
+	public void CarregaJogadores() throws IOException, JSONException {
 		Vector<Color> cores = new Vector<>();
 	    JSONObject jsonObject;
 	    Jogador j_nova_pos;
@@ -651,7 +667,7 @@ public class main extends JFrame{
 	    	}
 	    }
 	    
-	}*/
+	}
 
 	public static void main(String[] args) {
 		main f=new main();

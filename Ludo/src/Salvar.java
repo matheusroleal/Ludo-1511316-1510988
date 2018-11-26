@@ -15,7 +15,7 @@ public class Salvar extends Botao{
 		super("Salvar",752,202);
 	}
 	
-	public void SalvaJogo(int jogador_turno, Vector<Jogador> Jogadores, boolean c1,boolean c2,boolean c3,boolean c4,boolean fim1,boolean fim2,boolean fim3,boolean fim4) {
+	public void SalvaJogo(int jogador_turno, Vector<Jogador> Jogadores, boolean c1,boolean c2,boolean c3,boolean c4,int fim1,int fim2,int fim3,int fim4,boolean y1,boolean y2,boolean y3,boolean y4,boolean cinco1,boolean cinco2,boolean cinco3,boolean cinco4) {
 	    String json_str = "{}";
 	    JSONObject jsonObject;
 	    JSONArray jsonArray = new JSONArray();
@@ -41,7 +41,17 @@ public class Salvar extends Botao{
 		    jsonObject.put("fim1", fim1);
 		    jsonObject.put("fim2", fim2);
 		    jsonObject.put("fim3", fim3);
-		    jsonObject.put("fim4", fim4);		    
+		    jsonObject.put("fim4", fim4);
+		    
+		    jsonObject.put("cinco1",cinco1);
+		    jsonObject.put("cinco2",cinco2);
+		    jsonObject.put("cinco3",cinco3);
+		    jsonObject.put("cinco4",cinco4);
+			
+		    jsonObject.put("y1",y1);
+		    jsonObject.put("y2",y2);
+		    jsonObject.put("y3",y3);
+		    jsonObject.put("y4",y4);
 
 		    	    
 		    EscreverJogo(jsonObject);

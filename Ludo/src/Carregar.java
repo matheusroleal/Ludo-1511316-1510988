@@ -59,4 +59,18 @@ public class Carregar extends Botao{
 	
 	}
 	
+	public int CarregaFim(String data) throws JSONException, IOException {
+		String json_str = CarregaJogo();
+		
+	    JSONObject jsonObject;
+	    int result;
+
+		jsonObject = new JSONObject(json_str);
+		
+	    result = jsonObject.getInt(data);
+	    	
+		return result;
+	
+	}
+	
 }
