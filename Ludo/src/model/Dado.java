@@ -1,4 +1,4 @@
-import java.awt.*;
+package model;
 
 import javax.swing.*;
 
@@ -21,6 +21,10 @@ public class Dado extends JPanel {
 		MudaImagem(dado_val);
 		
 		return dado_val;
+	}
+	
+	public JButton getDado() {
+		return dado_btn;
 	}
 	
 	private void MudaImagem(int num) {

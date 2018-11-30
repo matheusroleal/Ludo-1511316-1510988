@@ -1,3 +1,5 @@
+package model;
+
 import java.awt.Color;
 import java.util.Vector;
 
@@ -39,7 +41,7 @@ public class Vetor {
 	}
 	
 	public Color ExibeCorPeao(int index) {
-		return jogadores_na_casa.elementAt(index).p1.a;
+		return jogadores_na_casa.elementAt(index).p1.ExibeP();
 	}
 	
 	public boolean VerificaElemento() {

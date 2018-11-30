@@ -1,3 +1,5 @@
+package view;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,6 +9,8 @@ import java.util.Vector;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import model.Jogador;
 
 public class Carregar extends Botao{
 	Vector<Jogador> Jogadores;

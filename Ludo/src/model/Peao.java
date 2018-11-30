@@ -1,11 +1,15 @@
-import java.awt.Color;
+package model;
 
-import lista.Lista;
+import java.awt.Color;
+import model.lista.Lista;
+import view.Peca;
+
 
 public class Peao {
-	Lista lst;
-	Peca p, p1;
-	int x_final, y_final;
+	public Lista lst;
+	Peca p;
+	Peca p1;
+	public int x_final, y_final;
 	
 	public Peao(String cor_jogador) {
 		lst = new Lista();
@@ -16,8 +20,50 @@ public class Peao {
 		PopulaLista(cor_jogador);
 	}
 	
+	public Lista getLst() {
+		return lst;
+	}
+	
+	public Peca getP1() {
+		return p1;		
+	}
+	
+	public Peca getP() {
+		return p;		
+	}
+	
+	public int getXFinal() {
+		return x_final;
+	}
+	
+	public int getYFinal() {
+		return y_final;
+	}
+	
+	public int getPos() {
+		return lst.pos;
+	}
+	
+	public void setP1(int x, int y) {
+		p1.x = x;
+		p1.y = y;
+	}
+	
 	private void PintaP(String cor_jogador) {
-		p1.a = Color.RED;
+		switch(cor_jogador) {
+		case "vermelho":
+			p1.PintaP(Color.RED);
+			break;
+		case "amarelo":
+			p1.PintaP(Color.YELLOW);
+			break;
+		case "verde":
+			p1.PintaP(Color.GREEN);			
+			break;
+		case "azul":
+			p1.PintaP(Color.BLUE);
+			break;
+		}
 	}
 	
 	private void PopulaLista(String cor_jogador) {

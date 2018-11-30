@@ -1,4 +1,4 @@
-package lista;
+package model.lista;
 
 public class Lista {
 	private int tam=0;
@@ -40,7 +40,7 @@ public class Lista {
 		tam++;
 	}
 	
-	public Object pos_lstCorr() {
+	public Object posCorr() {
 		if(tam == 0) {
 			return null;
 		}
@@ -50,11 +50,10 @@ public class Lista {
 		return elem;
 	}
 	
-	public void pos_lstIni() {
+	public void posIni() {
 		pos = 0;
 		corr = ini;
 	}
-
 	
 	public Object prox() {
 		if(corr == null) {

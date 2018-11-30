@@ -1,11 +1,13 @@
+package view;
+
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
 
 public class Peca extends JPanel {
-	int x;
-	int y;
-	Color a;
+	public int x;
+	public int y;
+	public Color a;
 	private Object [][]casas = new Object[15][15];
 	
 	public Peca(){
@@ -18,6 +20,14 @@ public class Peca extends JPanel {
 				casas[i][j] = new Rectangle2D.Double(50*j,50*i,50,50);
 			}
 		}
+	}
+	
+	public void PintaP (Color cor_jogador) {
+		this.a = cor_jogador;
+	}
+	
+	public Color ExibeP () {
+		return this.a;
 	}
 	
 	public void paintComponent(Graphics g) {
