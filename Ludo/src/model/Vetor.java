@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
 import java.util.Vector;
 
 public class Vetor {
@@ -22,19 +23,19 @@ public class Vetor {
 		return this.y;
 	}
 		
-	public void AdicionaPeao(Peao p) {
+	public void AdicionaPeao(Peao p) throws FileNotFoundException {
 		if(jogadores_na_casa.firstElement() == null) {
 			jogadores_na_casa.add(0, p);
 		}else if(jogadores_na_casa.lastElement() == null){
 			jogadores_na_casa.add(1, p);
 		}else {
-			System.out.print("Quantidade maxima de jogadores na casa");
+			TextAreaLog.getTextAreaLog().printLog("Quantidade maxima de jogadores na casa");
 		}
 	}
 	
-	public void RemovePeao(int index) {
+	public void RemovePeao(int index) throws FileNotFoundException {
 		if(VerificaElemento()) {
-			System.out.print("Quantidade maxima de jogadores na casa, nao pode passar");
+			TextAreaLog.getTextAreaLog().printLog("Quantidade maxima de jogadores na casa, nao pode passar");
 		}else {
 			jogadores_na_casa.add(index, null);
 		}

@@ -1,9 +1,11 @@
 package controller;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
 
 import Interface.Inicializador;
 import model.Jogador;
+import model.TextAreaLog;
 import model.Vetor;
 
 public class Regras {
@@ -25,12 +27,12 @@ public class Regras {
 		
 	}
     
-    public void AplicaRegras() {
+    public void AplicaRegras() throws FileNotFoundException {
     	if(JogadoresController.getJogadoresController().getJogadorTurno() == 0) {					
 			if(JogadoresController.getJogadoresController().getCinco(1) == false) {
 				movimento = Inicializador.getInicializador().d.GeraValor();
 				
-				System.out.println("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
+				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
 				if(movimento == 5) {
 					j1.SetP1Color(Color.RED);
@@ -51,7 +53,7 @@ public class Regras {
 				
 				if(JogadoresController.getJogadoresController().getFim(1) != -1) {
 					JogadoresController.getJogadoresController().setFim(1, j1.getYFinal() - ((Vetor) j1.peoes_do_jogador.elementAt(j1.getNumPeao()).lst.posCorr()).RetornaY());
-					System.out.println("fim1 - (2): " + JogadoresController.getJogadoresController().getFim(1));
+					TextAreaLog.getTextAreaLog().printLog("fim1 - (2): " + JogadoresController.getJogadoresController().getFim(1));
 					
 					if((JogadoresController.getJogadoresController().getFim(1) - movimento) == 0 || movimento < JogadoresController.getJogadoresController().getFim(1)) 
 						JogadoresController.getJogadoresController().setY(1, true);
@@ -60,7 +62,7 @@ public class Regras {
 				}
 				
 				if(JogadoresController.getJogadoresController().getY(1) == true) {
-					System.out.println("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero - (2): " + movimento);
+					TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero - (2): " + movimento);
 					
 					for (int i = 1; i < movimento + 1 ; i++) {
 						j1.peoes_do_jogador.elementAt(j1.getNumPeao()).lst.prox();
@@ -82,7 +84,7 @@ public class Regras {
 					if(novo_x1==7 && novo_y1==1+i){			
 														
 						JogadoresController.getJogadoresController().setFim(1, j1.getYFinal() - ((Vetor) j1.peoes_do_jogador.elementAt(j1.getNumPeao()).lst.posCorr()).RetornaY());
-						System.out.println("fim1: " + JogadoresController.getJogadoresController().getFim(1));
+						TextAreaLog.getTextAreaLog().printLog("fim1: " + JogadoresController.getJogadoresController().getFim(1));
 						
 						if((JogadoresController.getJogadoresController().getFim(1) - movimento) == 0 || movimento < JogadoresController.getJogadoresController().getFim(1)) 
 							JogadoresController.getJogadoresController().setY(1, true);
@@ -127,7 +129,7 @@ public class Regras {
 			if(JogadoresController.getJogadoresController().getCinco(2) == false) {
 				movimento = Inicializador.getInicializador().d.GeraValor();
 				
-				System.out.println("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
+				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
 				if(movimento == 5) {
 					j2.SetP1Color(Color.GREEN);
@@ -147,7 +149,7 @@ public class Regras {
 				
 				if(JogadoresController.getJogadoresController().getFim(2) != -1) {
 					JogadoresController.getJogadoresController().setFim(2, j2.getXFinal() - ((Vetor) j2.peoes_do_jogador.elementAt(j2.getNumPeao()).lst.posCorr()).RetornaX());
-					System.out.println("fim2 - (2): " + JogadoresController.getJogadoresController().getFim(2));
+					TextAreaLog.getTextAreaLog().printLog("fim2 - (2): " + JogadoresController.getJogadoresController().getFim(2));
 					
 					if((JogadoresController.getJogadoresController().getFim(2) - movimento) == 0 || movimento < JogadoresController.getJogadoresController().getFim(2)) 
 						JogadoresController.getJogadoresController().setY(2, true);
@@ -156,7 +158,7 @@ public class Regras {
 				}
 				
 				if(JogadoresController.getJogadoresController().getY(2) == true) {
-					System.out.println("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero - (2): " + movimento);
+					TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero - (2): " + movimento);
 					
 					for (int i = 1; i < movimento + 1 ; i++) 
 						j2.peoes_do_jogador.elementAt(j2.getNumPeao()).lst.prox();
@@ -176,7 +178,7 @@ public class Regras {
 					if(novo_y2==7 && novo_x2==1+i){			
 														
 						JogadoresController.getJogadoresController().setFim(2, j2.getXFinal() - ((Vetor) j2.peoes_do_jogador.elementAt(j2.getNumPeao()).lst.posCorr()).RetornaX());
-						System.out.println("fim2: " + JogadoresController.getJogadoresController().getFim(2));
+						TextAreaLog.getTextAreaLog().printLog("fim2: " + JogadoresController.getJogadoresController().getFim(2));
 						
 						if((JogadoresController.getJogadoresController().getFim(2) - movimento) == 0 || movimento < JogadoresController.getJogadoresController().getFim(2)) 
 							JogadoresController.getJogadoresController().setY(2, true);
@@ -216,7 +218,7 @@ public class Regras {
 			if(JogadoresController.getJogadoresController().getCinco(3) == false) {
 				movimento = Inicializador.getInicializador().d.GeraValor();
 				
-				System.out.println("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
+				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
 				if(movimento == 5) {
 					j3.SetP1Color(Color.YELLOW);
@@ -235,7 +237,7 @@ public class Regras {
 				
 				if(JogadoresController.getJogadoresController().getFim(3) != -1) {
 					JogadoresController.getJogadoresController().setFim(3,((Vetor) j3.peoes_do_jogador.elementAt(j3.getNumPeao()).lst.posCorr()).RetornaY() - j3.getYFinal());
-					System.out.println("fim3 - (2): " + JogadoresController.getJogadoresController().getFim(3));
+					TextAreaLog.getTextAreaLog().printLog("fim3 - (2): " + JogadoresController.getJogadoresController().getFim(3));
 					
 					if((JogadoresController.getJogadoresController().getFim(3) - movimento) == 0 || movimento < JogadoresController.getJogadoresController().getFim(3)) 
 						JogadoresController.getJogadoresController().setY(3,true);
@@ -244,7 +246,7 @@ public class Regras {
 				}
 			
 				if(JogadoresController.getJogadoresController().getY(3) == true) {
-					System.out.println("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero - (2): " + movimento);
+					TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero - (2): " + movimento);
 					
 					for (int i = 1; i < movimento + 1 ; i++)
 						j3.peoes_do_jogador.elementAt(j3.getNumPeao()).lst.prox();
@@ -264,7 +266,7 @@ public class Regras {
 					if(novo_x3==7 && novo_y3==8+i){
 						
 						JogadoresController.getJogadoresController().setFim(3,((Vetor) j3.peoes_do_jogador.elementAt(j3.getNumPeao()).lst.posCorr()).RetornaY() - j3.getYFinal());
-						System.out.println("fim3 - (2): " + JogadoresController.getJogadoresController().getFim(3));
+						TextAreaLog.getTextAreaLog().printLog("fim3 - (2): " + JogadoresController.getJogadoresController().getFim(3));
 						
 						if((JogadoresController.getJogadoresController().getFim(3) - movimento) == 0 || movimento < JogadoresController.getJogadoresController().getFim(3)) 
 							JogadoresController.getJogadoresController().setY(3,true);
@@ -305,7 +307,7 @@ public class Regras {
 			if(JogadoresController.getJogadoresController().getCinco(4) == false) {
 				movimento = Inicializador.getInicializador().d.GeraValor();
 				
-				System.out.println("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
+				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
 				if(movimento == 5) {
 					j4.SetP1Color(Color.BLUE);
@@ -325,7 +327,7 @@ public class Regras {
 				
 				if(JogadoresController.getJogadoresController().getFim(4) != -1) {
 					JogadoresController.getJogadoresController().setFim(4, ((Vetor) j4.peoes_do_jogador.elementAt(j4.getNumPeao()).lst.posCorr()).RetornaX() - j4.getXFinal());
-					System.out.println("fim4 - (2): " + JogadoresController.getJogadoresController().getFim(4));
+					TextAreaLog.getTextAreaLog().printLog("fim4 - (2): " + JogadoresController.getJogadoresController().getFim(4));
 					
 					if((JogadoresController.getJogadoresController().getFim(4) - movimento) == 0 || movimento < JogadoresController.getJogadoresController().getFim(4)) 
 						JogadoresController.getJogadoresController().setY(4,true);
@@ -334,7 +336,7 @@ public class Regras {
 				}
 				
 				if(	JogadoresController.getJogadoresController().getY(4) == true) {
-					System.out.println("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero - (2): " + movimento);
+					TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero - (2): " + movimento);
 					
 					for (int i = 1; i < movimento + 1 ; i++)  
 						j4.peoes_do_jogador.elementAt(j4.getNumPeao()).lst.prox();
@@ -354,7 +356,7 @@ public class Regras {
 					if(novo_y4==7 && novo_x4==8+i){
 
 						JogadoresController.getJogadoresController().setFim(4, ((Vetor) j4.peoes_do_jogador.elementAt(j4.getNumPeao()).lst.posCorr()).RetornaX() - j4.getXFinal());
-						System.out.println("fim4 - (2): " + JogadoresController.getJogadoresController().getFim(4));
+						TextAreaLog.getTextAreaLog().printLog("fim4 - (2): " + JogadoresController.getJogadoresController().getFim(4));
 						
 						if((JogadoresController.getJogadoresController().getFim(4) - movimento) == 0 || movimento < JogadoresController.getJogadoresController().getFim(4)) 
 							JogadoresController.getJogadoresController().setY(4,true);
