@@ -3,6 +3,8 @@ package controller;
 import java.awt.Color;
 import java.io.FileNotFoundException;
 
+import javax.swing.text.BadLocationException;
+
 import Interface.Inicializador;
 import model.Jogador;
 import model.TextAreaLog;
@@ -27,7 +29,7 @@ public class Regras {
 		
 	}
     
-    public void AplicaRegras() throws FileNotFoundException {
+    public void AplicaRegras() throws FileNotFoundException, BadLocationException {
     	if(JogadoresController.getJogadoresController().getJogadorTurno() == 0) {					
 			if(JogadoresController.getJogadoresController().getCinco(1) == false) {
 				movimento = Inicializador.getInicializador().d.GeraValor();

@@ -11,6 +11,7 @@ public class TextAreaLog {
 	private static volatile TextAreaLog instance;
 	
 	JTextArea textArea;
+	private int count = 0;
 	
 	private PrintStream standardOut;
 	
@@ -35,11 +36,16 @@ public class TextAreaLog {
 	}
 	
 	
-	public void printLog(String str) {
+	public void printLog(String str) throws BadLocationException {
+		if(count > 10) {
+			removeLog();
+		}
+		count ++;
 		textArea.append(str+"\n");
 	}
 	
 	public void removeLog() throws BadLocationException {
+		count = 0;
 		textArea.getDocument().remove(0,textArea.getDocument().getLength());
 	}
 	

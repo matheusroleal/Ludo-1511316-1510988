@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.Vector;
 
+import javax.swing.text.BadLocationException;
+
 public class Vetor {
 	private int x,y;
 	private Vector<Peao> jogadores_na_casa = new Vector<>();
@@ -23,7 +25,7 @@ public class Vetor {
 		return this.y;
 	}
 		
-	public void AdicionaPeao(Peao p) throws FileNotFoundException {
+	public void AdicionaPeao(Peao p) throws FileNotFoundException, BadLocationException {
 		if(jogadores_na_casa.firstElement() == null) {
 			jogadores_na_casa.add(0, p);
 		}else if(jogadores_na_casa.lastElement() == null){
@@ -33,7 +35,7 @@ public class Vetor {
 		}
 	}
 	
-	public void RemovePeao(int index) throws FileNotFoundException {
+	public void RemovePeao(int index) throws FileNotFoundException, BadLocationException {
 		if(VerificaElemento()) {
 			TextAreaLog.getTextAreaLog().printLog("Quantidade maxima de jogadores na casa, nao pode passar");
 		}else {

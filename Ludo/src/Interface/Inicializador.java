@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.text.BadLocationException;
 
 import org.json.JSONException;
 
@@ -179,6 +180,9 @@ public class Inicializador extends JFrame{
 						Regras.getRegras(null).AplicaRegras();
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				}
 			});
@@ -205,9 +209,10 @@ public class Inicializador extends JFrame{
 			
 //			ConsoleLog.add(TextAreaLog.getTextAreaLog().getTextArea());
 			this.getContentPane().add(TextAreaLog.getTextAreaLog().getTextArea());
-//			this.getContentPane().add(ConsoleLog);
 			
 			this.getContentPane().add(t);
+//			this.getContentPane().add(ConsoleLog);
+
 
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
