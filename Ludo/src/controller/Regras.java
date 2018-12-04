@@ -29,10 +29,10 @@ public class Regras {
 		
 	}
     
-    public void AplicaRegras() throws FileNotFoundException, BadLocationException {
+    public void AplicaRegras(int mv) throws FileNotFoundException, BadLocationException {
     	if(JogadoresController.getJogadoresController().getJogadorTurno() == 0) {					
 			if(JogadoresController.getJogadoresController().getCinco(1) == false) {
-				movimento = Inicializador.getInicializador().d.GeraValor();
+				movimento = mv;
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
@@ -129,7 +129,7 @@ public class Regras {
 		else if(JogadoresController.getJogadoresController().getJogadorTurno() == 1) {
 			
 			if(JogadoresController.getJogadoresController().getCinco(2) == false) {
-				movimento = Inicializador.getInicializador().d.GeraValor();
+				movimento = mv;
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
@@ -218,7 +218,7 @@ public class Regras {
 		}
 		else if(JogadoresController.getJogadoresController().getJogadorTurno() == 2) {
 			if(JogadoresController.getJogadoresController().getCinco(3) == false) {
-				movimento = Inicializador.getInicializador().d.GeraValor();
+				movimento = mv;
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
@@ -307,7 +307,7 @@ public class Regras {
 		}
 		else {
 			if(JogadoresController.getJogadoresController().getCinco(4) == false) {
-				movimento = Inicializador.getInicializador().d.GeraValor();
+				movimento = mv;
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				

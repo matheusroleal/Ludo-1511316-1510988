@@ -22,6 +22,8 @@ public class Inicializador extends JFrame{
 	public Dado d;
 	Salvar s;
 	Carregar c;
+	BotaoTeste bt1, bt2, bt3, bt4, bt5, bt6;
+	
 	
 	private Inicializador() {
 		try {
@@ -177,7 +179,7 @@ public class Inicializador extends JFrame{
 			d.dado_btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras();
+						Regras.getRegras(null).AplicaRegras(d.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
@@ -203,16 +205,103 @@ public class Inicializador extends JFrame{
 				}
 			});
 			
-//			JPanel ConsoleLog = new JPanel();
-//			ConsoleLog.setLayout(null);
+			bt1 = new BotaoTeste("1",752, 402,1);
+			bt2 = new BotaoTeste("2",817, 402,2);
+			bt3 = new BotaoTeste("3",882, 402,3);
+			bt4 = new BotaoTeste("4",752, 452,4);
+			bt5 = new BotaoTeste("5",817, 452,5);
+			bt6 = new BotaoTeste("6",882, 452,6);
+			
+			this.getContentPane().add(bt1.btn);
+			this.getContentPane().add(bt2.btn);
+			this.getContentPane().add(bt3.btn);
+			this.getContentPane().add(bt4.btn);
+			this.getContentPane().add(bt5.btn);
+			this.getContentPane().add(bt6.btn);
+
+			bt1.btn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						Regras.getRegras(null).AplicaRegras(bt1.GeraValor());
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			
+			bt2.btn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						Regras.getRegras(null).AplicaRegras(bt2.GeraValor());
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			
+			bt3.btn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						Regras.getRegras(null).AplicaRegras(bt2.GeraValor());
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			
+			bt4.btn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						Regras.getRegras(null).AplicaRegras(bt3.GeraValor());
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			
+			bt5.btn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						Regras.getRegras(null).AplicaRegras(bt5.GeraValor());
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			
+			bt6.btn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						Regras.getRegras(null).AplicaRegras(bt6.GeraValor());
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			
 			TextAreaLog.getTextAreaLog().getTextArea().setBounds(755, 502, 200, 200);
 			
-//			ConsoleLog.add(TextAreaLog.getTextAreaLog().getTextArea());
 			this.getContentPane().add(TextAreaLog.getTextAreaLog().getTextArea());
 			
 			this.getContentPane().add(t);
-//			this.getContentPane().add(ConsoleLog);
-
 
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
