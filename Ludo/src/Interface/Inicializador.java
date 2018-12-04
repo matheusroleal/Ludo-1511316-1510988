@@ -248,7 +248,7 @@ public class Inicializador extends JFrame{
 			bt3.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras(bt2.GeraValor());
+						Regras.getRegras(null).AplicaRegras(bt3.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
@@ -261,7 +261,7 @@ public class Inicializador extends JFrame{
 			bt4.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras(bt3.GeraValor());
+						Regras.getRegras(null).AplicaRegras(bt4.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
