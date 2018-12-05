@@ -20,6 +20,14 @@ public class Peca extends JPanel {
 		this.a = cor_jogador;
 	}
 	
+	public void setX(int novo_x) {
+		x = novo_x;
+	}
+	
+	public void setY(int novo_y) {
+		y = novo_y;
+	}
+	
 	public Color ExibeP () {
 		return this.a;
 	}

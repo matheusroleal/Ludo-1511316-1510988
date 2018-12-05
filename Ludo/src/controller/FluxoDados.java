@@ -139,9 +139,9 @@ public class FluxoDados {
 					int novo_x = v.RetornaX();
 					int novo_y = v.RetornaY();
 					
-					j_nova_pos.getPeao(y).a = cores.elementAt(x);
-					j_nova_pos.getPeao(y).x = novo_x;
-					j_nova_pos.getPeao(y).y = novo_y;
+					j_nova_pos.getPeao(y).getP1().PintaP(cores.elementAt(x));
+					j_nova_pos.getPeao(y).getP1().setX(novo_x);
+					j_nova_pos.getPeao(y).getP1().setY(novo_y);
 					
 					Inicializador.getInicializador().repaint();
 	    		}
