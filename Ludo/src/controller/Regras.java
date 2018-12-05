@@ -31,7 +31,28 @@ public class Regras {
     public void AplicaRegras(int mv) throws FileNotFoundException, BadLocationException {
     	movimento = mv;
     	
-    	if(JogadoresController.getJogadoresController().getJogadorTurno() == 0) {					
+    	if(JogadoresController.getJogadoresController().getJogadorTurno() == 0) {	
+    		
+    		//mostrando novamente no tabuleiro peca sem a outra em cima
+    		if(JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.RED) {
+					JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false; 
+					j2.SetP1Color(Color.GREEN);
+				}
+	  		}
+    		else if(JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.RED) {
+					JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false; 
+					j3.SetP1Color(Color.YELLOW);
+				}
+	  		}
+    		else if(JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.RED) {
+					JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false; 
+					j4.SetP1Color(Color.BLUE);
+				}
+	  		}
+    		  		
 			if(JogadoresController.getJogadoresController().getCinco(1) == false) { //se cincoX for false quer dizer que o jogador ainda n tirou numero 5 no dado para poder sair da casa inicial
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
@@ -82,14 +103,14 @@ public class Regras {
 				//eh necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
 				JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).RemovePeao(j1.getPeao(j1.getNumPeao()));
 				
-				if(movimento == 6) {//se movimento for 6, jogador pode jogar novamente
+				if(movimento == 6) {//se movimento for 6, jogador pode jogar novamente					
 					JogadoresController.getJogadoresController().m = false; //m vira false para nao mudar o turno
 					JogadoresController.getJogadoresController().setMd(1,1); //aumentando a variavel md
 					
-					TextAreaLog.getTextAreaLog().printLog("md1: " + JogadoresController.getJogadoresController().getMd(1));
-					
-					if(JogadoresController.getJogadoresController().getMd(1) == 3)//se md for igual a 3, quer dizer que o jogador ja excedeu o maximo de vezes q pode jogar ao tirar 6
+					if(JogadoresController.getJogadoresController().getMd(1) == 3) {//se md for igual a 3, quer dizer que o jogador ja excedeu o maximo de vezes q pode jogar ao tirar 6
 						JogadoresController.getJogadoresController().m = true; //turno pode ser mudado
+						JogadoresController.getJogadoresController().setMd(1, 0); //variavel volta a ser 0
+					}
 				}
 				else { //se o movimento nao for 6, muda-se o turno
 					JogadoresController.getJogadoresController().m = true;
@@ -246,9 +267,10 @@ public class Regras {
 			
 			//caso de dois peoes na mesma casa
 			if(JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o2 != null) {
-				TextAreaLog.getTextAreaLog().printLog("dois peoes!");
+				JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o1.getP1().pode = true;
+				JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o1.getP1().b = j1.getPeao(j1.getNumPeao()).getP1().a;
 			}
-
+			
 			if((j1.getX() == 7 && j1.getY() == 6) && JogadoresController.getJogadoresController().getCont(1) != 3) {//se o peao tiver chegado na casa final e nao for o ultimo, mudamos o peao do jogador para o seguinte
 			
 				j1.mudaPeao();
@@ -265,7 +287,24 @@ public class Regras {
 			
 		}
 		else if(JogadoresController.getJogadoresController().getJogadorTurno() == 1) {
-			
+		
+			if(JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.GREEN) 
+					JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false; 
+	  		}
+			else if(JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.GREEN) {
+					JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false; 
+					j3.SetP1Color(Color.YELLOW);
+				}
+	  		}
+			else if(JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.GREEN){
+					JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false; 
+					j4.SetP1Color(Color.BLUE);
+				} 
+	  		}
+		 				
 			if(JogadoresController.getJogadoresController().getCinco(2) == false) {
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
@@ -318,11 +357,11 @@ public class Regras {
 				if(movimento == 6) {
 					JogadoresController.getJogadoresController().m = false; 
 					JogadoresController.getJogadoresController().setMd(2,1); 
-					
-					TextAreaLog.getTextAreaLog().printLog("md2: " + JogadoresController.getJogadoresController().getMd(2));
-					
-					if(JogadoresController.getJogadoresController().getMd(2) == 3)
+						
+					if(JogadoresController.getJogadoresController().getMd(2) == 3) {
 						JogadoresController.getJogadoresController().m = true;
+						JogadoresController.getJogadoresController().setMd(2, 0);
+					}
 				}
 				else { 
 					JogadoresController.getJogadoresController().m = true;
@@ -472,7 +511,11 @@ public class Regras {
 			}
 			
 			if(JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o2 != null) {
-				TextAreaLog.getTextAreaLog().printLog("dois peoes!");
+				JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o1.getP1().pode = true;
+				JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o1.getP1().b = j2.getPeao(j2.getNumPeao()).getP1().a;	
+				
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.RED)
+					j2.SetP1Color(new Color(0,0,0,0));
 			}
 			
 			if((j2.getX() == 6 && j2.getY() == 7) && j2.getNumPeao() != 3) {
@@ -489,6 +532,22 @@ public class Regras {
 			}
 		}
 		else if(JogadoresController.getJogadoresController().getJogadorTurno() == 2) {
+			
+			if(JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.YELLOW) 
+					JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false; 
+	  		}
+			else if(JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.YELLOW) 
+					JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false; 
+	  		}
+			else if(JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.YELLOW){
+					JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false; 
+					j4.SetP1Color(Color.BLUE);
+				} 
+	  		}
+			
 			if(JogadoresController.getJogadoresController().getCinco(3) == false) {
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
@@ -541,11 +600,11 @@ public class Regras {
 				if(movimento == 6) {
 					JogadoresController.getJogadoresController().m = false; 
 					JogadoresController.getJogadoresController().setMd(3,1); 
-					
-					TextAreaLog.getTextAreaLog().printLog("md3: " + JogadoresController.getJogadoresController().getMd(3));
-					
-					if(JogadoresController.getJogadoresController().getMd(3) == 3)
+								
+					if(JogadoresController.getJogadoresController().getMd(3) == 3) {
 						JogadoresController.getJogadoresController().m = true;
+						JogadoresController.getJogadoresController().setMd(3, 0);
+					}
 				}
 				else { 
 					JogadoresController.getJogadoresController().m = true;
@@ -694,7 +753,11 @@ TextAreaLog.getTextAreaLog().printLog("peca comida!");
 			}
 			
 			if(JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o2 != null) {
-				TextAreaLog.getTextAreaLog().printLog("dois peoes!");
+				JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().pode = true;
+				JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().b = j3.getPeao(j3.getNumPeao()).getP1().a;	
+				
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.RED || JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.GREEN)
+					j3.SetP1Color(new Color(0,0,0,0));
 			}
 			
 			if((j3.getX() == 7 && j3.getY() == 8) && j3.getNumPeao() != 3) {
@@ -712,6 +775,20 @@ TextAreaLog.getTextAreaLog().printLog("peca comida!");
 			
 		}
 		else {
+			
+			if(JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.BLUE) 
+					JogadoresController.getJogadoresController().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false; 
+	  		}
+			else if(JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.BLUE) 
+					JogadoresController.getJogadoresController().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false; 
+	  		}
+			else if(JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o2 != null){
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.BLUE)
+					JogadoresController.getJogadoresController().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false; 
+	  		}
+			
 			if(JogadoresController.getJogadoresController().getCinco(4) == false) {
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
@@ -765,11 +842,11 @@ TextAreaLog.getTextAreaLog().printLog("peca comida!");
 				if(movimento == 6) {
 					JogadoresController.getJogadoresController().m = false; 
 					JogadoresController.getJogadoresController().setMd(4,1); 
-					
-					TextAreaLog.getTextAreaLog().printLog("md4: " + JogadoresController.getJogadoresController().getMd(4));
-					
-					if(JogadoresController.getJogadoresController().getMd(4) == 3)
+			
+					if(JogadoresController.getJogadoresController().getMd(4) == 3) {
 						JogadoresController.getJogadoresController().m = true;
+						JogadoresController.getJogadoresController().setMd(4, 0);
+					}
 				}
 				else { 
 					JogadoresController.getJogadoresController().m = true;
@@ -920,7 +997,11 @@ TextAreaLog.getTextAreaLog().printLog("peca comida!");
 			}
 			
 			if(JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o2 != null) {
-				TextAreaLog.getTextAreaLog().printLog("dois peoes!");
+				JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().pode = true;
+				JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().b = j4.getPeao(j4.getNumPeao()).getP1().a;	
+				
+				if(JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.RED || JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.GREEN || JogadoresController.getJogadoresController().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.YELLOW)
+					j4.SetP1Color(new Color(0,0,0,0));
 			}
 			
 			if((j4.getX() == 8 && j4.getY() == 7) && j4.getNumPeao() != 3) {
@@ -937,7 +1018,7 @@ TextAreaLog.getTextAreaLog().printLog("peca comida!");
 			}
 			
 		}
-		if(JogadoresController.getJogadoresController().getM() == true)
+		if(JogadoresController.getJogadoresController().getM() == true) 
 			JogadoresController.getJogadoresController().MudaTurno();
 
     	//quando cincoX for = true, quer dizer que o jogador tirou 5 podendo colocar um peao na casa de saida

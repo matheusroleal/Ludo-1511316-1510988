@@ -2,13 +2,19 @@ package view;
 
 import java.awt.*;
 import java.awt.geom.*;
+import java.io.FileNotFoundException;
+
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+
+import model.TextAreaLog;
 
 public class Peca extends JPanel {
 	public int x;
 	public int y;
 	public Color a;
-	Boolean pode = false;
+	public Boolean pode = false;
+	public Color b;
 	
 	public Peca(){
 		setOpaque(false);
@@ -45,7 +51,7 @@ public class Peca extends JPanel {
 		e.setFrame(50*y, 50*x, 50, 50);
 		g2d.setPaint(a);
 		g2d.fill(e);
-		
+				
 		if(x==6 && y==1 || x==1 && y==8 || x==13 && y==6 || x==8 && y==13) {
 			g2d.setPaint(Color.BLACK);
 			g2d.draw(e);
@@ -58,7 +64,14 @@ public class Peca extends JPanel {
 			}
 		}
 		
-		if(pode == true)
-			System.out.println("funcionei!");
+		if(pode == true) {
+			Ellipse2D e1=new Ellipse2D.Double();
+			
+			e1.setFrame(50*y+7.5,50*x+7.5,35,35);
+			g2d.setPaint(b);
+			g2d.fill(e1);
+		
+		}
+		
 	}
 }

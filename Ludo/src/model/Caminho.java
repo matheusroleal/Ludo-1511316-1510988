@@ -42,10 +42,14 @@ public class Caminho{
 			o1 = null;
 		}
 		else {
-			if(o1 == p)
+			if(o1 == p) {
 				o1 = null;
-			else
+				o1 = o2;
 				o2 = null;
+			}
+			else {
+				o2 = null;
+			}
 		}
 		
 			
