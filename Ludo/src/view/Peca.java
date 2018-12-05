@@ -8,18 +8,12 @@ public class Peca extends JPanel {
 	public int x;
 	public int y;
 	public Color a;
-	private Object [][]casas = new Object[15][15];
+	Boolean pode = false;
 	
 	public Peca(){
 		setOpaque(false);
 		setBackground(new Color(0,0,0,0));
 		setSize(750,750);
-		
-		for(int i=0; i<15; i++) {
-			for(int j=0; j<15; j++) {
-				casas[i][j] = new Rectangle2D.Double(50*j,50*i,50,50);
-			}
-		}
 	}
 	
 	public void PintaP (Color cor_jogador) {
@@ -36,12 +30,13 @@ public class Peca extends JPanel {
 		Graphics2D g2d=(Graphics2D) g;
 		Ellipse2D e=new Ellipse2D.Double();
 		
+		e.setFrame(0,0,50,50);
+		g2d.setPaint(Color.RED);
+		g2d.fill(e);
+		
 		e.setFrame(50*y, 50*x, 50, 50);
 		g2d.setPaint(a);
 		g2d.fill(e);
-		
-		g2d.setPaint(Color.RED);
-		g2d.fill((Shape) casas[0][0]);
 		
 		if(x==6 && y==1 || x==1 && y==8 || x==13 && y==6 || x==8 && y==13) {
 			g2d.setPaint(Color.BLACK);
@@ -53,7 +48,9 @@ public class Peca extends JPanel {
 				g2d.setPaint(Color.BLACK);
 				g2d.draw(e);
 			}
-			
 		}
+		
+		if(pode == true)
+			System.out.println("funcionei!");
 	}
 }

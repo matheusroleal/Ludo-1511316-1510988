@@ -21,12 +21,13 @@ public class Jogador {
 			peoes_do_jogador.insertElementAt(new Peao(cor_jogador), index);
 		}
 	}
-
-	public Peca getPeao(int index) {
+	
+	//pecas p, p1
+	public Peca getPeca(int index) {
 		return peoes_do_jogador.elementAt(index).getP1();
 	}
 
-	public Peca getBasePeao(int index) {
+	public Peca getBasePeca(int index) {
 		return peoes_do_jogador.elementAt(index).getP();
 	}
 
@@ -45,24 +46,7 @@ public class Jogador {
 	public int getYFinal() {
 		return peoes_do_jogador.elementAt(num_peao).y_final;
 	}
-
-	public int getNumPeao() {
-		return num_peao;
-	}
-
-	public Vetor getPosCorr(int index) {
-		return (Vetor)peoes_do_jogador.elementAt(index).getLst().posCorr();
-	}
-
-	public int getPosInt(int index) {
-		return peoes_do_jogador.elementAt(index).getPos();
-	}
-
-	public void mudaPeao() {
-		if(num_peao < 4)
-			num_peao++;
-	}
-
+	
 	public void SetPX(int x) {
 		peoes_do_jogador.elementAt(num_peao).p.x = x;
 	}
@@ -86,4 +70,37 @@ public class Jogador {
 	public void SetP1Color(Color c) {
 		peoes_do_jogador.elementAt(num_peao).p1.a = c;
 	}
+	
+	//peoes
+	public Peao getPeao(int index) {
+		return peoes_do_jogador.elementAt(index);
+	}
+	
+	public int getNumPeao() {
+		return num_peao;
+	}
+	
+	public void setNumPeao(int i) {
+		num_peao = i;
+	}
+
+	public void mudaPeao() {
+		if(num_peao < 4)
+			num_peao++;
+	}
+
+	//lista
+	public Vetor getPosCorr(int index) {
+		return (Vetor)peoes_do_jogador.elementAt(index).getLst().posCorr();
+	}
+
+	public void getPosIni(int index) {
+		peoes_do_jogador.elementAt(index).getLst().posIni();
+	}
+	
+	public void getProx(int index) {
+		peoes_do_jogador.elementAt(index).getLst().prox();
+	}
+
 }
+

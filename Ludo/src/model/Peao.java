@@ -50,20 +50,7 @@ public class Peao {
 	}
 	
 	private void PintaP(String cor_jogador) {
-		switch(cor_jogador) {
-		case "vermelho":
-			p1.PintaP(Color.RED);
-			break;
-		case "amarelo":
-			p1.PintaP(Color.YELLOW);
-			break;
-		case "verde":
-			p1.PintaP(Color.GREEN);			
-			break;
-		case "azul":
-			p1.PintaP(Color.BLUE);
-			break;
-		}
+		p1.a = Color.RED;
 	}
 	
 	private void PopulaLista(String cor_jogador) {

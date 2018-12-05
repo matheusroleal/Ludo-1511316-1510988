@@ -1,6 +1,5 @@
 package Interface;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -11,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.text.BadLocationException;
 
-import org.json.JSONException;
+//import org.json.JSONException;
 
 import controller.*;
 import model.*;
@@ -24,7 +23,6 @@ public class Inicializador extends JFrame{
 	Carregar c;
 	BotaoTeste bt1, bt2, bt3, bt4, bt5, bt6;
 	
-	
 	private Inicializador() {
 		try {
 		
@@ -33,138 +31,109 @@ public class Inicializador extends JFrame{
 			this.setBounds(0,0,960,800);
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			
-			JButton vermelho = new JButton();
-			JButton verde = new JButton();
-			JButton amarelo = new JButton();
-			JButton azul = new JButton();
-			
-			vermelho.setLayout(null);
-			vermelho.setLocation(0,0);
-			vermelho.setSize(6*50, 6*50);
-			vermelho.setContentAreaFilled(false);
-		
-			verde.setLayout(null);
-			verde.setLocation(50*9,0);
-			verde.setSize(6*50, 6*50);
-			verde.setContentAreaFilled(false);
-			
-			amarelo.setLayout(null);
-			amarelo.setLocation(50*9,50*9);
-			amarelo.setSize(6*50, 6*50);
-			amarelo.setContentAreaFilled(false);
-			
-			azul.setLayout(null);
-			azul.setLocation(0,50*9);
-			azul.setSize(6*50, 6*50);
-			azul.setContentAreaFilled(false);
-			
-			this.getContentPane().add(vermelho);
-			this.getContentPane().add(verde);
-			this.getContentPane().add(amarelo);
-			this.getContentPane().add(azul);
-			
-			vermelho.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Jogador j1 = JogadoresController.getJogadoresController().getJogador(0); 
-					
-					vermelho.setEnabled(false); 
-					
-					j1.SetPColor(Color.RED);
-					j1.SetPX(4);
-					j1.SetPY(4);
-					
-					repaint();
-					
-					 d.dado_btn.setEnabled(true);
-				}
-			});
-					
-			verde.addActionListener(new ActionListener() {
-				public void	 actionPerformed(ActionEvent e) {
-					Jogador j2 = JogadoresController.getJogadoresController().getJogador(1); 
-	
-					verde.setEnabled(false);
-					
-					j2.SetPColor(Color.GREEN);
-					j2.SetPX(1);
-					j2.SetPY(10);
-					
-					repaint();
-					 d.dado_btn.setEnabled(true);
-				}
-			});
-					
-			azul.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Jogador j3 = JogadoresController.getJogadoresController().getJogador(2); 
-	
-					azul.setEnabled(false); 
-									
-					j3.SetPColor(Color.BLUE);
-					j3.SetPX(13);
-					j3.SetPY(4);
-					
-					repaint();
-					 d.dado_btn.setEnabled(true);
-				}
-			});
-					
-			amarelo.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Jogador j4 = JogadoresController.getJogadoresController().getJogador(3); 
-	
-					amarelo.setEnabled(false); 
-									
-					j4.SetPColor(Color.YELLOW);
-					j4.SetPX(10);
-					j4.SetPY(13);
-					
-					repaint();
-					 d.dado_btn.setEnabled(true);
-				}
-			});
-			
-			
 			Jogador j1 = JogadoresController.getJogadoresController().getJogador(0); 
 			Jogador j2 = JogadoresController.getJogadoresController().getJogador(1);
 			Jogador j3 = JogadoresController.getJogadoresController().getJogador(2); 
 			Jogador j4 = JogadoresController.getJogadoresController().getJogador(3);
-	
-			this.getContentPane().add(j4.getPeao(3));
-			this.getContentPane().add(j4.getBasePeao(3));
-			this.getContentPane().add(j4.getPeao(2));
-			this.getContentPane().add(j4.getBasePeao(2));
-			this.getContentPane().add(j4.getPeao(1));
-			this.getContentPane().add(j4.getBasePeao(1));
-			this.getContentPane().add(j4.getPeao(0));
-			this.getContentPane().add(j4.getBasePeao(0));
 			
-			this.getContentPane().add(j3.getPeao(3));
-			this.getContentPane().add(j3.getBasePeao(3));
-			this.getContentPane().add(j3.getPeao(2));
-			this.getContentPane().add(j3.getBasePeao(2));
-			this.getContentPane().add(j3.getPeao(1));
-			this.getContentPane().add(j3.getBasePeao(1));
-			this.getContentPane().add(j3.getPeao(0));
-			this.getContentPane().add(j3.getBasePeao(0));
+			//botoes vermelhos
+			JButton vm1 = new JButton();
+			JButton vm2 = new JButton();
+			JButton vm3 = new JButton();
+			JButton vm4 = new JButton();
 			
-			this.getContentPane().add(j2.getPeao(3));
-			this.getContentPane().add(j2.getBasePeao(3));
-			this.getContentPane().add(j2.getPeao(2));
-			this.getContentPane().add(j2.getBasePeao(2));
-			this.getContentPane().add(j2.getPeao(1));
-			this.getContentPane().add(j2.getBasePeao(1));
-			this.getContentPane().add(j2.getPeao(0));
-			this.getContentPane().add(j2.getBasePeao(0));
+			vm1.setBorder(null);
+			vm1.setLocation(1*50, 4*50);
+			vm1.setSize(50,50);
+			vm1.setContentAreaFilled(false);
+			vm2.setBorder(null);
+			vm2.setLocation(4*50, 4*50);
+			vm2.setSize(50,50);
+			vm2.setContentAreaFilled(false);
+			vm3.setBorder(null);
+			vm3.setLocation(1*50, 1*50);
+			vm3.setSize(50,50);
+			vm3.setContentAreaFilled(false);
 			
-			this.getContentPane().add(j1.getPeao(3));
-			this.getContentPane().add(j1.getBasePeao(3));
-			this.getContentPane().add(j1.getPeao(2));
-			this.getContentPane().add(j1.getBasePeao(2));
-			this.getContentPane().add(j1.getPeao(1));
-			this.getContentPane().add(j1.getBasePeao(1));
-			this.getContentPane().add(j1.getPeao(0));
-			this.getContentPane().add(j1.getBasePeao(0));
+			vm4.setBorder(null);
+			vm4.setLocation(4*50, 1*50);
+			vm4.setSize(50,50);
+			vm4.setContentAreaFilled(false);
+						
+			
+			this.getContentPane().add(vm1);
+			this.getContentPane().add(vm2);
+			this.getContentPane().add(vm3);
+			this.getContentPane().add(vm4);
+			
+			vm1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {					
+					j1.setNumPeao(0);
+					
+					d.dado_btn.setEnabled(true);
+				}
+			});
+					
+			vm2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {					
+					j1.setNumPeao(1);	
+					
+					d.dado_btn.setEnabled(true);
+				}
+			});
+			
+			vm3.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {					
+					j1.setNumPeao(2);	
+		
+					d.dado_btn.setEnabled(true);
+					
+				}
+			});
+			
+			vm4.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {					
+					j1.setNumPeao(3);	
+					
+					d.dado_btn.setEnabled(true);
+				}
+			});
+				
+			this.getContentPane().add(j4.getPeca(3));
+			this.getContentPane().add(j4.getBasePeca(3));
+			this.getContentPane().add(j4.getPeca(2));
+			this.getContentPane().add(j4.getBasePeca(2));
+			this.getContentPane().add(j4.getPeca(1));
+			this.getContentPane().add(j4.getBasePeca(1));
+			this.getContentPane().add(j4.getPeca(0));
+			this.getContentPane().add(j4.getBasePeca(0));
+			
+			this.getContentPane().add(j3.getPeca(3));
+			this.getContentPane().add(j3.getBasePeca(3));
+			this.getContentPane().add(j3.getPeca(2));
+			this.getContentPane().add(j3.getBasePeca(2));
+			this.getContentPane().add(j3.getPeca(1));
+			this.getContentPane().add(j3.getBasePeca(1));
+			this.getContentPane().add(j3.getPeca(0));
+			this.getContentPane().add(j3.getBasePeca(0));
+			
+			this.getContentPane().add(j2.getPeca(3));
+			this.getContentPane().add(j2.getBasePeca(3));
+			this.getContentPane().add(j2.getPeca(2));
+			this.getContentPane().add(j2.getBasePeca(2));
+			this.getContentPane().add(j2.getPeca(1));
+			this.getContentPane().add(j2.getBasePeca(1));
+			this.getContentPane().add(j2.getPeca(0));
+			this.getContentPane().add(j2.getBasePeca(0));
+			
+			this.getContentPane().add(j1.getPeca(3));
+			this.getContentPane().add(j1.getBasePeca(3));
+			this.getContentPane().add(j1.getPeca(2));
+			this.getContentPane().add(j1.getBasePeca(2));
+			this.getContentPane().add(j1.getPeca(1));
+			this.getContentPane().add(j1.getBasePeca(1));
+			this.getContentPane().add(j1.getPeca(0));
+			this.getContentPane().add(j1.getBasePeca(0));
 			
 			d = new Dado();
 			s = new Salvar();
@@ -191,19 +160,20 @@ public class Inicializador extends JFrame{
 	
 			s.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					FluxoDados.getFluxoDados().SalvarPartida();
+//					FluxoDados.getFluxoDados().SalvarPartida();
 				}
 			});
 	
 			c.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					try {
-						FluxoDados.getFluxoDados().CarregarPartida();
-					} catch (IOException | JSONException e1) {
-						e1.printStackTrace();
-					}
+//					try {
+//						FluxoDados.getFluxoDados().CarregarPartida();
+//					} catch (IOException | JSONException e1) {
+//						e1.printStackTrace();
+//					}
 				}
 			});
+			
 			
 			bt1 = new BotaoTeste("1",752, 402,1);
 			bt2 = new BotaoTeste("2",817, 402,2);
