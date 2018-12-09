@@ -37,7 +37,6 @@ public class Regras implements ObservadorIF {
     		
     		//mostrando novamente no tabuleiro peca sem a outra em cima   		
     		if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2 != null) {
-    			Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2.getP1().barreira = false;
     			Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false;
     			Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2.getP1().pode = false;
     			
@@ -553,14 +552,19 @@ public class Regras implements ObservadorIF {
 			
 			//caso de dois peoes na mesma casa
 			if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2 != null) {	
-				if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().a == Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2.getP1().a) {
-					Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).barreira = true;
-					Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2.getP1().barreira = true;
+				if(novo_x1==1 && novo_y1==8) {
+					TextAreaLog.getTextAreaLog().printLog("verde");
+					
+					if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.GREEN)
+						Inicializador.getInicializador().getCaminho(1, 8).o1.getP1().pode = true;
+					else
+						Inicializador.getInicializador().getCaminho(1, 8).o1.getP1().pode = false;
 				}
-				else {
-					Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().pode = true;
-					Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().b = j1.getPeao(j1.getNumPeao()).getP1().a;
-				}			
+				
+
+				Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().pode = true;
+				Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().b = j1.getPeao(j1.getNumPeao()).getP1().a;
+				
 			}
 			
 			
