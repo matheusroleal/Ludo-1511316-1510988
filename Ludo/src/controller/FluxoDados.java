@@ -88,6 +88,7 @@ public class FluxoDados {
 		    }
 		    
 		    jsonObject.put("turno", JogadoresController.getJogadoresController().getJogadorTurno());
+		    jsonObject.put("m", JogadoresController.getJogadoresController().getM());
 		    		    	    
 		    jsonObject.put("cont1", JogadoresController.getJogadoresController().getCont(1));
 		    jsonObject.put("cont2", JogadoresController.getJogadoresController().getCont(2));
@@ -136,6 +137,8 @@ public class FluxoDados {
 		jsonObject = new JSONObject(json_str);
 		
 		JogadoresController.getJogadoresController().jogador_turno = jsonObject.getInt("turno");
+		JogadoresController.getJogadoresController().setM(jsonObject.getBoolean("m"));
+
 				
 	    for(int x = 0; x < 4; x++) {
     	    JSONArray jsonArray = new JSONArray(jsonObject.getString("j"+x+"mov"));
