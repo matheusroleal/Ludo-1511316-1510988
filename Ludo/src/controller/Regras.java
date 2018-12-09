@@ -571,7 +571,7 @@ public class Regras implements ObservadorIF {
 			if((j1.getX() == 7 && j1.getY() == 6) && JogadoresController.getJogadoresController().getCont(1) != 3) {//se o peao tiver chegado na casa final e nao for o ultimo, mudamos o peao do jogador para o seguinte
 			
 				j1.mudaPeao();
-				JogadoresController.getJogadoresController().setCont(1);
+				JogadoresController.getJogadoresController().setCont(1, (JogadoresController.getJogadoresController().getCont(1) + 1));
 				
 				//jogador pode andar mais 6
 				for (int i = 1; i < 6; i++) {
@@ -1096,7 +1096,7 @@ public class Regras implements ObservadorIF {
 			if((j2.getX() == 6 && j2.getY() == 7) && j2.getNumPeao() != 3) {
 				
 				j2.mudaPeao();
-				//JogadoresController.getJogadoresController().setCont(2);
+				//JogadoresController.getJogadoresController().setCont(2,(JogadoresController.getJogadoresController().getCont(2) + 1));
 				
 				//jogador q fizer uma captura pode andar mais 6
 				for (int i = 1; i < 6; i++) {
@@ -1612,7 +1612,7 @@ public class Regras implements ObservadorIF {
 			if((j3.getX() == 7 && j3.getY() == 8) && j3.getNumPeao() != 3) {
 				
 				j3.mudaPeao();
-				//JogadoresController.getJogadoresController().setCont(3);
+				//JogadoresController.getJogadoresController().setCont(3,(JogadoresController.getJogadoresController().getCont(3) + 1));
 				
 				//jogador q fizer uma captura pode andar mais 6
 				for (int i = 1; i < 6; i++) {
@@ -2131,7 +2131,7 @@ public class Regras implements ObservadorIF {
 			if((j4.getX() == 8 && j4.getY() == 7) && j4.getNumPeao() != 3) {
 				
 				j4.mudaPeao();
-				//JogadoresController.getJogadoresController().setCont(4);
+				//JogadoresController.getJogadoresController().setCont(4,(JogadoresController.getJogadoresController().getCont(4) + 1));
 				
 				//jogador q fizer uma captura pode andar mais 6
 				for (int i = 1; i < 6; i++) {

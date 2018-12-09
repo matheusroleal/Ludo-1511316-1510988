@@ -55,19 +55,19 @@ public class JogadoresController {
     	return -1;
     }
     
-    public void setCont(int i) {
+    public void setCont(int i, int val) {
     	switch(i) {
 			case 1:
-				cont1++;
+				cont1 = val;
 				break;
 			case 2:
-				cont2++;
+				cont2 = val;
 				break;
 			case 3:
-				cont3++;
+				cont3 = val;
 				break;
 			case 4:
-				cont4++;
+				cont4 = val;
 				break;
     	}
     }
