@@ -13,7 +13,7 @@ public class Peca extends JPanel {
 	public int x;
 	public int y;
 	public Color a;
-	public Boolean pode = false;
+	public Boolean pode = false, barreira = false;
 	public Color b;
 	
 	public Peca(){
@@ -71,6 +71,20 @@ public class Peca extends JPanel {
 			g2d.setPaint(b);
 			g2d.fill(e1);
 		
+		}
+		
+		if(barreira == true) {
+			Ellipse2D e2, e3;
+			e2 = e3 = new Ellipse2D.Double();
+			
+			e2.setFrame(50*y+5,50*x+5,40,40);
+			g2d.setPaint(Color.WHITE);
+			g2d.fill(e2);
+			
+			e3.setFrame(50*y+10, 50*x+10,30,30);
+			g2d.setPaint(a);
+			g2d.fill(e3);
+			
 		}
 		
 	}
