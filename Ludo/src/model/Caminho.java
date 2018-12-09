@@ -9,6 +9,7 @@ public class Caminho{
 	public Boolean pode;
 	public Peao aux = null;
 	public Color ant;
+	public int numPeao;
 	
 	public Caminho() {
 		o1 = null;
@@ -16,20 +17,22 @@ public class Caminho{
 		pode = false;
 	}
 	
-	public void AdicionaPeao(Peao p) throws FileNotFoundException, BadLocationException {
+	public void AdicionaPeao(Peao p) throws FileNotFoundException, BadLocationException {		
 		if(o1 == null) {
 			o1 = p;
+			
 		}
 		else if(o2 == null) {
-			if(pode == true) { //se for true trata-se de alguma casa em q podemos ter mais de um peao
-				TextAreaLog.getTextAreaLog().printLog("funcionei!");
-				
+			
+			if(p.p1.a == o1.p1.a) //se os dois peoes forem da mesma cor
 				o2 = p;
-				//ant = o1.p1.a; //salvando a cor do peao q estava na casa primeiramente
+			
+			if(pode == true) { //se for true trata-se de alguma casa em q podemos ter mais de um peao (abrigo)
+				o2 = p;
 			} 
-			else {
-				aux = o1;
-				o1 = p;
+			else if(pode!=true) {
+					aux = o1;
+					o1 = p;
 			}	
 		}
 		else {
@@ -37,17 +40,18 @@ public class Caminho{
 		}
 	}
 	
-	public void RemovePeao(Peao p) {
+	public void RemovePeao(Peao p) throws FileNotFoundException, BadLocationException {
 		if(o2 == null) {
 			o1 = null;
+			
 		}
-		else {
+		else {	
 			if(o1 == p) {
 				o1 = null;
 				o1 = o2;
 				o2 = null;
 			}
-			else {
+			else {	
 				o2 = null;
 			}
 		}
