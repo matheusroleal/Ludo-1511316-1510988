@@ -10,13 +10,15 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Vector;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Interface.Inicializador;
+import Interface.Jogo;
 import model.Jogador;
 import model.TextAreaLog;
 import model.Vetor;
@@ -126,66 +128,74 @@ public class FluxoDados {
 		cores.insertElementAt(Color.GREEN, 1);
 		cores.insertElementAt(Color.YELLOW, 2);
 		cores.insertElementAt(Color.BLUE, 3);
-		    
-		File file = new File("jogos_salvos/salvo.json");
-		reader = new BufferedReader(new FileReader(file));
 		
-		json_str = reader.readLine();
-
-	    reader.close();
-
-		jsonObject = new JSONObject(json_str);
+		JFileChooser fc = new JFileChooser();
+		fc.setDialogTitle("Escolha um arquivo para carregar");
+		fc.setFileFilter(new FileNameExtensionFilter("Arquivos de Texto", "json"));
+		int returnVal = fc.showOpenDialog(Jogo.getJogo());
 		
-		JogadoresController.getJogadoresController().jogador_turno = jsonObject.getInt("turno");
-		JogadoresController.getJogadoresController().setM(jsonObject.getBoolean("m"));
+		if(returnVal==JFileChooser.APPROVE_OPTION){
+			File file = fc.getSelectedFile();
+			reader = new BufferedReader(new FileReader(file.getPath()));
+			
+			json_str = reader.readLine();
 
-				
-	    for(int x = 0; x < 4; x++) {
-    	    JSONArray jsonArray = new JSONArray(jsonObject.getString("j"+x+"mov"));
-    	    JSONArray jsonArrayInterno = new JSONArray(jsonObject.getString("j"+x));
-    	    
-    		JogadoresController.getJogadoresController().setCont((x+1), jsonObject.getInt("cont"+(x+1)));
-    	    
-	    	j_nova_pos = JogadoresController.getJogadoresController().getJogador(x);
-    	    
-	    	for(int y = 0; y < 4; y++) {
-	    		int nova_pos = (int)jsonArray.get(y);
+		    reader.close();
 
-	    		if(nova_pos > 0) {
-	    			int pos = y + 1;
+			jsonObject = new JSONObject(json_str);
 
-				    JSONObject jsonObjectInterno = new JSONObject(jsonArrayInterno.get(y).toString());
+			JogadoresController.getJogadoresController().jogador_turno = jsonObject.getInt("turno");
+//			JogadoresController.getJogadoresController().setM(jsonObject.getBoolean("matheus"));
 
-	    			j_nova_pos.getPeao(y).setC(y, jsonObjectInterno.getBoolean("c"+pos));
-	        	    j_nova_pos.getPeao(y).setCinco(y, jsonObjectInterno.getBoolean("cinco"+pos));
-	        	    j_nova_pos.getPeao(y).setFim(y, jsonObjectInterno.getInt("fim"+pos));
-	        	    j_nova_pos.getPeao(y).setY(y, jsonObjectInterno.getBoolean("y"+pos));
-	        	    j_nova_pos.getPeao(y).setMd(y, jsonObjectInterno.getInt("md"+pos));
-	    			
-		    		j_nova_pos.peoes_do_jogador.elementAt(y).lst.posIni();
-		    		
-					for (int i = 1; i < nova_pos + 1 ; i++) {
-						j_nova_pos.peoes_do_jogador.elementAt(y).lst.prox();
-					}
-					
-					Vetor v = (Vetor) j_nova_pos.peoes_do_jogador.elementAt(y).lst.posCorr();
-					
-					int novo_x = v.RetornaX();
-					int novo_y = v.RetornaY();
 
-					Inicializador.getInicializador().getCaminho(novo_x, novo_y).AdicionaPeao(j_nova_pos.getPeao(y));
-					Inicializador.getInicializador().getCaminho(novo_x, novo_y).numPeao = y;
-					
-					j_nova_pos.getPeao(y).getP1().PintaP(cores.elementAt(x));
-					j_nova_pos.getPeao(y).getP1().setX(novo_x);
-					j_nova_pos.getPeao(y).getP1().setY(novo_y);
+		    for(int x = 0; x < 4; x++) {
+	    	    JSONArray jsonArray = new JSONArray(jsonObject.getString("j"+x+"mov"));
+	    	    JSONArray jsonArrayInterno = new JSONArray(jsonObject.getString("j"+x));
+	    	    
+	    		JogadoresController.getJogadoresController().setCont((x+1), jsonObject.getInt("cont"+(x+1)));
+	    	    
+		    	j_nova_pos = JogadoresController.getJogadoresController().getJogador(x);
 
-					Inicializador.getInicializador().repaint();
+		    	for(int y = 0; y < 4; y++) {
+		    		int nova_pos = (int)jsonArray.get(y);
 
-	    		}
-	    	}
-	    }
-	    	
+		    		if(nova_pos > 0) {
+
+		    			int pos = y + 1;
+
+					    JSONObject jsonObjectInterno = new JSONObject(jsonArrayInterno.get(y).toString());
+
+		    			j_nova_pos.getPeao(y).setC(y, jsonObjectInterno.getBoolean("c"+pos));
+		        	    j_nova_pos.getPeao(y).setCinco(y, jsonObjectInterno.getBoolean("cinco"+pos));
+		        	    j_nova_pos.getPeao(y).setFim(y, jsonObjectInterno.getInt("fim"+pos));
+		        	    j_nova_pos.getPeao(y).setY(y, jsonObjectInterno.getBoolean("y"+pos));
+		        	    j_nova_pos.getPeao(y).setMd(y, jsonObjectInterno.getInt("md"+pos));
+		    			
+			    		j_nova_pos.peoes_do_jogador.elementAt(y).lst.posIni();
+			    		
+						for (int i = 1; i < nova_pos + 1 ; i++) {
+							j_nova_pos.peoes_do_jogador.elementAt(y).lst.prox();
+						}
+						
+						Vetor v = (Vetor) j_nova_pos.peoes_do_jogador.elementAt(y).lst.posCorr();
+						
+						int novo_x = v.RetornaX();
+						int novo_y = v.RetornaY();
+
+						Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j_nova_pos.getPeao(y));
+						Jogo.getJogo().getCaminho(novo_x, novo_y).numPeao = y;
+						
+						j_nova_pos.getPeao(y).getP1().PintaP(cores.elementAt(x));
+						j_nova_pos.getPeao(y).getP1().setX(novo_x);
+						j_nova_pos.getPeao(y).getP1().setY(novo_y);
+
+						Jogo.getJogo().repaint();
+
+		    		}
+		    	}
+		    }
+		}else {
+			TextAreaLog.getTextAreaLog().printLog("Erro ao escolher arquivo!");
+		}
 	}
-
 }

@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 
 import javax.swing.text.BadLocationException;
 
-import Interface.Inicializador;
+import Interface.Jogo;
 import model.Jogador;
 import model.TextAreaLog;
 import model.Vetor;
@@ -36,9 +36,9 @@ public class Regras implements ObservadorIF {
      	if(JogadoresController.getJogadoresController().getJogadorTurno() == 0) {
     		
     		//mostrando novamente no tabuleiro peca sem a outra em cima   		
-    		if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2 != null) {
-    			Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false;
-    			Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2.getP1().pode = false;
+    		if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o2 != null) {
+    			Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false;
+    			Jogo.getJogo().getCaminho(novo_x1, novo_y1).o2.getP1().pode = false;
     			
     			j1.SetP1Color(Color.RED);
     			
@@ -49,21 +49,21 @@ public class Regras implements ObservadorIF {
     			else if(j4.getPeao(j4.getNumPeao()).getCinco(4) != false)
     				j4.SetP1Color(Color.BLUE);
     		}
-    		else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o2 != null) {
-				if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.RED) {
-					Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false; 
+    		else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o2 != null) {
+				if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.RED) {
+					Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false; 
 					j2.SetP1Color(Color.GREEN);
 				}
 	  		}
-    		else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.RED) {
-					Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false; 
+    		else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.RED) {
+					Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false; 
 					j3.SetP1Color(Color.YELLOW);
 				}
 	  		}
-    		else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.RED) {
-					Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false; 
+    		else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.RED) {
+					Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false; 
 					j4.SetP1Color(Color.BLUE);
 				}
 	  		}
@@ -107,18 +107,18 @@ public class Regras implements ObservadorIF {
 					j1.SetP1X(novo_x1);
 					j1.SetP1Y(novo_y1);
 
-					if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1 != null) {
-						Inicializador.getInicializador().jogadores_na_casa[6][1].pode = false;
+					if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1 != null) {
+						Jogo.getJogo().jogadores_na_casa[6][1].pode = false;
 						
-						Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao())); //adiciona peao a casa de saida; peao o1 preenchido 
-						Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
-						TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x1, novo_y1));
-						TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x1, novo_y1));
+						Jogo.getJogo().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao())); //adiciona peao a casa de saida; peao o1 preenchido 
+						Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
+						TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x1, novo_y1));
+						TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x1, novo_y1));
 						
 						//captura
-						if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux != null) {
+						if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux != null) {
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.GREEN) {
+							if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.GREEN) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -126,19 +126,19 @@ public class Regras implements ObservadorIF {
 								j2.getPeao(j2.getNumPeao()).setPosIni(); //volta com sua lista
 								j2.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
 									j2.SetPX(1); 
 									j2.SetPY(10);
 									j2.SetP1X(1); 
 									j2.SetP1Y(10);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 1) {
 									j2.SetPX(1);
 									j2.SetPY(13);
 									j2.SetP1X(1); 
 									j2.SetP1Y(13);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 2) {
 									j2.SetPX(4);
 									j2.SetPY(10);
 									j2.SetP1X(4); 
@@ -152,14 +152,14 @@ public class Regras implements ObservadorIF {
 								}
 								
 								//reiniciando as variaveis
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setCinco(2, false);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setC(2, false);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setFim(2, -1);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setY(2, true);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setMd(2,0);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setCinco(2, false);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setC(2, false);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setFim(2, -1);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setY(2, true);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setMd(2,0);
 								
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.YELLOW) {
+							else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.YELLOW) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -167,19 +167,19 @@ public class Regras implements ObservadorIF {
 								j3.getPeao(j3.getNumPeao()).setPosIni();
 								j3.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
 									j3.SetPX(10); 
 									j3.SetPY(13);
 									j3.SetP1X(10); 
 									j3.SetP1Y(13);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 1) {
 									j3.SetPX(10);
 									j3.SetPY(10);
 									j3.SetP1X(10); 
 									j3.SetP1Y(10);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 2) {
 									j3.SetPX(13);
 									j3.SetPY(13);
 									j3.SetP1X(13); 
@@ -193,14 +193,14 @@ public class Regras implements ObservadorIF {
 								}
 								
 								//reiniciando as variaveis
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setCinco(3, false);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setC(3, false);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setFim(3, -1);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setY(3, true);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setMd(3,0);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setCinco(3, false);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setC(3, false);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setFim(3, -1);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setY(3, true);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setMd(3,0);
 								
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.BLUE) {
+							else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.BLUE) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -208,19 +208,19 @@ public class Regras implements ObservadorIF {
 								j4.getPeao(j4.getNumPeao()).setPosIni();
 								j4.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
 									j4.SetPX(13); 
 									j4.SetPY(4);
 									j4.SetP1X(13); 
 									j4.SetP1Y(4);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 1) {
 									j4.SetPX(13);
 									j4.SetPY(1);
 									j4.SetP1X(13); 
 									j4.SetP1Y(1);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 2) {
 									j4.SetPX(10);
 									j4.SetPY(4);
 									j4.SetP1X(10); 
@@ -234,16 +234,16 @@ public class Regras implements ObservadorIF {
 								}
 								
 								//reiniciando as variaveis
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setCinco(4, false);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setC(4, false);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setFim(4, -1);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setY(4, true);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setMd(4,0);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setCinco(4, false);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setC(4, false);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setFim(4, -1);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setY(4, true);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setMd(4,0);
 							}
 								
-							Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux = null; //transformando variavel auxiliar em null novamente
+							Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux = null; //transformando variavel auxiliar em null novamente
 							
-							Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).RemovePeao(j1.getPeao(j1.getNumPeao()));
+							Jogo.getJogo().getCaminho(novo_x1, novo_y1).RemovePeao(j1.getPeao(j1.getNumPeao()));
 					
 							//jogador q fizer uma captura pode andar mais 6
 							for (int i = 1; i < 6; i++) {
@@ -258,35 +258,35 @@ public class Regras implements ObservadorIF {
 							j1.SetP1X(novo_x1);
 							j1.SetP1Y(novo_y1);
 							
-							Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao()));
-							Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
-							TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x1, novo_y1));
-							TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x1, novo_y1));
+							Jogo.getJogo().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao()));
+							Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
+							TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x1, novo_y1));
+							TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x1, novo_y1));
 						
 						}
 					
 					}else {
-						Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao())); //adiciona peao a casa de saida; peao o1 preenchido 
-						Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
-						TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x1, novo_y1));
-						TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x1, novo_y1));
+						Jogo.getJogo().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao())); //adiciona peao a casa de saida; peao o1 preenchido 
+						Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
+						TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x1, novo_y1));
+						TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x1, novo_y1));
 					}
 								
-					Inicializador.getInicializador().repaint();
+					Jogo.getJogo().repaint();
 					
 					j1.getPeao(j1.getNumPeao()).setCinco(1, true); //sai do cincoX = false ja q o jogador tirou 5
 					j1.getPeao(j1.getNumPeao()).setY(1, true);
 				}
 			}			
     		
-    		Inicializador.getInicializador().jogadores_na_casa[6][1].pode = true;
+    		Jogo.getJogo().jogadores_na_casa[6][1].pode = true;
 			
     		if(j1.getPeao(j1.getNumPeao()).getC(1) == true){//quando c1 for true, quer dizer q o peao ja esta no tabuleiro e vai andar por ele
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
 				//eh necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
-				Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).RemovePeao(j1.getPeao(j1.getNumPeao()));
+				Jogo.getJogo().getCaminho(novo_x1, novo_y1).RemovePeao(j1.getPeao(j1.getNumPeao()));
 				
 				if(movimento == 6) {//se movimento for 6, jogador pode jogar novamente	
 					JogadoresController.getJogadoresController().m = false; 
@@ -331,7 +331,7 @@ public class Regras implements ObservadorIF {
 							j1.getPeao(j1.getNumPeao()).setY(1, false);
 							JogadoresController.getJogadoresController().m = true;
 							
-							Inicializador.getInicializador().repaint();	
+							Jogo.getJogo().repaint();	
 						}
 						else {
 							JogadoresController.getJogadoresController().m = true;
@@ -367,15 +367,15 @@ public class Regras implements ObservadorIF {
 					j1.SetP1X(novo_x1);
 					j1.SetP1Y(novo_y1);
 					
-					Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao()));
-					Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
-					TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x1, novo_y1));
-					TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x1, novo_y1));
+					Jogo.getJogo().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao()));
+					Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
+					TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x1, novo_y1));
+					TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x1, novo_y1));
 					
 					//captura
-					if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux != null) {
+					if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux != null) {
 						
-						if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.GREEN) {
+						if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.GREEN) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -383,19 +383,19 @@ public class Regras implements ObservadorIF {
 							j2.getPeao(j2.getNumPeao()).setPosIni(); //volta com sua lista
 							j2.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
 								j2.SetPX(1); 
 								j2.SetPY(10);
 								j2.SetP1X(1); 
 								j2.SetP1Y(10);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 1) {
 								j2.SetPX(1);
 								j2.SetPY(13);
 								j2.SetP1X(1); 
 								j2.SetP1Y(13);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 2) {
 								j2.SetPX(4);
 								j2.SetPY(10);
 								j2.SetP1X(4); 
@@ -409,14 +409,14 @@ public class Regras implements ObservadorIF {
 							}
 							
 							//reiniciando as variaveis
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setCinco(2, false);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setC(2, false);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setFim(2, -1);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setY(2, true);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setMd(2,0);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setCinco(2, false);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setC(2, false);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setFim(2, -1);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setY(2, true);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setMd(2,0);
 							
 						}
-						else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.YELLOW) {
+						else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.YELLOW) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -424,19 +424,19 @@ public class Regras implements ObservadorIF {
 							j3.getPeao(j3.getNumPeao()).setPosIni();
 							j3.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
 								j3.SetPX(10); 
 								j3.SetPY(13);
 								j3.SetP1X(10); 
 								j3.SetP1Y(13);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 1) {
 								j3.SetPX(10);
 								j3.SetPY(10);
 								j3.SetP1X(10); 
 								j3.SetP1Y(10);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 2) {
 								j3.SetPX(13);
 								j3.SetPY(13);
 								j3.SetP1X(13); 
@@ -450,14 +450,14 @@ public class Regras implements ObservadorIF {
 							}
 							
 							//reiniciando as variaveis
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setCinco(3, false);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setC(3, false);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setFim(3, -1);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setY(3, true);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setMd(3,0);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setCinco(3, false);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setC(3, false);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setFim(3, -1);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setY(3, true);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setMd(3,0);
 							
 						}
-						else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.BLUE) {
+						else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux.getP1().ExibeP() == Color.BLUE) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -465,19 +465,19 @@ public class Regras implements ObservadorIF {
 							j4.getPeao(j4.getNumPeao()).setPosIni();
 							j4.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 0) { 
 								j4.SetPX(13); 
 								j4.SetPY(4);
 								j4.SetP1X(13); 
 								j4.SetP1Y(4);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 1) {
 								j4.SetPX(13);
 								j4.SetPY(1);
 								j4.SetP1X(13); 
 								j4.SetP1Y(1);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao == 2) {
 								j4.SetPX(10);
 								j4.SetPY(4);
 								j4.SetP1X(10); 
@@ -491,16 +491,16 @@ public class Regras implements ObservadorIF {
 							}
 							
 							//reiniciando as variaveis
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setCinco(4, false);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setC(4, false);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setFim(4, -1);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setY(4, true);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao).setMd(4,0);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setCinco(4, false);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setC(4, false);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setFim(4, -1);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setY(4, true);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao).setMd(4,0);
 						}
 							
-						Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).aux = null; //transformando variavel auxiliar em null novamente
+						Jogo.getJogo().getCaminho(novo_x1, novo_y1).aux = null; //transformando variavel auxiliar em null novamente
 						
-						Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).RemovePeao(j1.getPeao(j1.getNumPeao()));
+						Jogo.getJogo().getCaminho(novo_x1, novo_y1).RemovePeao(j1.getPeao(j1.getNumPeao()));
 				
 						//jogador q fizer uma captura pode andar mais 6
 						for (int i = 1; i < 6; i++) {
@@ -515,14 +515,14 @@ public class Regras implements ObservadorIF {
 						j1.SetP1X(novo_x1);
 						j1.SetP1Y(novo_y1);
 						
-						Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao()));
-						Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
-						TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x1, novo_y1));
-						TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x1, novo_y1));
+						Jogo.getJogo().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao()));
+						Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
+						TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x1, novo_y1));
+						TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x1, novo_y1));
 					
 					}
 				
-					Inicializador.getInicializador().repaint();
+					Jogo.getJogo().repaint();
 				}	
 				
 				for(int i=0; i<6; i++) {
@@ -542,28 +542,28 @@ public class Regras implements ObservadorIF {
 			}
 			
 			if(j1.getNumPeao() == 0)
-				Inicializador.getInicializador().vm1.setLocation(50*novo_y1, 50*novo_x1);
+				Jogo.getJogo().vm1.setLocation(50*novo_y1, 50*novo_x1);
 			else if(j1.getNumPeao() == 1)
-				Inicializador.getInicializador().vm2.setLocation(50*novo_y1, 50*novo_x1);
+				Jogo.getJogo().vm2.setLocation(50*novo_y1, 50*novo_x1);
 			else if(j1.getNumPeao() == 2)
-				Inicializador.getInicializador().vm3.setLocation(50*novo_y1, 50*novo_x1);
+				Jogo.getJogo().vm3.setLocation(50*novo_y1, 50*novo_x1);
 			else if(j1.getNumPeao() == 3)
-				Inicializador.getInicializador().vm4.setLocation(50*novo_y1, 50*novo_x1);				
+				Jogo.getJogo().vm4.setLocation(50*novo_y1, 50*novo_x1);				
 			
 			//caso de dois peoes na mesma casa
-			if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2 != null) {	
+			if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o2 != null) {	
 				if(novo_x1==1 && novo_y1==8) {
 					TextAreaLog.getTextAreaLog().printLog("verde");
 					
-					if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.GREEN)
-						Inicializador.getInicializador().getCaminho(1, 8).o1.getP1().pode = true;
+					if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.GREEN)
+						Jogo.getJogo().getCaminho(1, 8).o1.getP1().pode = true;
 					else
-						Inicializador.getInicializador().getCaminho(1, 8).o1.getP1().pode = false;
+						Jogo.getJogo().getCaminho(1, 8).o1.getP1().pode = false;
 				}
 				
 
-				Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().pode = true;
-				Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().b = j1.getPeao(j1.getNumPeao()).getP1().a;
+				Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().pode = true;
+				Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().b = j1.getPeao(j1.getNumPeao()).getP1().a;
 				
 			}
 			
@@ -586,10 +586,10 @@ public class Regras implements ObservadorIF {
 				j1.SetP1X(novo_x1);
 				j1.SetP1Y(novo_y1);
 				
-				Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao()));
-				Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
-				TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x1, novo_y1));
-				TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x1, novo_y1));
+				Jogo.getJogo().getCaminho(novo_x1, novo_y1).AdicionaPeao(j1.getPeao(j1.getNumPeao()));
+				Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
+				TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x1, novo_y1));
+				TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x1, novo_y1));
 				
 				//reiniciando as variavies para novo peao
 				j1.getPeao(j1.getNumPeao()).setCinco(1, false);
@@ -603,15 +603,15 @@ public class Regras implements ObservadorIF {
 		}
 		else if(JogadoresController.getJogadoresController().getJogadorTurno() == 1) {
 			
-			if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.GREEN) { 
-					Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false; 
+			if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.GREEN) { 
+					Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false; 
 					j1.SetP1Color(Color.RED);
 				}
 	  		}
-			else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o2 != null) {
-    			Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false;
-    			Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o2.getP1().pode = false;
+			else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o2 != null) {
+    			Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false;
+    			Jogo.getJogo().getCaminho(novo_x2, novo_y2).o2.getP1().pode = false;
     			
     			j2.SetP1Color(Color.GREEN);
     			
@@ -622,15 +622,15 @@ public class Regras implements ObservadorIF {
     			else if(j4.getPeao(j4.getNumPeao()).getCinco(4) != false)
     				j4.SetP1Color(Color.BLUE);
 			}
-			else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.GREEN) {
-					Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false; 
+			else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.GREEN) {
+					Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false; 
 					j3.SetP1Color(Color.YELLOW);
 				}
 	  		}
-			else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.GREEN){
-					Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false; 
+			else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.GREEN){
+					Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false; 
 					j4.SetP1Color(Color.BLUE);
 				} 
 	  		}
@@ -670,14 +670,14 @@ public class Regras implements ObservadorIF {
 					j2.SetP1X(novo_x2);
 					j2.SetP1Y(novo_y2);
 					
-					if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1 != null) {
-						Inicializador.getInicializador().jogadores_na_casa[1][8].pode = false;
+					if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1 != null) {
+						Jogo.getJogo().jogadores_na_casa[1][8].pode = false;
 					
-						Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao())); 
-						Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
+						Jogo.getJogo().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao())); 
+						Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
 			
-						if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux != null) {
-							if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.RED) {
+						if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux != null) {
+							if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.RED) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -685,19 +685,19 @@ public class Regras implements ObservadorIF {
 								j1.getPeao(j1.getNumPeao()).setPosIni();
 								j1.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
 									j1.SetPX(4); 
 									j1.SetPY(1);
 									j1.SetP1X(4); 
 									j1.SetP1Y(1);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 1) {
 									j1.SetPX(4);
 									j1.SetPY(4);
 									j1.SetP1X(4); 
 									j1.SetP1Y(4);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 2) {
 									j1.SetPX(1);
 									j1.SetPY(1);
 									j1.SetP1X(1); 
@@ -710,14 +710,14 @@ public class Regras implements ObservadorIF {
 									j1.SetP1Y(4);
 								}
 								
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setCinco(1, false);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setC(1, false);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setFim(1, -1);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setY(1, true);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setMd(1, 0);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setCinco(1, false);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setC(1, false);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setFim(1, -1);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setY(1, true);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setMd(1, 0);
 								
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.YELLOW) {
+							else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.YELLOW) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -725,19 +725,19 @@ public class Regras implements ObservadorIF {
 								j3.getPeao(j3.getNumPeao()).setPosIni();
 								j3.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
 									j3.SetPX(10); 
 									j3.SetPY(13);
 									j3.SetP1X(10); 
 									j3.SetP1Y(13);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 1) {
 									j3.SetPX(10);
 									j3.SetPY(10);
 									j3.SetP1X(10); 
 									j3.SetP1Y(10);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 2) {
 									j3.SetPX(13);
 									j3.SetPY(13);
 									j3.SetP1X(13); 
@@ -750,14 +750,14 @@ public class Regras implements ObservadorIF {
 									j3.SetP1Y(10);
 								}
 								
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setCinco(3, false);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setC(3, false);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setFim(3, -1);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setY(3, true);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setMd(3, 0);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setCinco(3, false);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setC(3, false);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setFim(3, -1);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setY(3, true);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setMd(3, 0);
 								
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.BLUE) {
+							else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.BLUE) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -765,19 +765,19 @@ public class Regras implements ObservadorIF {
 								j4.getPeao(j4.getNumPeao()).setPosIni();
 								j4.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
 									j4.SetPX(13); 
 									j4.SetPY(4);
 									j4.SetP1X(13); 
 									j4.SetP1Y(4);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 1) {
 									j4.SetPX(13);
 									j4.SetPY(1);
 									j4.SetP1X(13); 
 									j4.SetP1Y(1);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 2) {
 									j4.SetPX(10);
 									j4.SetPY(4);
 									j4.SetP1X(10); 
@@ -790,16 +790,16 @@ public class Regras implements ObservadorIF {
 									j4.SetP1Y(1);
 								}
 								
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setCinco(4, false);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setC(4, false);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setFim(4, -1);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setY(4, true);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setMd(4, 0);		
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setCinco(4, false);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setC(4, false);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setFim(4, -1);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setY(4, true);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setMd(4, 0);		
 							}
 							
-							Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux = null;
+							Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux = null;
 							
-							Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).RemovePeao(j2.getPeao(j2.getNumPeao()));
+							Jogo.getJogo().getCaminho(novo_x2, novo_y2).RemovePeao(j2.getPeao(j2.getNumPeao()));
 							
 							//jogador q fizer uma captura pode andar mais 6
 							for (int i = 1; i < 6; i++) {
@@ -814,34 +814,34 @@ public class Regras implements ObservadorIF {
 							j2.SetP1X(novo_x2);
 							j2.SetP1Y(novo_y2);
 							
-							Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao()));
-							Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
-							TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x2, novo_y2));
-							TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x2, novo_y2));
+							Jogo.getJogo().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao()));
+							Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
+							TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x2, novo_y2));
+							TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x2, novo_y2));
 						}
 					
 					}else {
-						Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao())); 
-						Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
-						TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x2, novo_y2));
-						TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x2, novo_y2));
+						Jogo.getJogo().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao())); 
+						Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
+						TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x2, novo_y2));
+						TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x2, novo_y2));
 
 					}
 					
-					Inicializador.getInicializador().repaint();
+					Jogo.getJogo().repaint();
 					
 					j2.getPeao(j2.getNumPeao()).setCinco(2, true);
 					j2.getPeao(j2.getNumPeao()).setY(2, true);
 				}
 			}	
 			
-			Inicializador.getInicializador().jogadores_na_casa[1][8].pode = true;
+			Jogo.getJogo().jogadores_na_casa[1][8].pode = true;
 		
 			if(j2.getPeao(j2.getNumPeao()).getC(2) == true) {
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
-				Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).RemovePeao(j2.getPeao(j2.getNumPeao()));
+				Jogo.getJogo().getCaminho(novo_x2, novo_y2).RemovePeao(j2.getPeao(j2.getNumPeao()));
 				
 				if(movimento == 6) {
 					JogadoresController.getJogadoresController().m = false; 
@@ -886,7 +886,7 @@ public class Regras implements ObservadorIF {
 							j2.getPeao(j2.getNumPeao()).setY(2, false);
 							JogadoresController.getJogadoresController().m = true;
 							
-							Inicializador.getInicializador().repaint();
+							Jogo.getJogo().repaint();
 						}
 						else {
 							JogadoresController.getJogadoresController().m = true;
@@ -921,11 +921,11 @@ public class Regras implements ObservadorIF {
 					j2.SetP1X(novo_x2);
 					j2.SetP1Y(novo_y2);
 					
-					Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao()));
-					Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
+					Jogo.getJogo().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao()));
+					Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
 					
-					if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux != null) {
-						if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.RED) {
+					if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux != null) {
+						if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.RED) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -933,19 +933,19 @@ public class Regras implements ObservadorIF {
 							j1.getPeao(j1.getNumPeao()).setPosIni();
 							j1.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
 								j1.SetPX(4); 
 								j1.SetPY(1);
 								j1.SetP1X(4); 
 								j1.SetP1Y(1);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 1) {
 								j1.SetPX(4);
 								j1.SetPY(4);
 								j1.SetP1X(4); 
 								j1.SetP1Y(4);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 2) {
 								j1.SetPX(1);
 								j1.SetPY(1);
 								j1.SetP1X(1); 
@@ -958,14 +958,14 @@ public class Regras implements ObservadorIF {
 								j1.SetP1Y(4);
 							}
 							
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setCinco(1, false);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setC(1, false);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setFim(1, -1);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setY(1, true);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setMd(1, 0);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setCinco(1, false);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setC(1, false);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setFim(1, -1);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setY(1, true);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setMd(1, 0);
 							
 						}
-						else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.YELLOW) {
+						else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.YELLOW) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -973,19 +973,19 @@ public class Regras implements ObservadorIF {
 							j3.getPeao(j3.getNumPeao()).setPosIni();
 							j3.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
 								j3.SetPX(10); 
 								j3.SetPY(13);
 								j3.SetP1X(10); 
 								j3.SetP1Y(13);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 1) {
 								j3.SetPX(10);
 								j3.SetPY(10);
 								j3.SetP1X(10); 
 								j3.SetP1Y(10);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 2) {
 								j3.SetPX(13);
 								j3.SetPY(13);
 								j3.SetP1X(13); 
@@ -998,14 +998,14 @@ public class Regras implements ObservadorIF {
 								j3.SetP1Y(10);
 							}
 							
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setCinco(3, false);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setC(3, false);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setFim(3, -1);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setY(3, true);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setMd(3, 0);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setCinco(3, false);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setC(3, false);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setFim(3, -1);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setY(3, true);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setMd(3, 0);
 							
 						}
-						else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.BLUE) {
+						else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux.getP1().ExibeP() == Color.BLUE) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -1013,19 +1013,19 @@ public class Regras implements ObservadorIF {
 							j4.getPeao(j4.getNumPeao()).setPosIni();
 							j4.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 0) { 
 								j4.SetPX(13); 
 								j4.SetPY(4);
 								j4.SetP1X(13); 
 								j4.SetP1Y(4);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 1) {
 								j4.SetPX(13);
 								j4.SetPY(1);
 								j4.SetP1X(13); 
 								j4.SetP1Y(1);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao == 2) {
 								j4.SetPX(10);
 								j4.SetPY(4);
 								j4.SetP1X(10); 
@@ -1038,16 +1038,16 @@ public class Regras implements ObservadorIF {
 								j4.SetP1Y(1);
 							}
 							
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setCinco(4, false);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setC(4, false);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setFim(4, -1);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setY(4, true);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao).setMd(4, 0);		
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setCinco(4, false);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setC(4, false);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setFim(4, -1);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setY(4, true);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao).setMd(4, 0);		
 						}
 						
-						Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).aux = null;
+						Jogo.getJogo().getCaminho(novo_x2, novo_y2).aux = null;
 						
-						Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).RemovePeao(j2.getPeao(j2.getNumPeao()));
+						Jogo.getJogo().getCaminho(novo_x2, novo_y2).RemovePeao(j2.getPeao(j2.getNumPeao()));
 						
 						//jogador q fizer uma captura pode andar mais 6
 						for (int i = 1; i < 6; i++) {
@@ -1062,13 +1062,13 @@ public class Regras implements ObservadorIF {
 						j2.SetP1X(novo_x2);
 						j2.SetP1Y(novo_y2);
 						
-						Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao()));
-						Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
-						TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x2, novo_y2));
-						TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x2, novo_y2));
+						Jogo.getJogo().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao()));
+						Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
+						TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x2, novo_y2));
+						TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x2, novo_y2));
 					}
 											
-					Inicializador.getInicializador().repaint();
+					Jogo.getJogo().repaint();
 				}	
 				
 				for(int i=0; i<6; i++) {
@@ -1085,11 +1085,11 @@ public class Regras implements ObservadorIF {
 				}
 			}
 			
-			if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o2 != null) {
-				Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().pode = true;
-				Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().b = j2.getPeao(j2.getNumPeao()).getP1().a;	
+			if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o2 != null) {
+				Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().pode = true;
+				Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().b = j2.getPeao(j2.getNumPeao()).getP1().a;	
 				
-				if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.RED)
+				if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.RED)
 					j2.SetP1Color(new Color(0,0,0,0));
 			}
 			
@@ -1111,10 +1111,10 @@ public class Regras implements ObservadorIF {
 				j2.SetP1X(novo_x2);
 				j2.SetP1Y(novo_y2);
 				
-				Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao()));
-				Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
-				TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x2, novo_y2));
-				TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x2, novo_y2));
+				Jogo.getJogo().getCaminho(novo_x2, novo_y2).AdicionaPeao(j2.getPeao(j2.getNumPeao()));
+				Jogo.getJogo().getCaminho(novo_x2, novo_y2).numPeao = j2.getNumPeao();
+				TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x2, novo_y2));
+				TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x2, novo_y2));
 				
 				j2.getPeao(j2.getNumPeao()).setCinco(2, false);
 				j2.getPeao(j2.getNumPeao()).setC(2, false);
@@ -1126,17 +1126,17 @@ public class Regras implements ObservadorIF {
 		}
 		else if(JogadoresController.getJogadoresController().getJogadorTurno() == 2) {
 			
-			if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.YELLOW) 
-					Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false; 
+			if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.YELLOW) 
+					Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false; 
 	  		}
-			else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.YELLOW) 
-					Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false; 
+			else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.YELLOW) 
+					Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false; 
 	  		}
-			else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o2 != null) {
-    			Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false;
-    			Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o2.getP1().pode = false;
+			else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o2 != null) {
+    			Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false;
+    			Jogo.getJogo().getCaminho(novo_x3, novo_y3).o2.getP1().pode = false;
     			
     			j3.SetP1Color(Color.YELLOW);
     			
@@ -1147,9 +1147,9 @@ public class Regras implements ObservadorIF {
     			else if(j4.getPeao(j4.getNumPeao()).getCinco(4) != false)
     				j4.SetP1Color(Color.BLUE);
     		}
-			else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.YELLOW){
-					Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false; 
+			else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.YELLOW){
+					Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false; 
 					j4.SetP1Color(Color.BLUE);
 				} 
 	  		}
@@ -1190,34 +1190,34 @@ public class Regras implements ObservadorIF {
 					j3.SetP1Y(novo_y3);
 					
 					
-					if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1 != null) {
-						Inicializador.getInicializador().jogadores_na_casa[8][13].pode = false;
+					if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1 != null) {
+						Jogo.getJogo().jogadores_na_casa[8][13].pode = false;
 
-						Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
-						Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
+						Jogo.getJogo().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
+						Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
 						
-						if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux != null) {
+						if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux != null) {
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.RED) {
+							if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.RED) {
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
 								j1.SetP1Color(new Color(0,0,0,0));
 								j1.getPeao(j1.getNumPeao()).setPosIni();
 								j1.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
 									j1.SetPX(4); 
 									j1.SetPY(1);
 									j1.SetP1X(4); 
 									j1.SetP1Y(1);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 1) {
 									j1.SetPX(4);
 									j1.SetPY(4);
 									j1.SetP1X(4);
 									j1.SetP1Y(4);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 2) {
 									j1.SetPX(1);
 									j1.SetPY(1);
 									j1.SetP1X(1);
@@ -1230,13 +1230,13 @@ public class Regras implements ObservadorIF {
 									j1.SetP1Y(4);
 								}
 								
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setCinco(1, false);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setC(1, false);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setFim(1, -1);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setY(1, true);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setMd(1, 0);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setCinco(1, false);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setC(1, false);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setFim(1, -1);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setY(1, true);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setMd(1, 0);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.GREEN) {
+							else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.GREEN) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -1244,19 +1244,19 @@ public class Regras implements ObservadorIF {
 								j2.getPeao(j2.getNumPeao()).setPosIni();
 								j2.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
 									j2.SetPX(1); 
 									j2.SetPY(10);
 									j2.SetP1X(1); 
 									j2.SetP1Y(10);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 1) {
 									j2.SetPX(1);
 									j2.SetPY(13);
 									j2.SetP1X(1); 
 									j2.SetP1Y(13);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 2) {
 									j2.SetPX(4);
 									j2.SetPY(10);
 									j2.SetP1X(4); 
@@ -1269,14 +1269,14 @@ public class Regras implements ObservadorIF {
 									j2.SetP1Y(13);
 								}
 								
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setCinco(2, false);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setC(2, false);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setFim(2, -1);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setY(2, true);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setMd(2, 0);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setCinco(2, false);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setC(2, false);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setFim(2, -1);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setY(2, true);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setMd(2, 0);
 								
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.BLUE) {
+							else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.BLUE) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -1284,19 +1284,19 @@ public class Regras implements ObservadorIF {
 								j4.getPeao(j4.getNumPeao()).setPosIni();
 								j4.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
 									j4.SetPX(13); 
 									j4.SetPY(4);
 									j4.SetP1X(13); 
 									j4.SetP1Y(4);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 1) {
 									j4.SetPX(13);
 									j4.SetPY(1);
 									j4.SetP1X(13); 
 									j4.SetP1Y(1);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 2) {
 									j4.SetPX(10);
 									j4.SetPY(4);
 									j4.SetP1X(10); 
@@ -1309,16 +1309,16 @@ public class Regras implements ObservadorIF {
 									j4.SetP1Y(1);
 								}
 								
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setCinco(4, false);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setC(4, false);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setFim(4, -1);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setY(4, true);
-								j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setMd(4, 0);		
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setCinco(4, false);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setC(4, false);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setFim(4, -1);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setY(4, true);
+								j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setMd(4, 0);		
 							}
 							
-							Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux = null;
+							Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux = null;
 							
-							Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).RemovePeao(j3.getPeao(j3.getNumPeao()));
+							Jogo.getJogo().getCaminho(novo_x3, novo_y3).RemovePeao(j3.getPeao(j3.getNumPeao()));
 							
 							//jogador q fizer uma captura pode andar mais 6
 							for (int i = 1; i < 6; i++) {
@@ -1333,32 +1333,32 @@ public class Regras implements ObservadorIF {
 							j3.SetP1X(novo_x3);
 							j3.SetP1Y(novo_y3);
 							
-							Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
-							Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
-							TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x3, novo_y3));
-							TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x3, novo_y3));
+							Jogo.getJogo().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
+							Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
+							TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x3, novo_y3));
+							TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x3, novo_y3));
 								
 						}
 					}
 					else{
-						Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao())); 
-						Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
+						Jogo.getJogo().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao())); 
+						Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
 					}
 					
-					Inicializador.getInicializador().repaint();
+					Jogo.getJogo().repaint();
 					
 					j3.getPeao(j3.getNumPeao()).setCinco(3, true);
 					j3.getPeao(j3.getNumPeao()).setY(3, true);
 				}
 			}
 			
-			Inicializador.getInicializador().jogadores_na_casa[8][13].pode = true;
+			Jogo.getJogo().jogadores_na_casa[8][13].pode = true;
 			
 			if(j3.getPeao(j3.getNumPeao()).getC(3) == true) {
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
-				Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).RemovePeao(j3.getPeao(j3.getNumPeao()));
+				Jogo.getJogo().getCaminho(novo_x3, novo_y3).RemovePeao(j3.getPeao(j3.getNumPeao()));
 				
 				if(movimento == 6) {
 					JogadoresController.getJogadoresController().m = false; 
@@ -1402,7 +1402,7 @@ public class Regras implements ObservadorIF {
 							j3.getPeao(j3.getNumPeao()).setY(3, false);
 							JogadoresController.getJogadoresController().m = true;
 							
-							Inicializador.getInicializador().repaint();
+							Jogo.getJogo().repaint();
 						}
 						else {
 							JogadoresController.getJogadoresController().m = true;
@@ -1437,31 +1437,31 @@ public class Regras implements ObservadorIF {
 					j3.SetP1X(novo_x3);
 					j3.SetP1Y(novo_y3);
 					
-					Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
-					Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
+					Jogo.getJogo().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
+					Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
 					
-					if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux != null) {
+					if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux != null) {
 						
-						if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.RED) {
+						if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.RED) {
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
 							j1.SetP1Color(new Color(0,0,0,0));
 							j1.getPeao(j1.getNumPeao()).setPosIni();
 							j1.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
 								j1.SetPX(4); 
 								j1.SetPY(1);
 								j1.SetP1X(4); 
 								j1.SetP1Y(1);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 1) {
 								j1.SetPX(4);
 								j1.SetPY(4);
 								j1.SetP1X(4); 
 								j1.SetP1Y(4);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 2) {
 								j1.SetPX(1);
 								j1.SetPY(1);
 								j1.SetP1X(1); 
@@ -1474,13 +1474,13 @@ public class Regras implements ObservadorIF {
 								j1.SetP1Y(4);
 							}
 							
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setCinco(1, false);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setC(1, false);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setFim(1, -1);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setY(1, true);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setMd(1, 0);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setCinco(1, false);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setC(1, false);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setFim(1, -1);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setY(1, true);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setMd(1, 0);
 						}
-						else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.GREEN) {
+						else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.GREEN) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -1488,19 +1488,19 @@ public class Regras implements ObservadorIF {
 							j2.getPeao(j2.getNumPeao()).setPosIni();
 							j2.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
 								j2.SetPX(1); 
 								j2.SetPY(10);
 								j2.SetP1X(1); 
 								j2.SetP1Y(10);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 1) {
 								j2.SetPX(1);
 								j2.SetPY(13);
 								j2.SetP1X(1); 
 								j2.SetP1Y(13);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 2) {
 								j2.SetPX(4);
 								j2.SetPY(10);
 								j2.SetP1X(4); 
@@ -1513,14 +1513,14 @@ public class Regras implements ObservadorIF {
 								j2.SetP1Y(13);
 							}
 							
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setCinco(2, false);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setC(2, false);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setFim(2, -1);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setY(2, true);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setMd(2, 0);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setCinco(2, false);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setC(2, false);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setFim(2, -1);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setY(2, true);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setMd(2, 0);
 							
 						}
-						else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.BLUE) {
+						else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux.getP1().ExibeP() == Color.BLUE) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -1528,19 +1528,19 @@ public class Regras implements ObservadorIF {
 							j4.getPeao(j4.getNumPeao()).setPosIni();
 							j4.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 0) { 
 								j4.SetPX(13); 
 								j4.SetPY(4);
 								j4.SetP1X(13); 
 								j4.SetP1Y(4);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 1) {
 								j4.SetPX(13);
 								j4.SetPY(1);
 								j4.SetP1X(13); 
 								j4.SetP1Y(1);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao == 2) {
 								j4.SetPX(10);
 								j4.SetPY(4);
 								j4.SetP1X(10); 
@@ -1553,16 +1553,16 @@ public class Regras implements ObservadorIF {
 								j4.SetP1Y(1);
 							}
 							
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setCinco(4, false);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setC(4, false);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setFim(4, -1);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setY(4, true);
-							j4.getPeao(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao).setMd(4, 0);		
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setCinco(4, false);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setC(4, false);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setFim(4, -1);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setY(4, true);
+							j4.getPeao(Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao).setMd(4, 0);		
 						}
 						
-						Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).aux = null;
+						Jogo.getJogo().getCaminho(novo_x3, novo_y3).aux = null;
 						
-						Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).RemovePeao(j3.getPeao(j3.getNumPeao()));
+						Jogo.getJogo().getCaminho(novo_x3, novo_y3).RemovePeao(j3.getPeao(j3.getNumPeao()));
 						
 						//jogador q fizer uma captura pode andar mais 6
 						for (int i = 1; i < 6; i++) {
@@ -1577,14 +1577,14 @@ public class Regras implements ObservadorIF {
 						j3.SetP1X(novo_x3);
 						j3.SetP1Y(novo_y3);
 						
-						Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
-						Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
-						TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x3, novo_y3));
-						TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x3, novo_y3));
+						Jogo.getJogo().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
+						Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
+						TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x3, novo_y3));
+						TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x3, novo_y3));
 							
 					}
 					
-					Inicializador.getInicializador().repaint();
+					Jogo.getJogo().repaint();
 				}	
 				
 				for(int i=0; i<6; i++) {
@@ -1601,11 +1601,11 @@ public class Regras implements ObservadorIF {
 				}
 			}
 			
-			if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o2 != null) {
-				Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().pode = true;
-				Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().b = j3.getPeao(j3.getNumPeao()).getP1().a;	
+			if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o2 != null) {
+				Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().pode = true;
+				Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().b = j3.getPeao(j3.getNumPeao()).getP1().a;	
 				
-				if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.RED || Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.GREEN)
+				if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.RED || Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.GREEN)
 					j3.SetP1Color(new Color(0,0,0,0));
 			}
 			
@@ -1627,10 +1627,10 @@ public class Regras implements ObservadorIF {
 				j3.SetP1X(novo_x3);
 				j3.SetP1Y(novo_y3);
 				
-				Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
-				Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
-				TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x3, novo_y3));
-				TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x3, novo_y3));
+				Jogo.getJogo().getCaminho(novo_x3, novo_y3).AdicionaPeao(j3.getPeao(j3.getNumPeao()));
+				Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
+				TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x3, novo_y3));
+				TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x3, novo_y3));
 				
 				j3.getPeao(j3.getNumPeao()).setCinco(3, false);
 				j3.getPeao(j3.getNumPeao()).setC(3, false);
@@ -1643,21 +1643,21 @@ public class Regras implements ObservadorIF {
 		}
 		else {
 			
-			if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.BLUE) 
-					Inicializador.getInicializador().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false; 
+			if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().a == Color.BLUE) 
+					Jogo.getJogo().getCaminho(novo_x1, novo_y1).o1.getP1().pode = false; 
 	  		}
-			else if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.BLUE) 
-					Inicializador.getInicializador().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false; 
+			else if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().a == Color.BLUE) 
+					Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().pode = false; 
 	  		}
-			else if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o2 != null){
-				if(Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.BLUE)
-					Inicializador.getInicializador().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false; 
+			else if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o2 != null){
+				if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().a == Color.BLUE)
+					Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().pode = false; 
 	  		}
-			else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o2 != null) {
-    			Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false;
-    			Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o2.getP1().pode = false;
+			else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o2 != null) {
+    			Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().pode = false;
+    			Jogo.getJogo().getCaminho(novo_x4, novo_y4).o2.getP1().pode = false;
     			
     			j4.SetP1Color(Color.BLUE);
     			
@@ -1705,11 +1705,11 @@ public class Regras implements ObservadorIF {
 					j4.SetP1X(novo_x4);
 					j4.SetP1Y(novo_y4);
 					
-					if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1 != null) {
-						Inicializador.getInicializador().jogadores_na_casa[13][6].pode = false;
+					if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1 != null) {
+						Jogo.getJogo().jogadores_na_casa[13][6].pode = false;
 						
-						if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux != null) {
-							if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.RED) {
+						if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux != null) {
+							if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.RED) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -1717,19 +1717,19 @@ public class Regras implements ObservadorIF {
 								j1.getPeao(j1.getNumPeao()).setPosIni();
 								j1.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
 									j1.SetPX(4); 
 									j1.SetPY(1);
 									j1.SetP1X(4); 
 									j1.SetP1Y(1);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 1) {
 									j1.SetPX(4);
 									j1.SetPY(4);
 									j1.SetP1X(4); 
 									j1.SetP1Y(4);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 2) {
 									j1.SetPX(1);
 									j1.SetPY(1);
 									j1.SetP1X(1); 
@@ -1742,14 +1742,14 @@ public class Regras implements ObservadorIF {
 									j1.SetP1Y(4);
 								}
 								
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setCinco(1, false);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setC(1, false);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setFim(1, -1);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setY(1, true);
-								j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setMd(1, 0);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setCinco(1, false);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setC(1, false);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setFim(1, -1);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setY(1, true);
+								j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setMd(1, 0);
 								
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.GREEN) {
+							else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.GREEN) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -1757,19 +1757,19 @@ public class Regras implements ObservadorIF {
 								j2.getPeao(j2.getNumPeao()).setPosIni();
 								j2.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
 									j2.SetPX(1); 
 									j2.SetPY(10);
 									j2.SetP1X(1); 
 									j2.SetP1Y(10);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 1) {
 									j2.SetPX(1);
 									j2.SetPY(13);
 									j2.SetP1X(1); 
 									j2.SetP1Y(13);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 2) {
 									j2.SetPX(4);
 									j2.SetPY(10);
 									j2.SetP1X(4); 
@@ -1782,14 +1782,14 @@ public class Regras implements ObservadorIF {
 									j2.SetP1Y(13);
 								}
 								
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setCinco(2, false);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setC(2, false);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setFim(2, -1);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setY(2, true);
-								j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setMd(2, 0);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setCinco(2, false);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setC(2, false);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setFim(2, -1);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setY(2, true);
+								j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setMd(2, 0);
 								
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.YELLOW) {
+							else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.YELLOW) {
 								
 								TextAreaLog.getTextAreaLog().printLog("peca comida!");
 								
@@ -1797,19 +1797,19 @@ public class Regras implements ObservadorIF {
 								j3.getPeao(j3.getNumPeao()).setPosIni();
 								j3.SetPColor(Color.WHITE);
 								
-								if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
+								if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
 									j3.SetPX(10); 
 									j3.SetPY(13);
 									j3.SetP1X(10); 
 									j3.SetP1Y(13);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 1) {
+								else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 1) {
 									j3.SetPX(10);
 									j3.SetPY(10);
 									j3.SetP1X(10); 
 									j3.SetP1Y(10);
 								}
-								else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 2) {
+								else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 2) {
 									j3.SetPX(13);
 									j3.SetPY(13);
 									j3.SetP1X(13); 
@@ -1822,17 +1822,17 @@ public class Regras implements ObservadorIF {
 									j3.SetP1Y(10);
 								}
 								
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setCinco(3, false);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setC(3, false);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setFim(3, -1);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setY(3, true);
-								j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setMd(3, 0);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setCinco(3, false);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setC(3, false);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setFim(3, -1);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setY(3, true);
+								j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setMd(3, 0);
 								
 							}
 							
-							Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux = null;
+							Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux = null;
 							
-							Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).RemovePeao(j4.getPeao(j4.getNumPeao()));
+							Jogo.getJogo().getCaminho(novo_x4, novo_y4).RemovePeao(j4.getPeao(j4.getNumPeao()));
 							
 							//jogador q fizer uma captura pode andar mais 6
 							for (int i = 1; i < 6; i++) {
@@ -1847,21 +1847,21 @@ public class Regras implements ObservadorIF {
 							j4.SetP1X(novo_x4);
 							j4.SetP1Y(novo_y4);
 							
-							Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao()));
-							Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
-							TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x4, novo_y4));
-							TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x4, novo_y4));
+							Jogo.getJogo().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao()));
+							Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
+							TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x4, novo_y4));
+							TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x4, novo_y4));
 						
 						}
 						
 					}
 					else {
-						Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao())); 
-						Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
+						Jogo.getJogo().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao())); 
+						Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
 			
 					}
 					
-					Inicializador.getInicializador().repaint();
+					Jogo.getJogo().repaint();
 					
 					j4.getPeao(j4.getNumPeao()).setCinco(4, true); 
 					j4.getPeao(j4.getNumPeao()).setY(4, true);
@@ -1869,13 +1869,13 @@ public class Regras implements ObservadorIF {
 				}
 			}
 			
-			Inicializador.getInicializador().jogadores_na_casa[13][6].pode = true;
+			Jogo.getJogo().jogadores_na_casa[13][6].pode = true;
 			
 			if(j4.getPeao(j4.getNumPeao()).getC(4) == true) {
 				
 				TextAreaLog.getTextAreaLog().printLog("jogador: " + JogadoresController.getJogadoresController().getJogadorTurno() + " numero: " + movimento);
 				
-				Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).RemovePeao(j4.getPeao(j4.getNumPeao()));
+				Jogo.getJogo().getCaminho(novo_x4, novo_y4).RemovePeao(j4.getPeao(j4.getNumPeao()));
 				
 				if(movimento == 6) {
 					JogadoresController.getJogadoresController().m = false; 
@@ -1919,7 +1919,7 @@ public class Regras implements ObservadorIF {
 							j4.getPeao(j4.getNumPeao()).setY(4, false);
 							JogadoresController.getJogadoresController().m = true;
 							
-							Inicializador.getInicializador().repaint();
+							Jogo.getJogo().repaint();
 						}
 						else {
 							JogadoresController.getJogadoresController().m = true;
@@ -1954,11 +1954,11 @@ public class Regras implements ObservadorIF {
 					j4.SetP1X(novo_x4);
 					j4.SetP1Y(novo_y4);
 					
-					Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao()));
-					Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
+					Jogo.getJogo().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao()));
+					Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
 					
-					if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux != null) {
-						if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.RED) {
+					if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux != null) {
+						if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.RED) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -1966,19 +1966,19 @@ public class Regras implements ObservadorIF {
 							j1.getPeao(j1.getNumPeao()).setPosIni();
 							j1.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
 								j1.SetPX(4); 
 								j1.SetPY(1);
 								j1.SetP1X(4); 
 								j1.SetP1Y(1);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 1) {
 								j1.SetPX(4);
 								j1.SetPY(4);
 								j1.SetP1X(4); 
 								j1.SetP1Y(4);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 2) {
 								j1.SetPX(1);
 								j1.SetPY(1);
 								j1.SetP1X(1); 
@@ -1991,14 +1991,14 @@ public class Regras implements ObservadorIF {
 								j1.SetP1Y(4);
 							}
 							
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setCinco(1, false);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setC(1, false);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setFim(1, -1);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setY(1, true);
-							j1.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setMd(1, 0);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setCinco(1, false);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setC(1, false);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setFim(1, -1);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setY(1, true);
+							j1.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setMd(1, 0);
 							
 						}
-						else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.GREEN) {
+						else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.GREEN) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -2006,19 +2006,19 @@ public class Regras implements ObservadorIF {
 							j2.getPeao(j2.getNumPeao()).setPosIni();
 							j2.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
 								j2.SetPX(1); 
 								j2.SetPY(10);
 								j2.SetP1X(1); 
 								j2.SetP1Y(10);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 1) {
 								j2.SetPX(1);
 								j2.SetPY(13);
 								j2.SetP1X(1); 
 								j2.SetP1Y(13);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 2) {
 								j2.SetPX(4);
 								j2.SetPY(10);
 								j2.SetP1X(4); 
@@ -2031,14 +2031,14 @@ public class Regras implements ObservadorIF {
 								j2.SetP1Y(13);
 							}
 							
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setCinco(2, false);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setC(2, false);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setFim(2, -1);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setY(2, true);
-							j2.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setMd(2, 0);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setCinco(2, false);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setC(2, false);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setFim(2, -1);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setY(2, true);
+							j2.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setMd(2, 0);
 							
 						}
-						else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.YELLOW) {
+						else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux.getP1().ExibeP() == Color.YELLOW) {
 							
 							TextAreaLog.getTextAreaLog().printLog("peca comida!");
 							
@@ -2046,19 +2046,19 @@ public class Regras implements ObservadorIF {
 							j3.getPeao(j3.getNumPeao()).setPosIni();
 							j3.SetPColor(Color.WHITE);
 							
-							if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
+							if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 0) { 
 								j3.SetPX(10); 
 								j3.SetPY(13);
 								j3.SetP1X(10); 
 								j3.SetP1Y(13);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 1) {
+							else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 1) {
 								j3.SetPX(10);
 								j3.SetPY(10);
 								j3.SetP1X(10); 
 								j3.SetP1Y(10);
 							}
-							else if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao == 2) {
+							else if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao == 2) {
 								j3.SetPX(13);
 								j3.SetPY(13);
 								j3.SetP1X(13); 
@@ -2071,17 +2071,17 @@ public class Regras implements ObservadorIF {
 								j3.SetP1Y(10);
 							}
 							
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setCinco(3, false);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setC(3, false);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setFim(3, -1);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setY(3, true);
-							j3.getPeao(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao).setMd(3, 0);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setCinco(3, false);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setC(3, false);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setFim(3, -1);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setY(3, true);
+							j3.getPeao(Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao).setMd(3, 0);
 							
 						}
 						
-						Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).aux = null;
+						Jogo.getJogo().getCaminho(novo_x4, novo_y4).aux = null;
 						
-						Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).RemovePeao(j4.getPeao(j4.getNumPeao()));
+						Jogo.getJogo().getCaminho(novo_x4, novo_y4).RemovePeao(j4.getPeao(j4.getNumPeao()));
 						
 						//jogador q fizer uma captura pode andar mais 6
 						for (int i = 1; i < 6; i++) {
@@ -2096,13 +2096,13 @@ public class Regras implements ObservadorIF {
 						j4.SetP1X(novo_x4);
 						j4.SetP1Y(novo_y4);
 						
-						Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao()));
-						Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
-						TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x4, novo_y4));
-						TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x4, novo_y4));
+						Jogo.getJogo().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao()));
+						Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
+						TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x4, novo_y4));
+						TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x4, novo_y4));
 					}
 					
-					Inicializador.getInicializador().repaint();
+					Jogo.getJogo().repaint();
 				}
 
 				for(int i=0; i<6; i++) {
@@ -2119,11 +2119,11 @@ public class Regras implements ObservadorIF {
 				}		
 			}
 			
-			if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o2 != null) {
-				Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().pode = true;
-				Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().b = j4.getPeao(j4.getNumPeao()).getP1().a;	
+			if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o2 != null) {
+				Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().pode = true;
+				Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().b = j4.getPeao(j4.getNumPeao()).getP1().a;	
 				
-				if(Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.RED || Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.GREEN || Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.YELLOW) {
+				if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.RED || Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.GREEN || Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().a == Color.YELLOW) {
 					j4.SetP1Color(new Color(0,0,0,0));
 				}
 			}
@@ -2146,10 +2146,10 @@ public class Regras implements ObservadorIF {
 				j4.SetP1X(novo_x4);
 				j4.SetP1Y(novo_y4);
 				
-				Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao()));
-				Inicializador.getInicializador().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
-				TextAreaLog.getTextAreaLog().printLog("o1: "+Inicializador.getInicializador().getO1(novo_x4, novo_y4));
-				TextAreaLog.getTextAreaLog().printLog("o2: "+Inicializador.getInicializador().getO2(novo_x4, novo_y4));
+				Jogo.getJogo().getCaminho(novo_x4, novo_y4).AdicionaPeao(j4.getPeao(j4.getNumPeao()));
+				Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
+				TextAreaLog.getTextAreaLog().printLog("o1: "+Jogo.getJogo().getO1(novo_x4, novo_y4));
+				TextAreaLog.getTextAreaLog().printLog("o2: "+Jogo.getJogo().getO2(novo_x4, novo_y4));
 				
 				j4.getPeao(j4.getNumPeao()).setCinco(4, false);
 				j4.getPeao(j4.getNumPeao()).setC(4, false);
@@ -2184,7 +2184,7 @@ public class Regras implements ObservadorIF {
 		if (instance == null) {
 		    instance = new Regras();
 		    
-		    Inicializador.getInicializador().add(instance);
+		    Jogo.getJogo().add(instance);
 		}
 		return instance;
     }
