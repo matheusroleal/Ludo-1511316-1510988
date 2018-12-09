@@ -10,15 +10,192 @@ public class Peao {
 	Peca p;
 	Peca p1;
 	public int x_final, y_final;
+	boolean cinco1, cinco2, cinco3, cinco4;
+	boolean c1, c2, c3, c4;
+	boolean y1, y2, y3, y4;
+	int fim1, fim2, fim3, fim4;
+	int md1, md2, md3, md4;
 	
 	public Peao(String cor_jogador) {
 		lst = new Lista();
 		p = new Peca(); //peao q cobre o espaco branco na casa inicial
 		p1 = new Peca(); //peao q anda pelo tabuleiro
 		
+		cinco1 = cinco2 = cinco3 = cinco4 = c1 = c2 = c3 = c4 = false; //variaveis que controlam se o jogador pode sair da casa inicial (cincoX), e se pode andar pelo tabuleiro (cX); inicialmente igual a false ja que ngm pode andar sem seguir as regras do jogo
+		y1 = y2 = y3 = y4 = true;
+		fim1 = fim2 = fim3 = fim4 = -1;
+		md1 = md2 = md3 = md4 = 0; //variavel para ver se jogador excedeu vantagem ao tirar 6 no dado
+		
 		PintaP(cor_jogador); //pinta peca q anda pelo tabuleiro q inicialmente se encontra na casa vermelha
 		PopulaLista(cor_jogador);
 	}
+	
+	public boolean getCinco(int i) {
+    	switch(i) {
+			case 1:
+				return cinco1;
+			case 2:
+				return cinco2;
+			case 3:
+				return cinco3;
+			case 4:
+				return cinco4;
+    	}
+    	return false;
+    }
+    
+    public void setCinco(int i, boolean val) {
+    	switch(i) {
+			case 1:
+				cinco1 = val;
+				break;
+			case 2:
+				cinco2 = val;
+				break;
+			case 3:
+				cinco3 = val;
+				break;
+			case 4:
+				cinco4 = val;
+				break;
+    	}
+    }
+    
+    public boolean getC(int i) {
+    	switch(i) {
+			case 1:
+				return c1;
+			case 2:
+				return c2;
+			case 3:
+				return c3;
+			case 4:
+				return c4;
+    	}
+    	return false;
+    }
+    
+    public void setC(int i, boolean val) {
+    	switch(i) {
+			case 1:
+				c1 = val;
+				break;
+			case 2:
+				c2 = val;
+				break;
+			case 3:
+				c3 = val;
+				break;
+			case 4:
+				c4 = val;
+				break;
+    	}
+    }
+    
+    public boolean getY(int i) {
+    	switch(i) {
+			case 1:
+				return y1;
+			case 2:
+				return y2;
+			case 3:
+				return y3;
+			case 4:
+				return y4;
+    	}
+    	return false;
+    }
+    
+    public void setY(int i, boolean val) {
+    	switch(i) {
+			case 1:
+				y1 = val;
+				break;
+			case 2:
+				y2 = val;
+				break;
+			case 3:
+				y3 = val;
+				break;
+			case 4:
+				y4 = val;
+				break;
+    	}
+    }
+    
+    public int getFim(int i) {
+    	switch(i) {
+			case 1:
+				return fim1;
+			case 2:
+				return fim2;
+			case 3:
+				return fim3;
+			case 4:
+				return fim4;
+    	}
+    	return -2;
+    }
+    
+    public void setFim(int i, int val) {
+    	switch(i) {
+			case 1:
+				fim1 = val;
+				break;
+			case 2:
+				fim2 = val;
+				break;
+			case 3:
+				fim3 = val;
+				break;
+			case 4:
+				fim4 = val;
+				break;
+    	}
+    }
+    
+    public int getMd(int i) {
+    	switch(i) {
+			case 1:
+				return md1;
+			case 2:
+				return md2;
+			case 3:
+				return md3;
+			case 4:
+				return md4;
+    	}
+    	return -1;
+    }
+    
+    public void setMd(int i, int val){
+    	switch(i) {
+			case 1:
+				if(val != 0)
+					md1++;
+				else
+					md1 = val;
+				break;
+			case 2:
+				if(val != 0)
+					md2++;
+				else
+					md2 = val;
+				break;
+			case 3:
+				if(val != 0)
+					md3++;
+				else
+					md3 = val;
+				break;
+			case 4:
+				if(val != 0)
+					md4++;
+				else
+					md4 = val;
+				break;
+    	}
+    }
 	
 	public Lista getLst() {
 		return lst;
@@ -47,6 +224,18 @@ public class Peao {
 	public void setP1(int x, int y) {
 		p1.x = x;
 		p1.y = y;
+	}
+	
+	public Vetor getPosCorr() {
+		return (Vetor)lst.posCorr();
+	}
+
+	public void setPosIni() {
+		lst.posIni();
+	}
+	
+	public void getProx() {
+		lst.prox();
 	}
 	
 	private void PintaP(String cor_jogador) {

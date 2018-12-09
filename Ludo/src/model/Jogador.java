@@ -89,18 +89,5 @@ public class Jogador {
 			num_peao++;
 	}
 
-	//lista
-	public Vetor getPosCorr(int index) {
-		return (Vetor)peoes_do_jogador.elementAt(index).getLst().posCorr();
-	}
-
-	public void getPosIni(int index) {
-		peoes_do_jogador.elementAt(index).getLst().posIni();
-	}
-	
-	public void getProx(int index) {
-		peoes_do_jogador.elementAt(index).getLst().prox();
-	}
-
 }
 

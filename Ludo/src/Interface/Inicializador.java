@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.text.BadLocationException;
@@ -16,12 +17,16 @@ import controller.*;
 import model.*;
 import view.*;
 
-public class Inicializador extends JFrame{
+public class Inicializador extends JFrame implements ObservadoIF{
 	private static Inicializador xframe = null;
 	public Dado d;
 	Salvar s;
 	Carregar c;
 	BotaoTeste bt1, bt2, bt3, bt4, bt5, bt6;
+	public JButton vm1, vm2, vm3, vm4;
+	ObservadorIF obs;
+	public int numPeao;
+	public Caminho[][] jogadores_na_casa = new Caminho[15][15];
 	
 	private Inicializador() {
 		try {
@@ -36,41 +41,79 @@ public class Inicializador extends JFrame{
 			Jogador j3 = JogadoresController.getJogadoresController().getJogador(2); 
 			Jogador j4 = JogadoresController.getJogadoresController().getJogador(3);
 			
-			//botoes vermelhos
-			JButton vm1 = new JButton();
-			JButton vm2 = new JButton();
-			JButton vm3 = new JButton();
-			JButton vm4 = new JButton();
+			//peoes da matriz jogadores_na_casa inicializados com null
+			for(int i=0; i<15; i++) {
+				for(int j=0; j<15; j++) {
+					jogadores_na_casa[i][j] = new Caminho();
+				}
+			}
 			
+			//setando casas em q se pode ter mais de um peao como true
+			jogadores_na_casa[1][6].pode = true; //casa preta
+			jogadores_na_casa[6][13].pode = true; //casa preta
+			jogadores_na_casa[13][8].pode = true; //casa preta
+			jogadores_na_casa[8][1].pode = true; //casa preta
+			jogadores_na_casa[6][1].pode = true; //casa de saida vermelha
+			jogadores_na_casa[1][8].pode = true; //casa de saida verde
+			jogadores_na_casa[8][13].pode = true; //casa de saida amarela
+			jogadores_na_casa[13][6].pode = true; //casa de saida azul		
+
+			
+			//botoes vermelhos
+			vm1 = new JButton();
+			vm2 = new JButton();
+			vm3 = new JButton();
+			vm4 = new JButton();
+
+			vm1.setName("vm1");
 			vm1.setBorder(null);
 			vm1.setLocation(1*50, 4*50);
 			vm1.setSize(50,50);
 			vm1.setContentAreaFilled(false);
+			vm2.setName("vm2");
 			vm2.setBorder(null);
 			vm2.setLocation(4*50, 4*50);
 			vm2.setSize(50,50);
 			vm2.setContentAreaFilled(false);
+			vm3.setName("vm3");
 			vm3.setBorder(null);
 			vm3.setLocation(1*50, 1*50);
 			vm3.setSize(50,50);
 			vm3.setContentAreaFilled(false);
-			
+			vm4.setName("vm4");
 			vm4.setBorder(null);
 			vm4.setLocation(4*50, 1*50);
 			vm4.setSize(50,50);
 			vm4.setContentAreaFilled(false);
 						
-			
 			this.getContentPane().add(vm1);
 			this.getContentPane().add(vm2);
 			this.getContentPane().add(vm3);
 			this.getContentPane().add(vm4);
 			
 			vm1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {					
+				public void actionPerformed(ActionEvent e) {	
 					j1.setNumPeao(0);
 					
+					
+					try {
+						notifyObservador(e);
+						notify();
+						Regras.getRegras(null).notify();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					d.dado_btn.setEnabled(true);
+
+					
 				}
 			});
 					
@@ -78,6 +121,19 @@ public class Inicializador extends JFrame{
 				public void actionPerformed(ActionEvent e) {					
 					j1.setNumPeao(1);	
 					
+					numPeao = j1.getNumPeao();
+					try {
+						notifyObservador(e);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					d.dado_btn.setEnabled(true);
 				}
 			});
@@ -85,16 +141,41 @@ public class Inicializador extends JFrame{
 			vm3.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {					
 					j1.setNumPeao(2);	
-		
-					d.dado_btn.setEnabled(true);
 					
+					numPeao = j1.getNumPeao();
+					try {
+						notifyObservador(e);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					d.dado_btn.setEnabled(true);
 				}
 			});
 			
 			vm4.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {					
-					j1.setNumPeao(3);	
+					j1.setNumPeao(3);
 					
+					numPeao = j1.getNumPeao();
+					try {
+						notifyObservador(e);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					d.dado_btn.setEnabled(true);
 				}
 			});
@@ -143,7 +224,7 @@ public class Inicializador extends JFrame{
 			this.getContentPane().add(s.btn);
 			this.getContentPane().add(c.btn);
 			
-			d.dado_btn.setEnabled(false);
+			d.dado_btn.setEnabled(true);
 			
 			d.dado_btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -152,6 +233,9 @@ public class Inicializador extends JFrame{
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -198,6 +282,9 @@ public class Inicializador extends JFrame{
 					} catch (BadLocationException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				}
 			});
@@ -209,6 +296,9 @@ public class Inicializador extends JFrame{
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -224,6 +314,9 @@ public class Inicializador extends JFrame{
 					} catch (BadLocationException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				}
 			});
@@ -235,6 +328,9 @@ public class Inicializador extends JFrame{
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -250,7 +346,10 @@ public class Inicializador extends JFrame{
 					} catch (BadLocationException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}		
 				}
 			});
 			
@@ -261,6 +360,9 @@ public class Inicializador extends JFrame{
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -278,9 +380,38 @@ public class Inicializador extends JFrame{
 		}
 	}
 	
+    
+    public Caminho getCaminho(int i, int j) {
+    	return jogadores_na_casa[i][j];
+    }
+    
+    public Peao getO1(int i, int j) {
+    	return jogadores_na_casa[i][j].o1;
+    }
+    
+    public Peao getO2(int i, int j) {
+    	return jogadores_na_casa[i][j].o2;
+    }
+
+	@Override
+	public void add(ObservadorIF o) {
+		obs = o;
+	}
+
+	@Override
+	public void remove(ObservadorIF o) {
+		obs = null;
+	}
+	
+	@Override
+	public void notifyObservador(ActionEvent e) throws InterruptedException, FileNotFoundException, BadLocationException {
+		obs.update(e);
+	}
+	
 	public static Inicializador getInicializador() {
 		if(xframe == null)
 			xframe = new Inicializador();
 		return xframe;
 	}
+
 }
