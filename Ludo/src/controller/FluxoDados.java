@@ -10,12 +10,15 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Vector;
 
+import javax.swing.text.BadLocationException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import Interface.Inicializador;
 import model.Jogador;
+import model.TextAreaLog;
 import model.Vetor;
 
 public class FluxoDados {
@@ -41,36 +44,51 @@ public class FluxoDados {
 		try {
 			jsonObject = new JSONObject(json_str);
 		    for(int x = 0; x < 4; x++) {
+			    JSONArray jsonArrayInterno = new JSONArray();
+
 		    	j = JogadoresController.getJogadoresController().getJogador(x);
+		    	
 		    	for(int y = 0; y < 4; y++) {
-		    		 jsonArray.put(y, j.peoes_do_jogador.elementAt(y).getPos());
+				    JSONObject jsonObjectInterno = new JSONObject(json_str);
+
+		    		
+					jsonArray.put(y, j.peoes_do_jogador.elementAt(y).getPos());	
+					
+				    jsonObjectInterno.put("c1", j.getPeao(y).getC(1));
+				    jsonObjectInterno.put("c2", j.getPeao(y).getC(2));
+				    jsonObjectInterno.put("c3", j.getPeao(y).getC(3));
+				    jsonObjectInterno.put("c4", j.getPeao(y).getC(4));
+				    
+				    jsonObjectInterno.put("fim1", j.getPeao(y).getFim(1));
+				    jsonObjectInterno.put("fim2", j.getPeao(y).getFim(2));
+				    jsonObjectInterno.put("fim3", j.getPeao(y).getFim(3));
+				    jsonObjectInterno.put("fim4", j.getPeao(y).getFim(4));
+				    
+				    jsonObjectInterno.put("cinco1",j.getPeao(y).getCinco(1));
+				    jsonObjectInterno.put("cinco2",j.getPeao(y).getCinco(2));
+				    jsonObjectInterno.put("cinco3",j.getPeao(y).getCinco(3));
+				    jsonObjectInterno.put("cinco4",j.getPeao(y).getCinco(4));
+					
+				    jsonObjectInterno.put("y1",j.getPeao(y).getY(1));
+				    jsonObjectInterno.put("y2",j.getPeao(y).getY(2));
+				    jsonObjectInterno.put("y3",j.getPeao(y).getY(3));
+				    jsonObjectInterno.put("y4",j.getPeao(y).getY(4));
+				   
+				    jsonObjectInterno.put("md1",j.getPeao(y).getMd(1));
+				    jsonObjectInterno.put("md2",j.getPeao(y).getMd(2));
+				    jsonObjectInterno.put("md3",j.getPeao(y).getMd(3));
+				    jsonObjectInterno.put("md4",j.getPeao(y).getMd(4));
+				    
+				    jsonArrayInterno.put(y, jsonObjectInterno);
+		    		 
 		    	}
-		    	jsonObject.put("j"+x, jsonArray.toString());
+		    	jsonObject.put("j"+x, jsonArrayInterno.toString());
+
+		    	jsonObject.put("j"+x+"mov", jsonArray.toString());
 		    }
 		    
 		    jsonObject.put("turno", JogadoresController.getJogadoresController().getJogadorTurno());
-		    
-		    jsonObject.put("c1", JogadoresController.getJogadoresController().getC(1));
-		    jsonObject.put("c2", JogadoresController.getJogadoresController().getC(2));
-		    jsonObject.put("c3", JogadoresController.getJogadoresController().getC(3));
-		    jsonObject.put("c4", JogadoresController.getJogadoresController().getC(4));
-		    
-		    jsonObject.put("fim1", JogadoresController.getJogadoresController().getFim(1));
-		    jsonObject.put("fim2", JogadoresController.getJogadoresController().getFim(2));
-		    jsonObject.put("fim3", JogadoresController.getJogadoresController().getFim(3));
-		    jsonObject.put("fim4", JogadoresController.getJogadoresController().getFim(4));
-		    
-		    jsonObject.put("cinco1",JogadoresController.getJogadoresController().getCinco(1));
-		    jsonObject.put("cinco2",JogadoresController.getJogadoresController().getCinco(2));
-		    jsonObject.put("cinco3",JogadoresController.getJogadoresController().getCinco(3));
-		    jsonObject.put("cinco4",JogadoresController.getJogadoresController().getCinco(4));
-			
-		    jsonObject.put("y1",JogadoresController.getJogadoresController().getY(1));
-		    jsonObject.put("y2",JogadoresController.getJogadoresController().getY(2));
-		    jsonObject.put("y3",JogadoresController.getJogadoresController().getY(3));
-		    jsonObject.put("y4",JogadoresController.getJogadoresController().getY(4));
-
-		    	    
+		    		    	    
 		    EscreverJogo(jsonObject);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -90,7 +108,7 @@ public class FluxoDados {
 		}
 	}
 
-	public void CarregarPartida() throws IOException, JSONException{
+	public void CarregarPartida() throws IOException, JSONException, BadLocationException{
 	    JSONObject jsonObject;
 	    String json_str;
 		Vector<Color> cores = new Vector<>();
@@ -102,7 +120,6 @@ public class FluxoDados {
 		cores.insertElementAt(Color.GREEN, 1);
 		cores.insertElementAt(Color.YELLOW, 2);
 		cores.insertElementAt(Color.BLUE, 3);
-		
 		    
 		File file = new File("jogos_salvos/salvo.json");
 		reader = new BufferedReader(new FileReader(file));
@@ -116,18 +133,25 @@ public class FluxoDados {
 		JogadoresController.getJogadoresController().jogador_turno = jsonObject.getInt("turno");
 				
 	    for(int x = 0; x < 4; x++) {
-    	    JSONArray jsonArray = new JSONArray(jsonObject.getString("j"+x));
+    	    JSONArray jsonArray = new JSONArray(jsonObject.getString("j"+x+"mov"));
+    	    JSONArray jsonArrayInterno = new JSONArray(jsonObject.getString("j"+x));
+    	    
 	    	j_nova_pos = JogadoresController.getJogadoresController().getJogador(x);
-	    	
-	    	int pos = x + 1;
-    	    JogadoresController.getJogadoresController().setC(x, jsonObject.getBoolean("c"+pos));
-    	    JogadoresController.getJogadoresController().setCinco(x, jsonObject.getBoolean("cinco"+pos));
-    	    JogadoresController.getJogadoresController().setFim(x, jsonObject.getInt("fim"+pos));
-    	    JogadoresController.getJogadoresController().setY(x, jsonObject.getBoolean("y"+pos));
     	    
 	    	for(int y = 0; y < 4; y++) {
 	    		int nova_pos = (int)jsonArray.get(y);
+
 	    		if(nova_pos > 0) {
+	    			int pos = y + 1;
+
+				    JSONObject jsonObjectInterno = new JSONObject(jsonArrayInterno.get(y).toString());
+
+	    			j_nova_pos.getPeao(y).setC(y, jsonObjectInterno.getBoolean("c"+pos));
+	        	    j_nova_pos.getPeao(y).setCinco(y, jsonObjectInterno.getBoolean("cinco"+pos));
+	        	    j_nova_pos.getPeao(y).setFim(y, jsonObjectInterno.getInt("fim"+pos));
+	        	    j_nova_pos.getPeao(y).setY(y, jsonObjectInterno.getBoolean("y"+pos));
+	        	    j_nova_pos.getPeao(y).setMd(y, jsonObjectInterno.getInt("md"+pos));
+	    			
 		    		j_nova_pos.peoes_do_jogador.elementAt(y).lst.posIni();
 		    		
 					for (int i = 1; i < nova_pos + 1 ; i++) {
@@ -138,12 +162,16 @@ public class FluxoDados {
 					
 					int novo_x = v.RetornaX();
 					int novo_y = v.RetornaY();
+
+					Inicializador.getInicializador().getCaminho(novo_x, novo_y).AdicionaPeao(j_nova_pos.getPeao(y));
+					Inicializador.getInicializador().getCaminho(novo_x, novo_y).numPeao = y;
 					
 					j_nova_pos.getPeao(y).getP1().PintaP(cores.elementAt(x));
 					j_nova_pos.getPeao(y).getP1().setX(novo_x);
 					j_nova_pos.getPeao(y).getP1().setY(novo_y);
-					
+
 					Inicializador.getInicializador().repaint();
+
 	    		}
 	    	}
 	    }

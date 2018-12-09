@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.text.BadLocationException;
 
-//import org.json.JSONException;
+import org.json.JSONException;
 
 import controller.*;
 import model.*;
@@ -27,27 +27,27 @@ public class Inicializador extends JFrame implements ObservadoIF{
 	ObservadorIF obs;
 	public int numPeao;
 	public Caminho[][] jogadores_na_casa = new Caminho[15][15];
-	
+
 	private Inicializador() {
 		try {
-		
+
 			Tabuleiro t = new Tabuleiro();
-			
+
 			this.setBounds(0,0,960,800);
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			
-			Jogador j1 = JogadoresController.getJogadoresController().getJogador(0); 
+
+			Jogador j1 = JogadoresController.getJogadoresController().getJogador(0);
 			Jogador j2 = JogadoresController.getJogadoresController().getJogador(1);
-			Jogador j3 = JogadoresController.getJogadoresController().getJogador(2); 
+			Jogador j3 = JogadoresController.getJogadoresController().getJogador(2);
 			Jogador j4 = JogadoresController.getJogadoresController().getJogador(3);
-			
+
 			//peoes da matriz jogadores_na_casa inicializados com null
 			for(int i=0; i<15; i++) {
 				for(int j=0; j<15; j++) {
 					jogadores_na_casa[i][j] = new Caminho();
 				}
 			}
-			
+
 			//setando casas em q se pode ter mais de um peao como true
 			jogadores_na_casa[1][6].pode = true; //casa preta
 			jogadores_na_casa[6][13].pode = true; //casa preta
@@ -56,9 +56,9 @@ public class Inicializador extends JFrame implements ObservadoIF{
 			jogadores_na_casa[6][1].pode = true; //casa de saida vermelha
 			jogadores_na_casa[1][8].pode = true; //casa de saida verde
 			jogadores_na_casa[8][13].pode = true; //casa de saida amarela
-			jogadores_na_casa[13][6].pode = true; //casa de saida azul		
+			jogadores_na_casa[13][6].pode = true; //casa de saida azul
 
-			
+
 			//botoes vermelhos
 			vm1 = new JButton();
 			vm2 = new JButton();
@@ -85,17 +85,17 @@ public class Inicializador extends JFrame implements ObservadoIF{
 			vm4.setLocation(4*50, 1*50);
 			vm4.setSize(50,50);
 			vm4.setContentAreaFilled(false);
-						
+
 			this.getContentPane().add(vm1);
 			this.getContentPane().add(vm2);
 			this.getContentPane().add(vm3);
 			this.getContentPane().add(vm4);
-			
+
 			vm1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {	
+				public void actionPerformed(ActionEvent e) {
 					j1.setNumPeao(0);
-					
-					
+
+
 					try {
 						notifyObservador(e);
 						notify();
@@ -110,17 +110,17 @@ public class Inicializador extends JFrame implements ObservadoIF{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
+
 					d.dado_btn.setEnabled(true);
 
-					
+
 				}
 			});
-					
+
 			vm2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {					
-					j1.setNumPeao(1);	
-					
+				public void actionPerformed(ActionEvent e) {
+					j1.setNumPeao(1);
+
 					numPeao = j1.getNumPeao();
 					try {
 						notifyObservador(e);
@@ -137,11 +137,11 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					d.dado_btn.setEnabled(true);
 				}
 			});
-			
+
 			vm3.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {					
-					j1.setNumPeao(2);	
-					
+				public void actionPerformed(ActionEvent e) {
+					j1.setNumPeao(2);
+
 					numPeao = j1.getNumPeao();
 					try {
 						notifyObservador(e);
@@ -158,11 +158,11 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					d.dado_btn.setEnabled(true);
 				}
 			});
-			
+
 			vm4.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {					
+				public void actionPerformed(ActionEvent e) {
 					j1.setNumPeao(3);
-					
+
 					numPeao = j1.getNumPeao();
 					try {
 						notifyObservador(e);
@@ -179,7 +179,7 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					d.dado_btn.setEnabled(true);
 				}
 			});
-				
+
 			this.getContentPane().add(j4.getPeca(3));
 			this.getContentPane().add(j4.getBasePeca(3));
 			this.getContentPane().add(j4.getPeca(2));
@@ -188,7 +188,7 @@ public class Inicializador extends JFrame implements ObservadoIF{
 			this.getContentPane().add(j4.getBasePeca(1));
 			this.getContentPane().add(j4.getPeca(0));
 			this.getContentPane().add(j4.getBasePeca(0));
-			
+
 			this.getContentPane().add(j3.getPeca(3));
 			this.getContentPane().add(j3.getBasePeca(3));
 			this.getContentPane().add(j3.getPeca(2));
@@ -197,7 +197,7 @@ public class Inicializador extends JFrame implements ObservadoIF{
 			this.getContentPane().add(j3.getBasePeca(1));
 			this.getContentPane().add(j3.getPeca(0));
 			this.getContentPane().add(j3.getBasePeca(0));
-			
+
 			this.getContentPane().add(j2.getPeca(3));
 			this.getContentPane().add(j2.getBasePeca(3));
 			this.getContentPane().add(j2.getPeca(2));
@@ -206,7 +206,7 @@ public class Inicializador extends JFrame implements ObservadoIF{
 			this.getContentPane().add(j2.getBasePeca(1));
 			this.getContentPane().add(j2.getPeca(0));
 			this.getContentPane().add(j2.getBasePeca(0));
-			
+
 			this.getContentPane().add(j1.getPeca(3));
 			this.getContentPane().add(j1.getBasePeca(3));
 			this.getContentPane().add(j1.getPeca(2));
@@ -215,17 +215,17 @@ public class Inicializador extends JFrame implements ObservadoIF{
 			this.getContentPane().add(j1.getBasePeca(1));
 			this.getContentPane().add(j1.getPeca(0));
 			this.getContentPane().add(j1.getBasePeca(0));
-			
+
 			d = new Dado();
 			s = new Salvar();
 			c = new Carregar();
-			
+
 			this.getContentPane().add(d.dado_btn);
 			this.getContentPane().add(s.btn);
 			this.getContentPane().add(c.btn);
-			
+
 			d.dado_btn.setEnabled(true);
-			
+
 			d.dado_btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -241,31 +241,31 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					}
 				}
 			});
-	
+
 			s.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					FluxoDados.getFluxoDados().SalvarPartida();
+					FluxoDados.getFluxoDados().SalvarPartida();
 				}
 			});
-	
+
 			c.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					try {
-//						FluxoDados.getFluxoDados().CarregarPartida();
-//					} catch (IOException | JSONException e1) {
-//						e1.printStackTrace();
-//					}
+					try {
+						FluxoDados.getFluxoDados().CarregarPartida();
+					} catch (IOException | JSONException | BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			});
-			
-			
+
 			bt1 = new BotaoTeste("1",752, 402,1);
 			bt2 = new BotaoTeste("2",817, 402,2);
 			bt3 = new BotaoTeste("3",882, 402,3);
 			bt4 = new BotaoTeste("4",752, 452,4);
 			bt5 = new BotaoTeste("5",817, 452,5);
 			bt6 = new BotaoTeste("6",882, 452,6);
-			
+
 			this.getContentPane().add(bt1.btn);
 			this.getContentPane().add(bt2.btn);
 			this.getContentPane().add(bt3.btn);
@@ -288,7 +288,7 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					}
 				}
 			});
-			
+
 			bt2.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -304,7 +304,7 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					}
 				}
 			});
-			
+
 			bt3.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -320,7 +320,7 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					}
 				}
 			});
-			
+
 			bt4.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -336,7 +336,7 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					}
 				}
 			});
-			
+
 			bt5.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -349,10 +349,10 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}		
+					}
 				}
 			});
-			
+
 			bt6.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -368,27 +368,27 @@ public class Inicializador extends JFrame implements ObservadoIF{
 					}
 				}
 			});
-			
+
 			TextAreaLog.getTextAreaLog().getTextArea().setBounds(755, 502, 200, 200);
-			
+
 			this.getContentPane().add(TextAreaLog.getTextAreaLog().getTextArea());
-			
+
 			this.getContentPane().add(t);
 
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
 	}
-	
-    
+
+
     public Caminho getCaminho(int i, int j) {
     	return jogadores_na_casa[i][j];
     }
-    
+
     public Peao getO1(int i, int j) {
     	return jogadores_na_casa[i][j].o1;
     }
-    
+
     public Peao getO2(int i, int j) {
     	return jogadores_na_casa[i][j].o2;
     }
@@ -402,12 +402,12 @@ public class Inicializador extends JFrame implements ObservadoIF{
 	public void remove(ObservadorIF o) {
 		obs = null;
 	}
-	
+
 	@Override
 	public void notifyObservador(ActionEvent e) throws InterruptedException, FileNotFoundException, BadLocationException {
 		obs.update(e);
 	}
-	
+
 	public static Inicializador getInicializador() {
 		if(xframe == null)
 			xframe = new Inicializador();
