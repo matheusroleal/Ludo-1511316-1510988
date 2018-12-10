@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -105,15 +106,23 @@ public class FluxoDados {
 	
 	private void EscreverJogo(JSONObject jsonObject) {
 	    Writer output = null;
-	    
-	    try {
-			output = new BufferedWriter(new FileWriter("jogos_salvos/salvo.json"));
-			output.write(jsonObject.toString());
-		    output.close();
-
-	    } catch (IOException e) {
+	    JFileChooser salvandoArquivo = new JFileChooser();
+	    int resultado = salvandoArquivo.showSaveDialog(null);
+		try {
+		    if (resultado == JFileChooser.APPROVE_OPTION) {
+			    File salvarArquivoEscolhido = salvandoArquivo.getSelectedFile();
+				output = new BufferedWriter(new FileWriter(salvarArquivoEscolhido.getAbsolutePath()));
+				output.write(jsonObject.toString());
+			    output.close();
+				TextAreaLog.getTextAreaLog().printLog("Arquivo salvado!");
+		    }else {
+				TextAreaLog.getTextAreaLog().printLog("Erro ao salvar arquivo!");
+			}
+		} catch (BadLocationException | IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	public void CarregarPartida() throws IOException, JSONException, BadLocationException{
@@ -145,7 +154,7 @@ public class FluxoDados {
 			jsonObject = new JSONObject(json_str);
 
 			JogadoresController.getJogadoresController().jogador_turno = jsonObject.getInt("turno");
-//			JogadoresController.getJogadoresController().setM(jsonObject.getBoolean("matheus"));
+//			JogadoresController.getJogadoresController().setM(jsonObject.getBoolean("m"));
 
 
 		    for(int x = 0; x < 4; x++) {
