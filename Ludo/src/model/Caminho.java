@@ -6,7 +6,7 @@ import javax.swing.text.BadLocationException;
 
 public class Caminho{
 	public Peao o1, o2;
-	public Boolean pode;
+	public Boolean pode, barreira;
 	public Peao aux = null;
 	public Color ant;
 	public int numPeao;
@@ -15,15 +15,14 @@ public class Caminho{
 		o1 = null;
 		o2 = null;
 		pode = false;
+		barreira = false;
 	}
 	
 	public void AdicionaPeao(Peao p) throws FileNotFoundException, BadLocationException {		
 		if(o1 == null) {
 			o1 = p;
-			
 		}
 		else if(o2 == null) {
-			
 			if(p.p1.a == o1.p1.a) //se os dois peoes forem da mesma cor
 				o2 = p;
 			
@@ -31,8 +30,10 @@ public class Caminho{
 				o2 = p;
 			} 
 			else if(pode!=true) {
+			//	if(barreira != true) {
 					aux = o1;
 					o1 = p;
+				//}
 			}	
 		}
 		else {
@@ -43,7 +44,6 @@ public class Caminho{
 	public void RemovePeao(Peao p) throws FileNotFoundException, BadLocationException {
 		if(o2 == null) {
 			o1 = null;
-			
 		}
 		else {	
 			if(o1 == p) {
@@ -51,42 +51,9 @@ public class Caminho{
 				o1 = o2;
 				o2 = null;
 			}
-			else {	
+			else {
 				o2 = null;
 			}
 		}
-		
-			
-		//if(jogadores_na_casa.lastElement() != null) {//VerificaElemento() == true) {
-				//	System.out.print("Quantidade maxima de jogadores na casa, nao pode passar");
-				//}else {
-				//	jogadores_na_casa.add(jogadores_na_casa.indexOf(p), null);
-				//	System.out.println("remove - " + jogadores_na_casa.elementAt(0));
-				//}
 	}
-
-
-	/*
-	public void RemovePeao(Peao p) {
-		System.out.println(jogadores_na_casa.indexOf(p));
-		
-		jogadores_na_casa.add(jogadores_na_casa.indexOf(p), null);
-		System.out.println("remove - " + jogadores_na_casa.elementAt(jogadores_na_casa.indexOf(p)));
-		
-		
-		
-		//if(jogadores_na_casa.lastElement() != null) {//VerificaElemento() == true) {
-		//	System.out.print("Quantidade maxima de jogadores na casa, nao pode passar");
-		//}else {
-		//	jogadores_na_casa.add(jogadores_na_casa.indexOf(p), null);
-		//	System.out.println("remove - " + jogadores_na_casa.elementAt(0));
-		//}
-	}
-	
-	//public boolean VerificaElemento() {
-		//if(jogadores_na_casa.lastElement() != null) {
-			//return true;
-		//}
-		//return false;
-	//}*/
 }
