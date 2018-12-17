@@ -1,4 +1,4 @@
-import java.awt.*;
+package view;
 
 import javax.swing.*;
 
@@ -7,7 +7,7 @@ public class Dado extends JPanel {
 	private ImageIcon dado_img;
 
 	public Dado() {
-		dado_img = new ImageIcon(getClass().getResource("/Imagens/Dado1.png"));
+		dado_img = new ImageIcon(getClass().getResource("Imagens/Dado1.png"));
 		dado_btn = new JButton(dado_img);
 		
 		dado_btn.setLayout(null);
@@ -23,8 +23,12 @@ public class Dado extends JPanel {
 		return dado_val;
 	}
 	
+	public JButton getDado() {
+		return dado_btn;
+	}
+	
 	private void MudaImagem(int num) {
-		dado_img = new ImageIcon(getClass().getResource("/Imagens/Dado"+ num +".png"));
+		dado_img = new ImageIcon(getClass().getResource("Imagens/Dado"+ num +".png"));
 
 		dado_btn.setIcon(dado_img);
 	}

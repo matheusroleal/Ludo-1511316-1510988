@@ -1,4 +1,4 @@
-package lista;
+package model.lista;
 
 public class Lista {
 	private int tam=0;

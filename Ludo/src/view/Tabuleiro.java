@@ -1,3 +1,5 @@
+package view;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
@@ -153,7 +155,7 @@ public class Tabuleiro extends JPanel {
 		CasaInicial(g2d, Color.BLUE, 9,0);		
 		CasaInicial(g2d, Color.YELLOW, 9,9);
 		
-		//locais onde peões ficam no início do jogo
+		//locais onde peï¿½es ficam no inï¿½cio do jogo
 		casas[1][1] = new Ellipse2D.Double();
 		casas[1][1] = Inicio(g2d, 50, 50);
 		casas[1][4] = new Ellipse2D.Double();
@@ -187,7 +189,7 @@ public class Tabuleiro extends JPanel {
 		casas[13][13] = new Ellipse2D.Double();
 		casas[13][13] = Inicio(g2d, 50*13, 50*13);
 		
-		//casas de saída
+		//casas de saï¿½da
 		cordx[0] = 50+10;
 		cordy[0] = 50*6+10;
 		cordx[1] = 50*2-10;

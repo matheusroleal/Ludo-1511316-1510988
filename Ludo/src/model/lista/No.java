@@ -1,4 +1,4 @@
-package lista;
+package model.lista;
 
 public class No {
 	private Object elem;
