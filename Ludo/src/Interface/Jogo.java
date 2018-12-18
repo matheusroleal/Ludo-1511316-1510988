@@ -17,21 +17,23 @@ import controller.*;
 import model.*;
 import view.*;
 
-public class Jogo extends JFrame implements ObservadoIF{
+public class Jogo extends JFrame implements Observador {
 	private static Jogo xframe = null;
 	public Dado d;
+	public JButton vm1, vm2, vm3, vm4, vd1, vd2, vd3, vd4, am1, am2, am3, am4, az1, az2, az3, az4;
+	private Observado observado;
+	public int numPeao;
+	public Caminho[][] jogadores_na_casa = new Caminho[15][15];
 	Salvar s;
 	Carregar c;
 	BotaoTeste bt1, bt2, bt3, bt4, bt5, bt6;
-	public JButton vm1, vm2, vm3, vm4, vd1, vd2, vd3, vd4, am1, am2, am3, am4, az1, az2, az3, az4;
 	JButton iniciar;
-	ObservadorIF obs;
-	public int numPeao;
-	public Caminho[][] jogadores_na_casa = new Caminho[15][15];
 
 
 	private Jogo() throws BadLocationException {
 		try {
+			Controlador.getControlador().registra(this);
+			observado = Controlador.getObservado();
 
 			TextAreaLog.getTextAreaLog().printLog("Jogadores, por favor, escolham seus peoes.");
 
@@ -94,13 +96,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j1, 0);
+						Regras.getRegras().inicio(j1, 0);
 						JogadoresController.getJogadoresController().setCont(1,(1+JogadoresController.getJogadoresController().getCont(1)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -116,12 +115,9 @@ public class Jogo extends JFrame implements ObservadoIF{
 			vm2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).inicio(j1, 1);
+						Regras.getRegras().inicio(j1, 1);
 						JogadoresController.getJogadoresController().setCont(1,(1+JogadoresController.getJogadoresController().getCont(1)));
-						notifyObservador(e);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -136,13 +132,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 			vm3.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).inicio(j1, 2);
+						Regras.getRegras().inicio(j1, 2);
 						JogadoresController.getJogadoresController().setCont(1,(1+JogadoresController.getJogadoresController().getCont(1)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -158,13 +151,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j1, 3);
+						Regras.getRegras().inicio(j1, 3);
 						JogadoresController.getJogadoresController().setCont(1,(1+JogadoresController.getJogadoresController().getCont(1)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -212,13 +202,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j2, 0);
+						Regras.getRegras().inicio(j2, 0);
 						JogadoresController.getJogadoresController().setCont(2,(1+JogadoresController.getJogadoresController().getCont(2)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -235,13 +222,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j2, 1);
+						Regras.getRegras().inicio(j2, 1);
 						JogadoresController.getJogadoresController().setCont(2,(1+JogadoresController.getJogadoresController().getCont(2)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -257,13 +241,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j2, 2);
+						Regras.getRegras().inicio(j2, 2);
 						JogadoresController.getJogadoresController().setCont(2,(1+JogadoresController.getJogadoresController().getCont(2)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -279,13 +260,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j2, 3);
+						Regras.getRegras().inicio(j2, 3);
 						JogadoresController.getJogadoresController().setCont(2,(1+JogadoresController.getJogadoresController().getCont(2)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -333,13 +311,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j3, 0);
+						Regras.getRegras().inicio(j3, 0);
 						JogadoresController.getJogadoresController().setCont(3,(1+JogadoresController.getJogadoresController().getCont(3)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -356,13 +331,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j3, 1);
+						Regras.getRegras().inicio(j3, 1);
 						JogadoresController.getJogadoresController().setCont(3,(1+JogadoresController.getJogadoresController().getCont(3)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -378,13 +350,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j3, 2);
+						Regras.getRegras().inicio(j3, 2);
 						JogadoresController.getJogadoresController().setCont(3,(1+JogadoresController.getJogadoresController().getCont(3)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -400,13 +369,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j3, 3);
+						Regras.getRegras().inicio(j3, 3);
 						JogadoresController.getJogadoresController().setCont(3,(1+JogadoresController.getJogadoresController().getCont(3)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -454,13 +420,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j4, 0);
+						Regras.getRegras().inicio(j4, 0);
 						JogadoresController.getJogadoresController().setCont(4,(1+JogadoresController.getJogadoresController().getCont(4)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -477,13 +440,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j4, 1);
+						Regras.getRegras().inicio(j4, 1);
 						JogadoresController.getJogadoresController().setCont(4,(1+JogadoresController.getJogadoresController().getCont(4)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -499,13 +459,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j4, 2);
+						Regras.getRegras().inicio(j4, 2);
 						JogadoresController.getJogadoresController().setCont(4,(1+JogadoresController.getJogadoresController().getCont(4)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -521,13 +478,10 @@ public class Jogo extends JFrame implements ObservadoIF{
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						Regras.getRegras(null).inicio(j4, 3);
+						Regras.getRegras().inicio(j4, 3);
 						JogadoresController.getJogadoresController().setCont(4,(1+JogadoresController.getJogadoresController().getCont(4)));
-						notifyObservador(e);
+						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
 
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -588,7 +542,7 @@ public class Jogo extends JFrame implements ObservadoIF{
 			d.dado_btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras(d.GeraValor());
+						Regras.getRegras().AplicaRegras(d.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
@@ -635,7 +589,7 @@ public class Jogo extends JFrame implements ObservadoIF{
 			bt1.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras(bt1.GeraValor());
+						Regras.getRegras().AplicaRegras(bt1.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
@@ -651,7 +605,7 @@ public class Jogo extends JFrame implements ObservadoIF{
 			bt2.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras(bt2.GeraValor());
+						Regras.getRegras().AplicaRegras(bt2.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
@@ -667,7 +621,7 @@ public class Jogo extends JFrame implements ObservadoIF{
 			bt3.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras(bt3.GeraValor());
+						Regras.getRegras().AplicaRegras(bt3.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
@@ -683,7 +637,7 @@ public class Jogo extends JFrame implements ObservadoIF{
 			bt4.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras(bt4.GeraValor());
+						Regras.getRegras().AplicaRegras(bt4.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
@@ -699,7 +653,7 @@ public class Jogo extends JFrame implements ObservadoIF{
 			bt5.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras(bt5.GeraValor());
+						Regras.getRegras().AplicaRegras(bt5.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
@@ -715,7 +669,7 @@ public class Jogo extends JFrame implements ObservadoIF{
 			bt6.btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						Regras.getRegras(null).AplicaRegras(bt6.GeraValor());
+						Regras.getRegras().AplicaRegras(bt6.GeraValor());
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (BadLocationException e1) {
@@ -751,20 +705,13 @@ public class Jogo extends JFrame implements ObservadoIF{
 	public Peao getO2(int i, int j) {
 		return jogadores_na_casa[i][j].o2;
 	}
-
-	@Override
-	public void add(ObservadorIF o) {
-		obs = o;
-	}
-
-	@Override
-	public void remove(ObservadorIF o) {
-		obs = null;
-	}
-
-	@Override
-	public void notifyObservador(ActionEvent e) throws InterruptedException, FileNotFoundException, BadLocationException {
-		obs.update(e);
+	
+	public void notify(int i, Observado o){
+		
+		if (i == 1) {
+			repaint();
+		}
+		
 	}
 
 	public static Jogo getJogo() throws BadLocationException{

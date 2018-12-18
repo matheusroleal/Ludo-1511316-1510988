@@ -11,12 +11,13 @@ import model.Jogador;
 import model.TextAreaLog;
 import model.Vetor;
 
-public class Regras implements ObservadorIF {
+public class Regras implements Observado {
     private static volatile Regras instance;
 	Jogador j1 , j2, j3, j4;
 	Vetor v;
 	int novo_x1, novo_y1, novo_x2, novo_y2, novo_x3, novo_y3, novo_x4, novo_y4;
 	int movimento;
+	private Observador obs;
 
     private Regras() {
 
@@ -268,7 +269,10 @@ public class Regras implements ObservadorIF {
 							Jogo.getJogo().getCaminho(novo_x1, novo_y1).numPeao = j1.getNumPeao();
 					}
 
-					Jogo.getJogo().repaint();
+					//Jogo.getJogo().repaint();
+					obs.notify(1, this);
+		
+
 
 					j1.getPeao(j1.getNumPeao()).setCinco(1, true); //sai do cincoX = false ja q o jogador tirou 5
 					j1.getPeao(j1.getNumPeao()).setY(1, true);
@@ -329,7 +333,9 @@ public class Regras implements ObservadorIF {
 							j1.getPeao(j1.getNumPeao()).setY(1, false);
 							JogadoresController.getJogadoresController().m = true;
 
-							Jogo.getJogo().repaint();
+							//Jogo.getJogo().repaint();
+							obs.notify(1, this);
+		
 						}
 						else {
 							JogadoresController.getJogadoresController().m = true;
@@ -517,7 +523,9 @@ public class Regras implements ObservadorIF {
 						}
 					}
 
-					Jogo.getJogo().repaint();
+					//Jogo.getJogo().repaint();
+					obs.notify(1, this);
+
 				}
 
 				for(int i=0; i<6; i++) {
@@ -794,7 +802,8 @@ public class Regras implements ObservadorIF {
 						}
 					}
 
-					Jogo.getJogo().repaint();
+					//Jogo.getJogo().repaint();
+					obs.notify(1, this);
 
 					j2.getPeao(j2.getNumPeao()).setCinco(2, true);
 					j2.getPeao(j2.getNumPeao()).setY(2, true);
@@ -856,7 +865,9 @@ public class Regras implements ObservadorIF {
 							j2.getPeao(j2.getNumPeao()).setY(2, false);
 							JogadoresController.getJogadoresController().m = true;
 
-							Jogo.getJogo().repaint();
+							//Jogo.getJogo().repaint();
+							obs.notify(1, this);
+
 						}
 						else {
 							JogadoresController.getJogadoresController().m = true;
@@ -1038,7 +1049,9 @@ public class Regras implements ObservadorIF {
 						}
 					}
 
-					Jogo.getJogo().repaint();
+					//Jogo.getJogo().repaint();
+					obs.notify(1, this);
+
 				}
 
 				for(int i=0; i<6; i++) {
@@ -1311,7 +1324,8 @@ public class Regras implements ObservadorIF {
 						Jogo.getJogo().getCaminho(novo_x3, novo_y3).numPeao = j3.getNumPeao();
 					}
 
-					Jogo.getJogo().repaint();
+					//Jogo.getJogo().repaint();
+					obs.notify(1, this);
 
 					j3.getPeao(j3.getNumPeao()).setCinco(3, true);
 					j3.getPeao(j3.getNumPeao()).setY(3, true);
@@ -1370,7 +1384,9 @@ public class Regras implements ObservadorIF {
 							j3.getPeao(j3.getNumPeao()).setY(3, false);
 							JogadoresController.getJogadoresController().m = true;
 
-							Jogo.getJogo().repaint();
+							//Jogo.getJogo().repaint();
+							obs.notify(1, this);
+
 						}
 						else {
 							JogadoresController.getJogadoresController().m = true;
@@ -1550,7 +1566,9 @@ public class Regras implements ObservadorIF {
 						}
 				//	}
 
-					Jogo.getJogo().repaint();
+					//Jogo.getJogo().repaint();
+					obs.notify(1, this);
+
 				}
 
 				for(int i=0; i<6; i++) {
@@ -1824,7 +1842,8 @@ public class Regras implements ObservadorIF {
 						Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
 					}
 
-					Jogo.getJogo().repaint();
+					//Jogo.getJogo().repaint();
+					obs.notify(1, this);
 
 					j4.getPeao(j4.getNumPeao()).setCinco(4, true);
 					j4.getPeao(j4.getNumPeao()).setY(4, true);
@@ -1884,7 +1903,9 @@ public class Regras implements ObservadorIF {
 							j4.getPeao(j4.getNumPeao()).setY(4, false);
 							JogadoresController.getJogadoresController().m = true;
 
-							Jogo.getJogo().repaint();
+							//Jogo.getJogo().repaint();
+							obs.notify(1, this);
+
 						}
 						else {
 							JogadoresController.getJogadoresController().m = true;
@@ -2067,7 +2088,9 @@ public class Regras implements ObservadorIF {
 							Jogo.getJogo().getCaminho(novo_x4, novo_y4).numPeao = j4.getNumPeao();
 						}
 					//}
-					Jogo.getJogo().repaint();
+					//Jogo.getJogo().repaint();
+					obs.notify(1, this);
+
 				}
 
 				for(int i=0; i<6; i++) {
@@ -2141,24 +2164,19 @@ public class Regras implements ObservadorIF {
 			j4.getPeao(j4.getNumPeao()).setC(4, true);
 
     }
+    
+	public void add(Observador o) {
+		obs = o;
+	}
 
-    public static Regras getRegras(String value) throws BadLocationException {
+	public void remove(Observador o) {
+		obs = null;
+	}
+
+    public static Regras getRegras() throws BadLocationException {
 		if (instance == null) {
 		    instance = new Regras();
-
-		    Jogo.getJogo().add(instance);
 		}
 		return instance;
     }
-
-	@Override
-	public void update(ActionEvent e) throws InterruptedException, FileNotFoundException, BadLocationException {
-		// TODO Auto-generated method stub
-		try {
-			TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-		} catch (FileNotFoundException | BadLocationException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
 }
