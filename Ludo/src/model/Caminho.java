@@ -23,6 +23,7 @@ public class Caminho{
 			o1 = p;
 		}
 		else if(o2 == null) {
+			/*
 			if(p.p1.a == o1.p1.a) //se os dois peoes forem da mesma cor
 				o2 = p;
 			
@@ -34,7 +35,7 @@ public class Caminho{
 					aux = o1;
 					o1 = p;
 				//}
-			}	
+			}*/	
 		}
 		else {
 			System.out.print("Quantidade maxima de jogadores na casa.");
@@ -42,18 +43,6 @@ public class Caminho{
 	}
 	
 	public void RemovePeao(Peao p) throws FileNotFoundException, BadLocationException {
-		if(o2 == null) {
-			o1 = null;
-		}
-		else {	
-			if(o1 == p) {
-				o1 = null;
-				o1 = o2;
-				o2 = null;
-			}
-			else {
-				o2 = null;
-			}
-		}
+		
 	}
 }

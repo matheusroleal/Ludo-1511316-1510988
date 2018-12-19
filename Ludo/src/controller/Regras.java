@@ -18,6 +18,8 @@ public class Regras implements Observado {
 	int novo_x1, novo_y1, novo_x2, novo_y2, novo_x3, novo_y3, novo_x4, novo_y4;
 	int movimento;
 	private Observador obs;
+	int numPeao;
+	Jogo jogo;
 
     private Regras() {
 
@@ -30,12 +32,10 @@ public class Regras implements Observado {
 
 	}
 
-    public void inicio(Jogador j, int i) {
-    	j.setNumPeao(i);
-    }
-
     public void AplicaRegras(int mv) throws FileNotFoundException, BadLocationException, InterruptedException {
     	movimento = mv;
+    	
+    	TextAreaLog.getTextAreaLog().printLog("nP: " + numPeao);
 
      	if(JogadoresController.getJogadoresController().getJogadorTurno() == 0) {
      		TextAreaLog.getTextAreaLog().printLog("Vez do jogador vermelho!");
@@ -541,15 +541,6 @@ public class Regras implements Observado {
 				}
 
 			}
-
-			if(j1.getNumPeao() == 0)
-				Jogo.getJogo().vm1.setLocation(50*novo_y1, 50*novo_x1);
-			else if(j1.getNumPeao() == 1)
-				Jogo.getJogo().vm2.setLocation(50*novo_y1, 50*novo_x1);
-			else if(j1.getNumPeao() == 2)
-				Jogo.getJogo().vm3.setLocation(50*novo_y1, 50*novo_x1);
-			else if(j1.getNumPeao() == 3)
-				Jogo.getJogo().vm4.setLocation(50*novo_y1, 50*novo_x1);
 
 			//caso de dois peoes na mesma casa
 			if(Jogo.getJogo().getCaminho(novo_x1, novo_y1).o2 != null) {
@@ -1067,16 +1058,6 @@ public class Regras implements Observado {
 				}
 			}
 
-			if(j2.getNumPeao() == 0)
-				Jogo.getJogo().vd1.setLocation(50*novo_y2, 50*novo_x2);
-			else if(j2.getNumPeao() == 1)
-				Jogo.getJogo().vd2.setLocation(50*novo_y2, 50*novo_x2);
-			else if(j2.getNumPeao() == 2)
-				Jogo.getJogo().vd3.setLocation(50*novo_y2, 50*novo_x2);
-			else if(j2.getNumPeao() == 3)
-				Jogo.getJogo().vd4.setLocation(50*novo_y2, 50*novo_x2);
-
-
 			if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o2 != null) {
                 if(Jogo.getJogo().getCaminho(novo_x2, novo_y2).o1.getP1().a == Jogo.getJogo().getCaminho(novo_x2, novo_y2).o2.getP1().a) {
                     Jogo.getJogo().getCaminho(novo_x2, novo_y2).barreira = true;
@@ -1583,15 +1564,6 @@ public class Regras implements Observado {
 					}
 				}
 			}
-
-			if(j3.getNumPeao() == 0)
-				Jogo.getJogo().am1.setLocation(50*novo_y3, 50*novo_x3);
-			else if(j3.getNumPeao() == 1)
-				Jogo.getJogo().am2.setLocation(50*novo_y3, 50*novo_x3);
-			else if(j3.getNumPeao() == 2)
-				Jogo.getJogo().am3.setLocation(50*novo_y3, 50*novo_x3);
-			else if(j3.getNumPeao() == 3)
-				Jogo.getJogo().am4.setLocation(50*novo_y3, 50*novo_x3);
 
 			if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o2 != null) {
 				if(Jogo.getJogo().getCaminho(novo_x3, novo_y3).o1.getP1().a == Jogo.getJogo().getCaminho(novo_x3, novo_y3).o2.getP1().a) {
@@ -2105,15 +2077,6 @@ public class Regras implements Observado {
 					}
 				}
 			}
-
-			if(j4.getNumPeao() == 0)
-				Jogo.getJogo().az1.setLocation(50*novo_y4, 50*novo_x4);
-			else if(j4.getNumPeao() == 1)
-				Jogo.getJogo().az2.setLocation(50*novo_y4, 50*novo_x4);
-			else if(j4.getNumPeao() == 2)
-				Jogo.getJogo().az3.setLocation(50*novo_y4, 50*novo_x4);
-			else if(j4.getNumPeao() == 3)
-				Jogo.getJogo().az4.setLocation(50*novo_y4, 50*novo_x4);
 
 			if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o2 != null) {
 				if(Jogo.getJogo().getCaminho(novo_x4, novo_y4).o1.getP1().a == Jogo.getJogo().getCaminho(novo_x4, novo_y4).o2.getP1().a) {

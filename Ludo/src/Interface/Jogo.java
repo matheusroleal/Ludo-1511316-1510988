@@ -2,6 +2,7 @@ package Interface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -14,15 +15,14 @@ import javax.swing.text.BadLocationException;
 import org.json.JSONException;
 
 import controller.*;
+import listeners.TratadorMouse;
 import model.*;
 import view.*;
 
-public class Jogo extends JFrame implements Observador {
+public class Jogo extends JFrame implements Observador{
 	private static Jogo xframe = null;
 	public Dado d;
-	public JButton vm1, vm2, vm3, vm4, vd1, vd2, vd3, vd4, am1, am2, am3, am4, az1, az2, az3, az4;
 	private Observado observado;
-	public int numPeao;
 	public Caminho[][] jogadores_na_casa = new Caminho[15][15];
 	Salvar s;
 	Carregar c;
@@ -35,10 +35,9 @@ public class Jogo extends JFrame implements Observador {
 			Controlador.getControlador().registra(this);
 			observado = Controlador.getObservado();
 
-			TextAreaLog.getTextAreaLog().printLog("Jogadores, por favor, escolham seus peoes.");
-
 			Tabuleiro t = new Tabuleiro();
-
+			t.addMouseListener(new TratadorMouse());
+			
 			this.setBounds(0,0,960,800);
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -60,438 +59,41 @@ public class Jogo extends JFrame implements Observador {
 			jogadores_na_casa[13][8].pode = true; //casa preta
 			jogadores_na_casa[8][1].pode = true; //casa preta
 			
-			//botoes vermelhos
-			vm1 = new JButton();
-			vm2 = new JButton();
-			vm3 = new JButton();
-			vm4 = new JButton();
-
-			vm1.setName("vm1");
-			vm1.setBorder(null);
-			vm1.setLocation(1*50, 4*50);
-			vm1.setSize(50,50);
-			vm1.setContentAreaFilled(false);
-			vm2.setName("vm2");
-			vm2.setBorder(null);
-			vm2.setLocation(4*50, 4*50);
-			vm2.setSize(50,50);
-			vm2.setContentAreaFilled(false);
-			vm3.setName("vm3");
-			vm3.setBorder(null);
-			vm3.setLocation(1*50, 1*50);
-			vm3.setSize(50,50);
-			vm3.setContentAreaFilled(false);
-			vm4.setName("vm4");
-			vm4.setBorder(null);
-			vm4.setLocation(4*50, 1*50);
-			vm4.setSize(50,50);
-			vm4.setContentAreaFilled(false);
-
-			this.getContentPane().add(vm1);
-			this.getContentPane().add(vm2);
-			this.getContentPane().add(vm3);
-			this.getContentPane().add(vm4);
-
-			vm1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j1, 0);
-						JogadoresController.getJogadoresController().setCont(1,(1+JogadoresController.getJogadoresController().getCont(1)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			vm2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					try {
-						Regras.getRegras().inicio(j1, 1);
-						JogadoresController.getJogadoresController().setCont(1,(1+JogadoresController.getJogadoresController().getCont(1)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			vm3.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					try {
-						Regras.getRegras().inicio(j1, 2);
-						JogadoresController.getJogadoresController().setCont(1,(1+JogadoresController.getJogadoresController().getCont(1)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			vm4.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j1, 3);
-						JogadoresController.getJogadoresController().setCont(1,(1+JogadoresController.getJogadoresController().getCont(1)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			//botoes verdes
-			vd1 = new JButton();
-			vd2 = new JButton();
-			vd3 = new JButton();
-			vd4 = new JButton();
-
-			vd1.setName("vd1");
-			vd1.setBorder(null);
-			vd1.setLocation(10*50, 1*50);
-			vd1.setSize(50,50);
-			vd1.setContentAreaFilled(false);
-			vd2.setName("vd2");
-			vd2.setBorder(null);
-			vd2.setLocation(13*50, 1*50);
-			vd2.setSize(50,50);
-			vd2.setContentAreaFilled(false);
-			vd3.setName("vd3");
-			vd3.setBorder(null);
-			vd3.setLocation(10*50, 4*50);
-			vd3.setSize(50,50);
-			vd3.setContentAreaFilled(false);
-			vd4.setName("vd4");
-			vd4.setBorder(null);
-			vd4.setLocation(13*50, 4*50);
-			vd4.setSize(50,50);
-			vd4.setContentAreaFilled(false);
-
-			this.getContentPane().add(vd1);
-			this.getContentPane().add(vd2);
-			this.getContentPane().add(vd3);
-			this.getContentPane().add(vd4);
-
-			vd1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j2, 0);
-						JogadoresController.getJogadoresController().setCont(2,(1+JogadoresController.getJogadoresController().getCont(2)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			vd2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j2, 1);
-						JogadoresController.getJogadoresController().setCont(2,(1+JogadoresController.getJogadoresController().getCont(2)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			vd3.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j2, 2);
-						JogadoresController.getJogadoresController().setCont(2,(1+JogadoresController.getJogadoresController().getCont(2)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			vd4.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j2, 3);
-						JogadoresController.getJogadoresController().setCont(2,(1+JogadoresController.getJogadoresController().getCont(2)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			//botoes amarelos
-			am1 = new JButton();
-			am2 = new JButton();
-			am3 = new JButton();
-			am4 = new JButton();
-
-			am1.setName("am1");
-			am1.setBorder(null);
-			am1.setLocation(13*50, 10*50);
-			am1.setSize(50,50);
-			am1.setContentAreaFilled(false);
-			am2.setName("am2");
-			am2.setBorder(null);
-			am2.setLocation(10*50, 10*50);
-			am2.setSize(50,50);
-			am2.setContentAreaFilled(false);
-			am3.setName("am3");
-			am3.setBorder(null);
-			am3.setLocation(13*50, 13*50);
-			am3.setSize(50,50);
-			am3.setContentAreaFilled(false);
-			am4.setName("am4");
-			am4.setBorder(null);
-			am4.setLocation(10*50, 13*50);
-			am4.setSize(50,50);
-			am4.setContentAreaFilled(false);
-
-			this.getContentPane().add(am1);
-			this.getContentPane().add(am2);
-			this.getContentPane().add(am3);
-			this.getContentPane().add(am4);
-
-			am1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j3, 0);
-						JogadoresController.getJogadoresController().setCont(3,(1+JogadoresController.getJogadoresController().getCont(3)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			am2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j3, 1);
-						JogadoresController.getJogadoresController().setCont(3,(1+JogadoresController.getJogadoresController().getCont(3)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			am3.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j3, 2);
-						JogadoresController.getJogadoresController().setCont(3,(1+JogadoresController.getJogadoresController().getCont(3)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			am4.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j3, 3);
-						JogadoresController.getJogadoresController().setCont(3,(1+JogadoresController.getJogadoresController().getCont(3)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			//botoes azuis
-			az1 = new JButton();
-			az2 = new JButton();
-			az3 = new JButton();
-			az4 = new JButton();
-
-			az1.setName("az1");
-			az1.setBorder(null);
-			az1.setLocation(4*50, 13*50);
-			az1.setSize(50,50);
-			az1.setContentAreaFilled(false);
-			az2.setName("az2");
-			az2.setBorder(null);
-			az2.setLocation(1*50, 13*50);
-			az2.setSize(50,50);
-			az2.setContentAreaFilled(false);
-			az3.setName("az3");
-			az3.setBorder(null);
-			az3.setLocation(4*50, 10*50);
-			az3.setSize(50,50);
-			az3.setContentAreaFilled(false);
-			az4.setName("az4");
-			az4.setBorder(null);
-			az4.setLocation(1*50, 10*50);
-			az4.setSize(50,50);
-			az4.setContentAreaFilled(false);
-
-			this.getContentPane().add(az1);
-			this.getContentPane().add(az2);
-			this.getContentPane().add(az3);
-			this.getContentPane().add(az4);
-
-			az1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j4, 0);
-						JogadoresController.getJogadoresController().setCont(4,(1+JogadoresController.getJogadoresController().getCont(4)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			az2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j4, 1);
-						JogadoresController.getJogadoresController().setCont(4,(1+JogadoresController.getJogadoresController().getCont(4)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			az3.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j4, 2);
-						JogadoresController.getJogadoresController().setCont(4,(1+JogadoresController.getJogadoresController().getCont(4)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
-
-			az4.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
-					try {
-						Regras.getRegras().inicio(j4, 3);
-						JogadoresController.getJogadoresController().setCont(4,(1+JogadoresController.getJogadoresController().getCont(4)));
-						TextAreaLog.getTextAreaLog().printLog("Peao escolhido!");
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					d.dado_btn.setEnabled(true);
-				}
-			});
+			jogadores_na_casa[4][1].o1 = j1.getPeao(0);
+			jogadores_na_casa[4][1].numPeao = 0;
+			jogadores_na_casa[4][4].o1 = j1.getPeao(1);
+			jogadores_na_casa[4][4].numPeao = 1;
+			jogadores_na_casa[1][1].o1 = j1.getPeao(2);
+			jogadores_na_casa[1][1].numPeao = 2;
+			jogadores_na_casa[1][4].o1 = j1.getPeao(3);
+			jogadores_na_casa[1][4].numPeao = 3;
+			
+			jogadores_na_casa[1][10].o1 = j2.getPeao(0);
+			jogadores_na_casa[1][10].numPeao = 0;
+			jogadores_na_casa[1][13].o1 = j2.getPeao(1);
+			jogadores_na_casa[1][13].numPeao = 1;
+			jogadores_na_casa[4][10].o1 = j2.getPeao(2);
+			jogadores_na_casa[4][10].numPeao = 2;
+			jogadores_na_casa[4][13].o1 = j2.getPeao(3);
+			jogadores_na_casa[4][13].numPeao = 3;
+			
+			jogadores_na_casa[10][13].o1 = j3.getPeao(0);
+			jogadores_na_casa[10][13].numPeao = 0;
+			jogadores_na_casa[10][10].o1 = j3.getPeao(1);
+			jogadores_na_casa[10][10].numPeao = 1;
+			jogadores_na_casa[13][13].o1 = j3.getPeao(2);
+			jogadores_na_casa[13][13].numPeao = 2;
+			jogadores_na_casa[13][10].o1 = j3.getPeao(3);
+			jogadores_na_casa[13][10].numPeao = 3;
+			
+			jogadores_na_casa[13][4].o1 = j4.getPeao(0);
+			jogadores_na_casa[13][4].numPeao = 0;
+			jogadores_na_casa[13][1].o1 = j4.getPeao(1);
+			jogadores_na_casa[13][1].numPeao = 1;
+			jogadores_na_casa[10][4].o1 = j4.getPeao(2);
+			jogadores_na_casa[10][4].numPeao = 2;
+			jogadores_na_casa[10][1].o1 = j4.getPeao(3);
+			jogadores_na_casa[10][1].numPeao = 3;
 
 			this.getContentPane().add(j4.getPeca(3));
 			this.getContentPane().add(j4.getBasePeca(3));
@@ -693,7 +295,6 @@ public class Jogo extends JFrame implements Observador {
 		}
 	}
 
-
 	public Caminho getCaminho(int i, int j) {
 		return jogadores_na_casa[i][j];
 	}
@@ -707,11 +308,9 @@ public class Jogo extends JFrame implements Observador {
 	}
 	
 	public void notify(int i, Observado o){
-		
 		if (i == 1) {
 			repaint();
 		}
-		
 	}
 
 	public static Jogo getJogo() throws BadLocationException{
