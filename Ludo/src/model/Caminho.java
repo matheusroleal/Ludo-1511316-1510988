@@ -10,39 +10,44 @@ public class Caminho{
 	public Peao aux = null;
 	public Color ant;
 	public int numPeao;
-	
+
 	public Caminho() {
 		o1 = null;
 		o2 = null;
 		pode = false;
 		barreira = false;
 	}
-	
-	public void AdicionaPeao(Peao p) throws FileNotFoundException, BadLocationException {		
+
+	public void AdicionaPeao(Peao p) throws FileNotFoundException, BadLocationException {
 		if(o1 == null) {
 			o1 = p;
 		}
 		else if(o2 == null) {
-			/*
-			if(p.p1.a == o1.p1.a) //se os dois peoes forem da mesma cor
+
+			//se os dois peoes forem da mesma cor
+			if(p.p1.a == o1.p1.a) {
 				o2 = p;
-			
-			if(pode == true) { //se for true trata-se de alguma casa em q podemos ter mais de um peao (abrigo)
+			}
+
+			//se for true trata-se de alguma casa em q podemos ter mais de um peao (abrigo)
+			if(pode == true) {
 				o2 = p;
-			} 
-			else if(pode!=true) {
-			//	if(barreira != true) {
-					aux = o1;
-					o1 = p;
-				//}
-			}*/	
+			}
+
 		}
 		else {
-			System.out.print("Quantidade maxima de jogadores na casa.");
+			TextAreaLog.getTextAreaLog().printLog("Quantidade maxima de peões na casa");
 		}
 	}
-	
+
 	public void RemovePeao(Peao p) throws FileNotFoundException, BadLocationException {
-		
+		if(o1.getP1().getX() == p.getP1().getX() && o1.getP1().getY() == p.getP1().getY()) {
+			o1 = o2;
+			o2 = null;
+		}else if (o2.getP1().getX() == p.getP1().getX() && o2.getP1().getY() == p.getP1().getY()) {
+			o2 = null;
+		}else {
+			TextAreaLog.getTextAreaLog().printLog("Peão não encontrado");
+		}
 	}
 }
