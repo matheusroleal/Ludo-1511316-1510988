@@ -41,10 +41,10 @@ public class Caminho{
 	}
 
 	public void RemovePeao(Peao p) throws FileNotFoundException, BadLocationException {
-		if(o1.getP1().getX() == p.getP1().getX() && o1.getP1().getY() == p.getP1().getY()) {
+		if(o1 == p) {
 			o1 = o2;
 			o2 = null;
-		}else if (o2.getP1().getX() == p.getP1().getX() && o2.getP1().getY() == p.getP1().getY()) {
+		}else if (o2 == p) {
 			o2 = null;
 		}else {
 			TextAreaLog.getTextAreaLog().printLog("Peão não encontrado");
