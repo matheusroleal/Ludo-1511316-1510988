@@ -44,6 +44,8 @@ public class Regras implements Observado {
 
     movimento = mv;
 
+    numPeao = j.getNumPeao();
+
     TextAreaLog.getTextAreaLog().printLog("nP: " + numPeao);
 
     // Se cincoX for false quer dizer que o jogador ainda n tirou o numero 5 no dado para poder sair da casa inicial
@@ -73,6 +75,11 @@ public class Regras implements Observado {
 
         // Move o peao de acordo com o valor do movimento
         movePeao(movimento);
+      }
+
+      // Se o peao tiver chegado na casa final e nao for o ultimo, mudamos o peao do jogador para o seguinte
+      if((j.getX() == defineXFinal(jogador_num) && j.getY() == defineYFinal(jogador_num)) && JogadoresController.getJogadoresController().getCont(jogador_num) != 3) {
+        peaoNoFinal();
       }
 
     }
@@ -126,7 +133,6 @@ public class Regras implements Observado {
           j.getPeao(j.getNumPeao()).setY(jogador_num, false);
           JogadoresController.getJogadoresController().setM(true);
 
-          //Jogo.getJogo().repaint();
           obs.notify(1, this);
 
         }
@@ -159,6 +165,19 @@ public class Regras implements Observado {
     Jogo.getJogo().getCaminho(novo_x, novo_y).numPeao = j.getNumPeao();
 
     obs.notify(1, this);
+  }
+
+  private void peaoNoFinal(){
+    j.mudaPeao();
+    JogadoresController.getJogadoresController().setCont(jogador_num,(1+JogadoresController.getJogadoresController().getCont(jogador_num)));
+
+    // Reiniciando as variavies para novo peao
+    j.getPeao(j.getNumPeao()).setCinco(jogador_num, false);
+    j.getPeao(j.getNumPeao()).setC(jogador_num, false);
+    j.getPeao(j.getNumPeao()).setFim(jogador_num, -1);
+    j.getPeao(j.getNumPeao()).setY(jogador_num, true);
+    j.getPeao(j.getNumPeao()).setMd(jogador_num, 0);
+    JogadoresController.getJogadoresController().setM(true);
   }
 
   private void checaFinal(){
@@ -262,6 +281,34 @@ public class Regras implements Observado {
       }
     }
     return turno + 1;
+  }
+
+  private int defineXFinal (int jogador){
+    switch (jogador) {
+      case 1:
+      return 7;
+      case 2:
+      return 6;
+      case 3:
+      return 7;
+      case 4:
+      return 8;
+    }
+    return 0;
+  }
+
+  private int defineYFinal (int jogador){
+    switch (jogador) {
+      case 1:
+      return 6;
+      case 2:
+      return 7;
+      case 3:
+      return 8;
+      case 4:
+      return 7;
+    }
+    return 0;
   }
 
   private int defineXInicial(int jogador, int peao){
