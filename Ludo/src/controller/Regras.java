@@ -69,7 +69,7 @@ public class Regras implements Observado {
       // Caso o peao esteja na reta final, verirficar se é possível mover o peao
       checaFinal();
 
-      if(j1.getPeao(j1.getNumPeao()).getY(1) == true) {
+      if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true) {
 
         // Move o peao de acordo com o valor do movimento
         movePeao(movimento);
@@ -93,7 +93,7 @@ public class Regras implements Observado {
           j.SetP1Color(new Color(0,0,0,0));
           j.getPeao(j.getNumPeao()).setPosIni();
 
-          j.SetPColor(Color.WHITE);
+          j.SetPColor(PegaCor(jogador_num));
 
           if(j.getNumPeao() == 0) { //se for o primeiro peao
             j.SetPX(defineXInicial(jogador_num, 0));
@@ -174,7 +174,7 @@ public class Regras implements Observado {
 
   private void checaCinco(int mov){
     if(mov == 5) {
-      j.SetPColor(PegaCor(jogador_num));
+      j.SetPColor(Color.WHITE);
 
       if(j.getNumPeao() == 0) {
         j.SetPX(defineXInicial(jogador_num, 0));
