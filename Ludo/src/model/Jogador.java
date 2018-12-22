@@ -88,6 +88,10 @@ public class Jogador {
 		if(num_peao < 4)
 			num_peao++;
 	}
+	
+	public int getIndex(Peao p) {
+		return peoes_do_jogador.indexOf(p);
+	}
 
 }
 

@@ -191,8 +191,8 @@ public class FluxoDados {
 						int novo_x = v.RetornaX();
 						int novo_y = v.RetornaY();
 
-						Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j_nova_pos.getPeao(y));
-						Jogo.getJogo().getCaminho(novo_x, novo_y).numPeao = y;
+						Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j_nova_pos.getPeao(y), j_nova_pos);
+					//	Jogo.getJogo().getCaminho(novo_x, novo_y).numPeao = y;
 						
 						j_nova_pos.getPeao(y).getP1().PintaP(cores.elementAt(x));
 						j_nova_pos.getPeao(y).getP1().setX(novo_x);

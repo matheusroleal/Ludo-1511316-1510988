@@ -5,6 +5,7 @@ import java.io.*;
 import javax.swing.text.BadLocationException;
 
 import Interface.Jogo;
+import model.Jogador;
 import model.TextAreaLog;
 
 
@@ -31,12 +32,13 @@ public class Controlador {
 	}
 	
 	public void getPosicao(int x, int y) throws BadLocationException, FileNotFoundException {
+			
+		if(JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).getIndex(jogo.getJogo().getO1(x, y)) != -1)
+			JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).setNumPeao((jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(jogo.getJogo().getO1(x, y)));
+		else
+			TextAreaLog.getTextAreaLog().printLog("Esta peca nao pertence a voce!");
 		
-		Regras.getRegras().numPeao = jogo.getJogo().jogadores_na_casa[x][y].numPeao;
-		
-		TextAreaLog.getTextAreaLog().printLog("x: " + x);
-		TextAreaLog.getTextAreaLog().printLog("y: " + y);	
-		TextAreaLog.getTextAreaLog().printLog("aqui: " + jogo.getJogo().jogadores_na_casa[x][y].numPeao);
+		TextAreaLog.getTextAreaLog().printLog("aqui: " + (jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(jogo.getJogo().getO1(x, y)));
 	}
 
 	public void registra(Observador o) {

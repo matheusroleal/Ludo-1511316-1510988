@@ -60,41 +60,41 @@ public class Jogo extends JFrame implements Observador{
 			jogadores_na_casa[8][1].pode = true; //casa preta
 			
 			jogadores_na_casa[4][1].o1 = j1.getPeao(0);
-			jogadores_na_casa[4][1].numPeao = 0;
+			jogadores_na_casa[4][1].jogadores.add(j1);
 			jogadores_na_casa[4][4].o1 = j1.getPeao(1);
-			jogadores_na_casa[4][4].numPeao = 1;
+			jogadores_na_casa[4][4].jogadores.add(j1);
 			jogadores_na_casa[1][1].o1 = j1.getPeao(2);
-			jogadores_na_casa[1][1].numPeao = 2;
+			jogadores_na_casa[1][1].jogadores.add(j1);
 			jogadores_na_casa[1][4].o1 = j1.getPeao(3);
-			jogadores_na_casa[1][4].numPeao = 3;
+			jogadores_na_casa[1][4].jogadores.add(j1);
 			
 			jogadores_na_casa[1][10].o1 = j2.getPeao(0);
-			jogadores_na_casa[1][10].numPeao = 0;
+			jogadores_na_casa[1][10].jogadores.add(j2);
 			jogadores_na_casa[1][13].o1 = j2.getPeao(1);
-			jogadores_na_casa[1][13].numPeao = 1;
+			jogadores_na_casa[1][13].jogadores.add(j2);
 			jogadores_na_casa[4][10].o1 = j2.getPeao(2);
-			jogadores_na_casa[4][10].numPeao = 2;
+			jogadores_na_casa[4][10].jogadores.add(j2);
 			jogadores_na_casa[4][13].o1 = j2.getPeao(3);
-			jogadores_na_casa[4][13].numPeao = 3;
+			jogadores_na_casa[4][13].jogadores.add(j2);
 			
 			jogadores_na_casa[10][13].o1 = j3.getPeao(0);
-			jogadores_na_casa[10][13].numPeao = 0;
+			jogadores_na_casa[10][13].jogadores.add(j3);
 			jogadores_na_casa[10][10].o1 = j3.getPeao(1);
-			jogadores_na_casa[10][10].numPeao = 1;
+			jogadores_na_casa[10][10].jogadores.add(j3);
 			jogadores_na_casa[13][13].o1 = j3.getPeao(2);
-			jogadores_na_casa[13][13].numPeao = 2;
+			jogadores_na_casa[13][13].jogadores.add(j3);
 			jogadores_na_casa[13][10].o1 = j3.getPeao(3);
-			jogadores_na_casa[13][10].numPeao = 3;
+			jogadores_na_casa[13][10].jogadores.add(j3);
 			
 			jogadores_na_casa[13][4].o1 = j4.getPeao(0);
-			jogadores_na_casa[13][4].numPeao = 0;
+			jogadores_na_casa[13][4].jogadores.add(j4);
 			jogadores_na_casa[13][1].o1 = j4.getPeao(1);
-			jogadores_na_casa[13][1].numPeao = 1;
+			jogadores_na_casa[13][1].jogadores.add(j4);
 			jogadores_na_casa[10][4].o1 = j4.getPeao(2);
-			jogadores_na_casa[10][4].numPeao = 2;
+			jogadores_na_casa[10][4].jogadores.add(j4);
 			jogadores_na_casa[10][1].o1 = j4.getPeao(3);
-			jogadores_na_casa[10][1].numPeao = 3;
-
+			jogadores_na_casa[10][1].jogadores.add(j4);
+	
 			this.getContentPane().add(j4.getPeca(3));
 			this.getContentPane().add(j4.getBasePeca(3));
 			this.getContentPane().add(j4.getPeca(2));
