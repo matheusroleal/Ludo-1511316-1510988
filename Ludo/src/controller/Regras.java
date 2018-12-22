@@ -20,11 +20,8 @@ public class Regras implements Observado {
     int movimento;
     int jogador_num;
     Jogador j;
-    int numPeao;
-    
     private Observador obs;
    
-    
     private Regras() {
     	
     	movimento = 0;

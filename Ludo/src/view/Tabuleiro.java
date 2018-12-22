@@ -236,50 +236,50 @@ public class Tabuleiro extends JPanel {
 		
 		Ellipse2D vm1, vm2, vm3, vm4;
 		vm1 = vm2 = vm3 = vm4 =new Ellipse2D.Double();
-		vm1.setFrame(50,50,50,50);
+		vm1.setFrame(50+5,50+5,40,40);
 		g2d.setPaint(Color.RED);
 		g2d.fill(vm1);
-		vm2.setFrame(50*4,50,50,50);
+		vm2.setFrame(50*4+5,50+5,40,40);
 		g2d.fill(vm2);
-		vm3.setFrame(50,50*4,50,50);
+		vm3.setFrame(50+5,50*4+5,40,40);
 		g2d.fill(vm3);
-		vm4.setFrame(50*4,50*4,50,50);
+		vm4.setFrame(50*4+5,50*4+5,40,40);
 		g2d.fill(vm4);
 		
 		Ellipse2D vd1, vd2, vd3, vd4;
 		vd1 = vd2 = vd3 = vd4 =new Ellipse2D.Double();
-		vd1.setFrame(50*10,50,50,50);
+		vd1.setFrame(50*10+5,50+5,40,40);
 		g2d.setPaint(Color.GREEN);
 		g2d.fill(vd1);
-		vd2.setFrame(50*13,50,50,50);
+		vd2.setFrame(50*13+5,50+5,40,40);
 		g2d.fill(vd2);
-		vd3.setFrame(50*10,50*4,50,50);
+		vd3.setFrame(50*10+5,50*4+5,40,40);
 		g2d.fill(vd3);
-		vd4.setFrame(50*13,50*4,50,50);
+		vd4.setFrame(50*13+5,50*4+5,40,40);
 		g2d.fill(vd4);
 		
 		Ellipse2D am1, am2, am3, am4;
 		am1 = am2 = am3 = am4 =new Ellipse2D.Double();
-		am1.setFrame(50*10,50*10,50,50);
+		am1.setFrame(50*10+5,50*10+5,40,40);
 		g2d.setPaint(Color.YELLOW);
 		g2d.fill(am1);
-		am2.setFrame(50*13,50*10,50,50);
+		am2.setFrame(50*13+5,50*10+5,40,40);
 		g2d.fill(am2);
-		am3.setFrame(50*10,50*13,50,50);
+		am3.setFrame(50*10+5,50*13+5,40,40);
 		g2d.fill(am3);
-		am4.setFrame(50*13,50*13,50,50);
+		am4.setFrame(50*13+5,50*13+5,40,40);
 		g2d.fill(am4);
 		
 		Ellipse2D az1, az2, az3, az4;
 		az1 = az2 = az3 = az4 =new Ellipse2D.Double();
-		az1.setFrame(50,50*10,50,50);
+		az1.setFrame(50+5,50*10+5,40,40);
 		g2d.setPaint(Color.BLUE);
 		g2d.fill(az1);
-		az2.setFrame(50*4,50*10,50,50);
+		az2.setFrame(50*4+5,50*10+5,40,40);
 		g2d.fill(az2);
-		az3.setFrame(50,50*13,50,50);
+		az3.setFrame(50+5,50*13+5,40,40);
 		g2d.fill(az3);
-		az4.setFrame(50*4,50*13,50,50);
+		az4.setFrame(50*4+5,50*13+5,40,40);
 		g2d.fill(az4);
 	}
 	
