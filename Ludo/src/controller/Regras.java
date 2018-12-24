@@ -21,16 +21,16 @@ public class Regras implements Observado {
     int jogador_num;
     Jogador j;
     private Observador obs;
-   
+
     private Regras() {
-    	
+
     	movimento = 0;
 
     	j1 = JogadoresController.getJogadoresController().getJogador(0);
     	j2 = JogadoresController.getJogadoresController().getJogador(1);
     	j3 = JogadoresController.getJogadoresController().getJogador(2);
     	j4 = JogadoresController.getJogadoresController().getJogador(3);
-    	
+
     }
 
     public void AplicaRegras(int mv) throws FileNotFoundException, BadLocationException, InterruptedException {
@@ -38,7 +38,7 @@ public class Regras implements Observado {
     	jogador_num = defineNumJogador(JogadoresController.getJogadoresController().getJogadorTurno());
 
     	j = JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno());
-      
+
     	movimento = mv;
 
     	// Se cincoX for false quer dizer que o jogador ainda n tirou o numero 5 no dado para poder sair da casa inicial
@@ -49,14 +49,9 @@ public class Regras implements Observado {
     	}
     	// Quando cinco for true, quer dizer que o peao ja esta no tabuleiro e vai andar por ele
     	else{
-    		
+
     		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
-    		v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
-
-    		antigo_x = v.RetornaX();
-    		antigo_y = v.RetornaY();
-
-    		Jogo.getJogo().getCaminho(antigo_x, antigo_y).RemovePeao(j.getPeao(j.getNumPeao()), j);
+        removePeaoCaminho();
 
     		// Se movimento for 6, jogador pode jogar novamente
     		checaSeis(movimento);
@@ -160,6 +155,15 @@ public class Regras implements Observado {
       obs.notify(1, this);
     }
 
+    private void removePeaoCaminho() throws FileNotFoundException, BadLocationException{
+  		v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+
+  		antigo_x = v.RetornaX();
+  		antigo_y = v.RetornaY();
+
+  		Jogo.getJogo().getCaminho(antigo_x, antigo_y).RemovePeao(j.getPeao(j.getNumPeao()), j);
+    }
+
     private void peaoNoFinal(){
       j.mudaPeao();
       JogadoresController.getJogadoresController().setCont(jogador_num,(1+JogadoresController.getJogadoresController().getCont(jogador_num)));
@@ -215,12 +219,12 @@ public class Regras implements Observado {
 
     		j.SetP1X(novo_x);
     		j.SetP1Y(novo_y);
-        
+
     		obs.notify(1, this);
 
     		j.getPeao(j.getNumPeao()).setCinco(jogador_num, true);
     		j.getPeao(j.getNumPeao()).setY(jogador_num, true);
-        
+
     		Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
     	}
     }
