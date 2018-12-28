@@ -59,7 +59,7 @@ public class Regras implements Observado {
     		// Caso o peao esteja na reta final, verirficar se é possível mover o peao
     		checaFinal();
 
-    		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true) {
+    		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento)) {
 
     			// Move o peao de acordo com o valor do movimento
     			movePeao(movimento);
@@ -134,6 +134,50 @@ public class Regras implements Observado {
         JogadoresController.getJogadoresController().setM(true);
         j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
       }
+    }
+
+    private Boolean checaBarreira(int mov) throws BadLocationException, FileNotFoundException{
+		int pos_corr = j.getPeao(j.getNumPeao()).getLst().pos;
+		int i = 1;
+		int caminho_barreira_x, caminho_barreira_y;
+		boolean flag_barreira = true;
+				
+		v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+		
+		caminho_barreira_x = v.RetornaX();
+		caminho_barreira_y = v.RetornaY();
+		
+		// move o peao pela lista, checando casa a casa se existe barreiras no caminho
+		while(i < (mov +1) && flag_barreira){
+			
+			//Checa se existe peoes da mesma cor na mesma casa
+			if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2) {
+				if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null) {
+					flag_barreira = false;
+				}
+			}
+			
+			j.getPeao(j.getNumPeao()).getProx();
+			
+			v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+	
+			caminho_barreira_x = v.RetornaX();
+			caminho_barreira_y = v.RetornaY();
+	
+			i++;							
+			
+		}
+		
+		
+		// Adiciona na posicao anterior a checagem
+		j.getPeao(j.getNumPeao()).getLst().posIni();
+		movePeao(pos_corr);
+		
+		if(flag_barreira) {
+			return true;
+		}
+		
+		return false;
     }
 
     private void movePeao(int mov) throws FileNotFoundException, BadLocationException{
