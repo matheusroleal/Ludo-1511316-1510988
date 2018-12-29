@@ -62,7 +62,8 @@ public class Regras implements Observado {
     		}
 
     		// Checa se e possivel movimentar a peca
-    		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento)) {
+    		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento) && checaAbrigo(movimento)) {
+ //   		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento)) {
 
     			// Move o peao de acordo com o valor do movimento
     			movePeao(movimento);
@@ -174,7 +175,6 @@ public class Regras implements Observado {
 
 		}
 
-
 		// Adiciona na posicao anterior a checagem
 		j.getPeao(j.getNumPeao()).getLst().posIni();
 		movePeao(pos_corr);
@@ -196,6 +196,42 @@ public class Regras implements Observado {
 		}
 
 		return false;
+    }
+    
+    private Boolean checaAbrigo(int mov) throws BadLocationException, FileNotFoundException{
+    	int caminho_abrigo_x, caminho_abrigo_y;
+		int pos_corr = j.getPeao(j.getNumPeao()).getLst().pos;
+    	boolean flag_abrigo = true;
+    	
+    	for (int i = 1; i < mov + 1 ; i++) {
+    		j.getPeao(j.getNumPeao()).getProx();
+    	}
+
+    	v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+
+    	caminho_abrigo_x = v.RetornaX();
+    	caminho_abrigo_y = v.RetornaY();
+
+		//Checa se e possivel adicionar o peao naquela casa
+		if (Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1 != null && Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1.getP1().a != j.getPeao(j.getNumPeao()).getP1().a) {
+			if(!Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).pode) {
+				flag_abrigo = false;
+			}
+		}
+		
+		// Adiciona na posicao anterior a checagem
+		j.getPeao(j.getNumPeao()).getLst().posIni();
+		movePeao(pos_corr);
+		removePeaoCaminho();
+		
+		if (flag_abrigo) {
+			return true;
+		}else {
+			TextAreaLog.getTextAreaLog().printLog("Um peao de outra cor se encontra no lugar");
+			return false;
+		}
+		
+
     }
 
     private void movePeao(int mov) throws FileNotFoundException, BadLocationException{
