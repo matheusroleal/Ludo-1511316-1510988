@@ -51,7 +51,7 @@ public class Regras implements Observado {
     	else{
 
     		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
-        removePeaoCaminho();
+    		removePeaoCaminho();
 
     		// Se movimento for 6, jogador pode jogar novamente
     		checaSeis(movimento);
@@ -59,6 +59,7 @@ public class Regras implements Observado {
     		// Caso o peao esteja na reta final, verirficar se é possível mover o peao
     		checaFinal();
 
+    		// Checa se e possivel movimentar a peca
     		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento)) {
 
     			// Move o peao de acordo com o valor do movimento
@@ -141,42 +142,54 @@ public class Regras implements Observado {
 		int i = 1;
 		int caminho_barreira_x, caminho_barreira_y;
 		boolean flag_barreira = true;
-				
+
 		v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
-		
+
 		caminho_barreira_x = v.RetornaX();
 		caminho_barreira_y = v.RetornaY();
-		
+
 		// move o peao pela lista, checando casa a casa se existe barreiras no caminho
 		while(i < (mov +1) && flag_barreira){
-			
+
 			//Checa se existe peoes da mesma cor na mesma casa
-			if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2) {
-				if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null) {
+			if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null && Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2 != null) {
+				if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1.getP1().a == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2.getP1().a) {
 					flag_barreira = false;
 				}
 			}
-			
+
 			j.getPeao(j.getNumPeao()).getProx();
-			
+
 			v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
-	
+
 			caminho_barreira_x = v.RetornaX();
 			caminho_barreira_y = v.RetornaY();
-	
-			i++;							
-			
+
+			i++;
+
 		}
-		
-		
+
+
 		// Adiciona na posicao anterior a checagem
 		j.getPeao(j.getNumPeao()).getLst().posIni();
 		movePeao(pos_corr);
-		
+		removePeaoCaminho();
+
 		if(flag_barreira) {
 			return true;
+		}else {
+	      v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+
+	      novo_x = v.RetornaX();
+	      novo_y = v.RetornaY();
+
+	      j.SetP1X(novo_x);
+	      j.SetP1Y(novo_y);
+
+	      Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
+	      TextAreaLog.getTextAreaLog().printLog("Existe uma barreira no caminho!");
 		}
-		
+
 		return false;
     }
 
