@@ -56,7 +56,7 @@ public class Jogador {
 	}
 
 	public void SetPColor(Color c) {
-		peoes_do_jogador.elementAt(num_peao).p.a = c;
+		peoes_do_jogador.elementAt(num_peao).p.PintaP(c);
 	}
 
 	public void SetP1X(int x) {

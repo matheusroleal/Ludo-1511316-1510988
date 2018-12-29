@@ -57,84 +57,89 @@ public class Regras implements Observado {
     		checaSeis(movimento);
 
     		// Caso o peao esteja na reta final, verirficar se é possível mover o peao
-    		checaFinal();
+				if(j.getPeao(j.getNumPeao()).getFim(jogador_num) != -1) {
+    			checaFinalAntes();
+    		}
 
     		// Checa se e possivel movimentar a peca
     		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento)) {
 
     			// Move o peao de acordo com o valor do movimento
     			movePeao(movimento);
-    		}
+        	}
 
-    		// Se o peao tiver chegado na casa final e nao for o ultimo, mudamos o peao do jogador para o seguinte
-    		if((j.getX() == defineXFinal(jogador_num) && j.getY() == defineYFinal(jogador_num)) && JogadoresController.getJogadoresController().getCont(jogador_num) != 3) {
-    			peaoNoFinal();
-    		}
+    		checaFinalDepois();
 
+    	}
+
+    	// Se o peao tiver chegado na casa final e nao for o ultimo, mudamos o peao do jogador para o seguinte
+    	if((j.getX() == defineXFinal(jogador_num) && j.getY() == defineYFinal(jogador_num)) && JogadoresController.getJogadoresController().getCont(jogador_num) != 3){
+    		peaoNoFinal();
     	}
 
     	if(JogadoresController.getJogadoresController().getM() == true){
     		JogadoresController.getJogadoresController().MudaTurno();
     	}
-
     }
 
-    private void checaSeis(int mov){
-      if(mov == 6) {
-        JogadoresController.getJogadoresController().setM(false);
-        j.getPeao(j.getNumPeao()).setMd(jogador_num,1);
 
-        if(j.getPeao(j.getNumPeao()).getMd(jogador_num) == 3) {
-          if(novo_x != 7 && novo_y != 8 || novo_x != 7 && novo_y != 9 || novo_x != 7 && novo_y != 10 || novo_x != 7 && novo_y != 11 || novo_x != 7 && novo_y != 12 || novo_x != 7 && novo_y != 13){
-            j.SetP1Color(new Color(0,0,0,0));
-            j.getPeao(j.getNumPeao()).setPosIni();
+    private void checaSeis(int mov) throws FileNotFoundException, BadLocationException{
 
-            j.SetPColor(PegaCor(jogador_num));
+    	if(mov == 6) {
+    		JogadoresController.getJogadoresController().setM(false);
+    		j.getPeao(j.getNumPeao()).setMd(jogador_num,1);
 
-            if(j.getNumPeao() == 0) { //se for o primeiro peao
-              j.SetPX(defineXInicial(jogador_num, 0));
-              j.SetPY(defineYInicial(jogador_num, 0));
-              j.SetP1X(defineXInicial(jogador_num, 0));
-              j.SetP1Y(defineYInicial(jogador_num, 0));
-            }
-            else if(j.getNumPeao() == 1) {
-              j.SetPX(defineXInicial(jogador_num, 1));
-              j.SetPY(defineYInicial(jogador_num, 1));
-              j.SetP1X(defineXInicial(jogador_num, 1));
-              j.SetP1Y(defineYInicial(jogador_num, 1));
-            }
-            else if(j.getNumPeao() == 2) {
-              j.SetPX(defineXInicial(jogador_num, 2));
-              j.SetPY(defineYInicial(jogador_num, 2));
-              j.SetP1X(defineXInicial(jogador_num, 2));
-              j.SetP1Y(defineYInicial(jogador_num, 2));
-            }
-            else {
-              j.SetPX(defineXInicial(jogador_num, 3));
-              j.SetPY(defineYInicial(jogador_num, 3));
-              j.SetP1X(defineXInicial(jogador_num, 3));
-              j.SetP1Y(defineYInicial(jogador_num, 3));
-            }
+    		if(j.getPeao(j.getNumPeao()).getMd(jogador_num) == 3) {
+    			if(novo_x!=7 && novo_y!=1 || novo_x!=7 && novo_y!=2 || novo_x!=7 && novo_y!=3 || novo_x!=7 && novo_y!=4 || novo_x!=7 && novo_y!=5 || novo_x!=7 && novo_y!=6 || novo_y!=7 && novo_x!=1 || novo_y!=7 && novo_x!=2 || novo_y!=7 && novo_x!=3 || novo_y!=7 && novo_x!=4 || novo_y!=7 && novo_x!=5 || novo_y!=7 && novo_x!=6 || novo_x!=7 && novo_y!=8 || novo_x!=7 && novo_y!=9 || novo_x!=7 && novo_y!=10 || novo_x!=7 && novo_y!=11 || novo_x!=7 && novo_y!=12 || novo_x!=7 && novo_y!=13 || novo_y!=7 && novo_x!=8 || novo_y!=7 && novo_x!=9 || novo_y!=7 && novo_x!=10 || novo_y!=7 && novo_x!=11 || novo_y!=7 && novo_x!=12 || novo_y!=7 && novo_x!=13){
+    				j.SetP1Color(new Color(0,0,0,0));
+    				j.getPeao(j.getNumPeao()).setPosIni();
 
-            j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
-            j.getPeao(j.getNumPeao()).setCinco(jogador_num, false);
-            j.getPeao(j.getNumPeao()).setC(jogador_num, false);
-            j.getPeao(j.getNumPeao()).setY(jogador_num, false);
-            JogadoresController.getJogadoresController().setM(true);
+    				j.SetPColor(PegaCor(jogador_num));
 
-            obs.notify(1, this);
+    				if(j.getNumPeao() == 0) { //se for o primeiro peao
+    					j.SetPX(defineXInicial(jogador_num, 0));
+    					j.SetPY(defineYInicial(jogador_num, 0));
+    					j.SetP1X(defineXInicial(jogador_num, 0));
+    					j.SetP1Y(defineYInicial(jogador_num, 0));
+    				}
+    				else if(j.getNumPeao() == 1) {
+    					j.SetPX(defineXInicial(jogador_num, 1));
+    					j.SetPY(defineYInicial(jogador_num, 1));
+    					j.SetP1X(defineXInicial(jogador_num, 1));
+    					j.SetP1Y(defineYInicial(jogador_num, 1));
+    				}
+    				else if(j.getNumPeao() == 2) {
+    					j.SetPX(defineXInicial(jogador_num, 2));
+    					j.SetPY(defineYInicial(jogador_num, 2));
+    					j.SetP1X(defineXInicial(jogador_num, 2));
+    					j.SetP1Y(defineYInicial(jogador_num, 2));
+    				}
+    				else {
+    					j.SetPX(defineXInicial(jogador_num, 3));
+    					j.SetPY(defineYInicial(jogador_num, 3));
+    					j.SetP1X(defineXInicial(jogador_num, 3));
+    					j.SetP1Y(defineYInicial(jogador_num, 3));
+    				}
 
-          }
-          else {
-            JogadoresController.getJogadoresController().setM(true);
-            j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
-          }
-        }
-      }
-      else {
-        JogadoresController.getJogadoresController().setM(true);
-        j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
-      }
+    				j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
+    				j.getPeao(j.getNumPeao()).setCinco(jogador_num, false);
+    				j.getPeao(j.getNumPeao()).setC(jogador_num, false);
+    				j.getPeao(j.getNumPeao()).setY(jogador_num, false);
+    				JogadoresController.getJogadoresController().setM(true);
+
+    				obs.notify(1, this);
+
+    			}
+    			else {
+    				JogadoresController.getJogadoresController().setM(true);
+    				j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
+    			}
+    		}
+    	}
+    	else {
+    		JogadoresController.getJogadoresController().setM(true);
+    		j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
+    	}
     }
 
     private Boolean checaBarreira(int mov) throws BadLocationException, FileNotFoundException{
@@ -194,22 +199,21 @@ public class Regras implements Observado {
     }
 
     private void movePeao(int mov) throws FileNotFoundException, BadLocationException{
-      for (int i = 1; i < mov + 1 ; i++) {
-        j.getPeao(j.getNumPeao()).getProx();
-      }
+    	for (int i = 1; i < mov + 1 ; i++) {
+    		j.getPeao(j.getNumPeao()).getProx();
+    	}
 
-      v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+    	v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
 
-      novo_x = v.RetornaX();
-      novo_y = v.RetornaY();
+    	novo_x = v.RetornaX();
+    	novo_y = v.RetornaY();
 
-      j.SetP1X(novo_x);
-      j.SetP1Y(novo_y);
+    	j.SetP1X(novo_x);
+    	j.SetP1Y(novo_y);
 
-      Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
-     // Jogo.getJogo().getCaminho(novo_x, novo_y).numPeao = j.getNumPeao();
+    	Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
 
-      obs.notify(1, this);
+    	obs.notify(1, this);
     }
 
     private void removePeaoCaminho() throws FileNotFoundException, BadLocationException{
@@ -222,27 +226,81 @@ public class Regras implements Observado {
     }
 
     private void peaoNoFinal(){
-      j.mudaPeao();
-      JogadoresController.getJogadoresController().setCont(jogador_num,(1+JogadoresController.getJogadoresController().getCont(jogador_num)));
+    	j.mudaPeao();
+    	JogadoresController.getJogadoresController().setCont(jogador_num,(1+JogadoresController.getJogadoresController().getCont(jogador_num)));
 
-      // Reiniciando as variavies para novo peao
-      j.getPeao(j.getNumPeao()).setCinco(jogador_num, false);
-      j.getPeao(j.getNumPeao()).setC(jogador_num, false);
-      j.getPeao(j.getNumPeao()).setFim(jogador_num, -1);
-      j.getPeao(j.getNumPeao()).setY(jogador_num, true);
-      j.getPeao(j.getNumPeao()).setMd(jogador_num, 0);
-      JogadoresController.getJogadoresController().setM(true);
+    	// Reiniciando as variavies para novo peao
+    	j.getPeao(j.getNumPeao()).setCinco(jogador_num, false);
+    	j.getPeao(j.getNumPeao()).setC(jogador_num, false);
+    	j.getPeao(j.getNumPeao()).setFim(jogador_num, -1);
+    	j.getPeao(j.getNumPeao()).setY(jogador_num, true);
+    	j.getPeao(j.getNumPeao()).setMd(jogador_num, 0);
+    	JogadoresController.getJogadoresController().setM(true);
     }
 
-    private void checaFinal(){
-      if(j.getPeao(j.getNumPeao()).getFim(jogador_num) != -1) {
-        j.getPeao(j.getNumPeao()).setFim(jogador_num, j.getYFinal() - ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaY());
-        if((j.getPeao(j.getNumPeao()).getFim(jogador_num) - movimento) == 0 || movimento < j.getPeao(j.getNumPeao()).getFim(jogador_num)){
-          j.getPeao(j.getNumPeao()).setY(jogador_num, true);
-        }else{
-          j.getPeao(j.getNumPeao()).setY(jogador_num, false);
-        }
-      }
+    private void checaFinalAntes(){
+    	if(jogador_num == 1)
+			j.getPeao(j.getNumPeao()).setFim(jogador_num, j.getYFinal() - ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaY());
+		else if(jogador_num == 2)
+			j.getPeao(j.getNumPeao()).setFim(jogador_num, j.getXFinal() - ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaX());
+		else if(jogador_num == 3)
+			j.getPeao(j.getNumPeao()).setFim(jogador_num, ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaY() - j.getYFinal());
+		else
+			j.getPeao(j.getNumPeao()).setFim(jogador_num, ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaX() - j.getXFinal());
+
+		if((j.getPeao(j.getNumPeao()).getFim(jogador_num) - movimento) == 0 || movimento < j.getPeao(j.getNumPeao()).getFim(jogador_num))
+			j.getPeao(j.getNumPeao()).setY(jogador_num, true);
+		else
+			j.getPeao(j.getNumPeao()).setY(jogador_num, false);
+    }
+
+    private void checaFinalDepois() {
+    	for(int i=0; i<6; i++) {
+			if(jogador_num == 1) {
+				if(novo_x==7 && novo_y==1+i){
+
+					j.getPeao(j.getNumPeao()).setFim(jogador_num, j.getYFinal() - ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaY());
+
+					if((j.getPeao(j.getNumPeao()).getFim(jogador_num) - movimento) == 0 || movimento < j.getPeao(j.getNumPeao()).getFim(jogador_num))
+						j.getPeao(j.getNumPeao()).setY(jogador_num, true);
+					else
+						j.getPeao(j.getNumPeao()).setY(jogador_num, false);
+				}
+			}
+			else if(jogador_num==2) {
+				if(novo_y==7 && novo_x==1+i){
+
+					j.getPeao(j.getNumPeao()).setFim(jogador_num, j.getXFinal() - ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaX());
+
+					if((j.getPeao(j.getNumPeao()).getFim(jogador_num) - movimento) == 0 || movimento < j.getPeao(j.getNumPeao()).getFim(jogador_num))
+						j.getPeao(j.getNumPeao()).setY(jogador_num, true);
+					else
+						j.getPeao(j.getNumPeao()).setY(jogador_num, false);
+				}
+			}
+			else if(jogador_num==3) {
+				if(novo_x==7 && novo_y==8+i){
+
+					j.getPeao(j.getNumPeao()).setFim(jogador_num, ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaY() - j.getYFinal());
+
+					if((j.getPeao(j.getNumPeao()).getFim(jogador_num) - movimento) == 0 || movimento < j.getPeao(j.getNumPeao()).getFim(jogador_num))
+						j.getPeao(j.getNumPeao()).setY(jogador_num,true);
+					else
+						j.getPeao(j.getNumPeao()).setY(jogador_num,false);
+				}
+			}
+			else {
+				if(novo_y==7 && novo_x==8+i){
+
+					j.getPeao(j.getNumPeao()).setFim(jogador_num, ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaX() - j.getXFinal());
+
+					if((j.getPeao(j.getNumPeao()).getFim(jogador_num) - movimento) == 0 || movimento < j.getPeao(j.getNumPeao()).getFim(jogador_num))
+						j.getPeao(j.getNumPeao()).setY(jogador_num,true);
+					else
+						j.getPeao(j.getNumPeao()).setY(jogador_num,false);
+				}
+			}
+    	}
     }
 
     private void checaCinco(int mov) throws FileNotFoundException, BadLocationException{
@@ -287,17 +345,17 @@ public class Regras implements Observado {
     }
 
     private Color PegaCor (int jogador){
-      switch (jogador) {
+    	switch (jogador) {
         case 1:
-        return Color.RED;
+        	return Color.RED;
         case 2:
-        return Color.GREEN;
+        	return Color.GREEN;
         case 3:
-        return Color.YELLOW;
+        	return Color.YELLOW;
         case 4:
-        return Color.BLUE;
-      }
-      return null;
+        	return Color.BLUE;
+    	}
+    	return null;
     }
 
     private int defineNumJogador(int turno){
@@ -339,145 +397,145 @@ public class Regras implements Observado {
     }
 
     private int defineXFinal (int jogador){
-      switch (jogador) {
+    	switch (jogador) {
         case 1:
-        return 7;
+        	return 7;
         case 2:
-        return 6;
+        	return 6;
         case 3:
-        return 7;
+        	return 7;
         case 4:
-        return 8;
-      }
-      return 0;
+        	return 8;
+    	}
+    	return 0;
     }
 
     private int defineYFinal (int jogador){
-      switch (jogador) {
+    	switch (jogador) {
         case 1:
-        return 6;
+        	return 6;
         case 2:
-        return 7;
+        	return 7;
         case 3:
-        return 8;
+        	return 8;
         case 4:
-        return 7;
-      }
-      return 0;
+        	return 7;
+    	}
+    	return 0;
     }
 
     private int defineXInicial(int jogador, int peao){
-      switch (jogador) {
+    	switch (jogador) {
         case 1:
-        switch (peao) {
-          case 0:
-          return 4;
-          case 1:
-          return 4;
-          case 2:
-          return 1;
-          case 3:
-          return 1;
-        }
+        	switch (peao) {
+        	case 0:
+        		return 4;
+        	case 1:
+        		return 4;
+        	case 2:
+        		return 1;
+        	case 3:
+        		return 1;
+        	}
         case 2:
-        switch (peao) {
-          case 0:
-          return 1;
-          case 1:
-          return 1;
-          case 2:
-          return 4;
-          case 3:
-          return 4;
-        }
+        	switch (peao) {
+        	case 0:
+        		return 1;
+        	case 1:
+        		return 1;
+        	case 2:
+        		return 4;
+        	case 3:
+        		return 4;
+        	}
         case 3:
-        switch (peao) {
-          case 0:
-          return 10;
-          case 1:
-          return 10;
-          case 2:
-          return 13;
-          case 3:
-          return 13;
-        }
+        	switch (peao) {
+        	case 0:
+        		return 10;
+        	case 1:
+        		return 10;
+        	case 2:
+        		return 13;
+        	case 3:
+        		return 13;
+        	}
         case 4:
-        switch (peao) {
-          case 0:
-          return 13;
-          case 1:
-          return 13;
-          case 2:
-          return 10;
-          case 3:
-          return 10;
-        }
-      }
-      return 0;
+        	switch (peao) {
+        	case 0:
+        		return 13;
+        	case 1:
+        		return 13;
+        	case 2:
+        		return 10;
+        	case 3:
+        		return 10;
+        	}
+    	}
+    	return 0;
     }
 
     private int defineYInicial(int jogador, int peao){
-      switch (jogador) {
-        case 1:
-        switch (peao) {
-          case 0:
-          return 1;
-          case 1:
-          return 4;
-          case 2:
-          return 1;
-          case 3:
-          return 4;
-        }
+    	switch (jogador) {
+    	case 1:
+    		switch (peao) {
+    		case 0:
+    			return 1;
+    		case 1:
+    			return 4;
+    		case 2:
+    			return 1;
+    		case 3:
+    			return 4;
+    		}
         case 2:
-        switch (peao) {
-          case 0:
-          return 10;
-          case 1:
-          return 13;
-          case 2:
-          return 10;
-          case 3:
-          return 13;
-        }
+        	switch (peao) {
+        	case 0:
+        		return 10;
+        	case 1:
+        		return 13;
+        	case 2:
+        		return 10;
+        	case 3:
+        		return 13;
+        	}
         case 3:
-        switch (peao) {
-          case 0:
-          return 13;
-          case 1:
-          return 10;
-          case 2:
-          return 13;
-          case 3:
-          return 10;
-        }
+        	switch (peao) {
+        	case 0:
+        		return 13;
+        	case 1:
+        		return 10;
+        	case 2:
+        		return 13;
+        	case 3:
+        		return 10;
+        	}
         case 4:
-        switch (peao) {
-          case 0:
-          return 4;
-          case 1:
-          return 1;
-          case 2:
-          return 4;
-          case 3:
-          return 1;
-        }
-      }
-      return 0;
+        	switch (peao) {
+        	case 0:
+        		return 4;
+        	case 1:
+        		return 1;
+        	case 2:
+        		return 4;
+        	case 3:
+        		return 1;
+        	}
+    	}
+    	return 0;
     }
 
     public void add(Observador o) {
-      obs = o;
+    	obs = o;
     }
 
     public void remove(Observador o) {
-      obs = null;
+    	obs = null;
     }
 
     public static Regras getRegras() throws BadLocationException {
-      if (instance == null) {
-        instance = new Regras();
-      }
-      return instance;
+    	if (instance == null) {
+    		instance = new Regras();
+    	}
+    	return instance;
     }
-  }
+}

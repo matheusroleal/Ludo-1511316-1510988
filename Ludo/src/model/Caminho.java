@@ -40,7 +40,7 @@ public class Caminho{
 		else if(o2 == p){
 			o2 = null;
 		}
-		
-		jogadores.remove(jogadores.indexOf(j));
+		if(!jogadores.isEmpty())
+			jogadores.remove(jogadores.indexOf(j));
 	}
 }

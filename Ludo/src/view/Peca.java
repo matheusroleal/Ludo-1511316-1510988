@@ -48,7 +48,7 @@ public class Peca extends JPanel {
 		g2d.setPaint(Color.RED);
 		g2d.fill(e);
 		
-		e.setFrame(50*y, 50*x, 50, 50);
+		e.setFrame(50*y+5, 50*x+5, 40, 40);
 		g2d.setPaint(a);
 		g2d.fill(e);
 				
