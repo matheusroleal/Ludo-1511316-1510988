@@ -289,6 +289,9 @@ public class Jogo extends JFrame implements Observador{
 			this.getContentPane().add(TextAreaLog.getTextAreaLog().getTextArea());
 
 			this.getContentPane().add(t);
+			
+    		TextAreaLog.getTextAreaLog().printLog("Vez do jogador vermelho!");
+  	      	TextAreaLog.getTextAreaLog().printLog("Selecione o peao antes de jogar!");
 
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();

@@ -35,7 +35,7 @@ public class Regras implements Observado {
 
     public void AplicaRegras(int mv) throws FileNotFoundException, BadLocationException, InterruptedException {
 
-    	jogador_num = defineNumJogador(JogadoresController.getJogadoresController().getJogadorTurno());
+    	jogador_num = JogadoresController.getJogadoresController().getJogadorTurno() + 1;
 
     	j = JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno());
 
@@ -63,7 +63,6 @@ public class Regras implements Observado {
 
     		// Checa se e possivel movimentar a peca
     		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento) && checaAbrigo(movimento)) {
- //   		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento)) {
 
     			// Move o peao de acordo com o valor do movimento
     			movePeao(movimento);
@@ -80,6 +79,8 @@ public class Regras implements Observado {
 
     	if(JogadoresController.getJogadoresController().getM() == true){
     		JogadoresController.getJogadoresController().MudaTurno();
+    		ChamaProxJogador(JogadoresController.getJogadoresController().getJogadorTurno());
+  	      	TextAreaLog.getTextAreaLog().printLog("Selecione o peao antes de jogar!");
     	}
     }
 
@@ -183,15 +184,6 @@ public class Regras implements Observado {
 		if(flag_barreira) {
 			return true;
 		}else {
-	      v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
-
-	      novo_x = v.RetornaX();
-	      novo_y = v.RetornaY();
-
-	      j.SetP1X(novo_x);
-	      j.SetP1Y(novo_y);
-
-	      Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
 	      TextAreaLog.getTextAreaLog().printLog("Existe uma barreira no caminho!");
 		}
 
@@ -394,42 +386,21 @@ public class Regras implements Observado {
     	return null;
     }
 
-    private int defineNumJogador(int turno){
+    private void ChamaProxJogador(int turno) throws FileNotFoundException, BadLocationException{
     	switch (turno) {
     	case 0:
-    		try {
-    			TextAreaLog.getTextAreaLog().printLog("Vez do jogador vermelho!");
-    			return turno + 1;
-    		} catch (FileNotFoundException | BadLocationException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
+    		TextAreaLog.getTextAreaLog().printLog("Vez do jogador vermelho!");
+    		break;
         case 1:
-        	try {
-        		TextAreaLog.getTextAreaLog().printLog("Vez do jogador verde!");
-        		return turno + 1;
-        	} catch (FileNotFoundException | BadLocationException e) {
-        		// TODO Auto-generated catch block
-        		e.printStackTrace();
-        	}
+        	TextAreaLog.getTextAreaLog().printLog("Vez do jogador verde!");
+    		break;
         case 2:
-        	try {
-        		TextAreaLog.getTextAreaLog().printLog("Vez do jogador amarelo!");
-        		return turno + 1;
-        	} catch (FileNotFoundException | BadLocationException e) {
-        		// TODO Auto-generated catch block
-        		e.printStackTrace();
-        	}
+        	TextAreaLog.getTextAreaLog().printLog("Vez do jogador amarelo!");
+    		break;
         case 3:
-        	try {
-        		TextAreaLog.getTextAreaLog().printLog("Vez do jogador azul!");
-        		return turno + 1;
-        	} catch (FileNotFoundException | BadLocationException e) {
-        		// TODO Auto-generated catch block
-        		e.printStackTrace();
-        	}
+        	TextAreaLog.getTextAreaLog().printLog("Vez do jogador azul!");
+    		break;
     	}
-    	return turno + 1;
     }
 
     private int defineXFinal (int jogador){
