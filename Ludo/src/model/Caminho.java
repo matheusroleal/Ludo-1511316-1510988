@@ -24,6 +24,14 @@ public class Caminho{
 		}
 		else if(o2 == null) {
 			o2 = p;
+			
+			// adiciona desenho do peao no estilo barreira / abrigo
+			if(o2.getP1().a == o1.getP1().a) {
+				o2.getP1().setBarreira(true);
+			}else {
+				o2.getP1().setPode(true);
+				o2.getP1().SetCorB(o1.getP1().a);
+			}
 		}
 		else {
 			TextAreaLog.getTextAreaLog().printLog("Quantidade maxima de peoes na casa");
@@ -33,6 +41,16 @@ public class Caminho{
 	}
 
 	public void RemovePeao(Peao p, Jogador j) throws FileNotFoundException, BadLocationException {
+		// remove desenho do peao no estilo barreira / abrigo
+		if(o1 != null && o2 != null) {
+			if(o2.getP1().a == o1.getP1().a) {
+				o2.getP1().setBarreira(false);
+			}else {
+				o2.getP1().setPode(false);
+			}
+		}
+		
+		// Faz a remocao do peao
 		if(o1 == p) {
 			o1 = o2;
 			o2 = null;
@@ -40,7 +58,9 @@ public class Caminho{
 		else if(o2 == p){
 			o2 = null;
 		}
-		if(!jogadores.isEmpty())
+		
+		if(!jogadores.isEmpty()) {
 			jogadores.remove(jogadores.indexOf(j));
+		}
 	}
 }

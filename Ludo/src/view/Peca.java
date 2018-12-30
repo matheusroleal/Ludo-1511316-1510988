@@ -34,15 +34,30 @@ public class Peca extends JPanel {
 		y = novo_y;
 	}
 	
+	public void setBarreira(boolean nova_barreira) {
+		barreira = nova_barreira;
+	}
+	
+	public void setPode(boolean nova_pode) {
+		pode = nova_pode;
+	}
+	
 	public Color ExibeP () {
 		return this.a;
+	}
+	
+	public void SetCorB(Color cor_jogador) {
+		this.b = cor_jogador;
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		Graphics2D g2d=(Graphics2D) g;
-		Ellipse2D e=new Ellipse2D.Double();
+		Graphics2D g2d = (Graphics2D) g;
+		Ellipse2D e = new Ellipse2D.Double();
+		Ellipse2D e1=new Ellipse2D.Double();
+		Ellipse2D e2 = new Ellipse2D.Double();
+		Ellipse2D e3 = new Ellipse2D.Double();;
 		
 		e.setFrame(0,0,50,50);
 		g2d.setPaint(Color.RED);
@@ -51,6 +66,20 @@ public class Peca extends JPanel {
 		e.setFrame(50*y+5, 50*x+5, 40, 40);
 		g2d.setPaint(a);
 		g2d.fill(e);
+		
+		// Para barreira
+		e2.setFrame(50*y+5,50*x+5,40,40);
+		g2d.setPaint(a);
+		g2d.fill(e2);
+		
+		e3.setFrame(50*y+10, 50*x+10,30,30);
+		g2d.setPaint(a);
+		g2d.fill(e3);
+		
+		// Para abrigo		
+		e1.setFrame(50*y+7.5,50*x+7.5,35,35);
+		g2d.setPaint(a);
+		g2d.fill(e1);
 				
 		if(x==6 && y==1 || x==1 && y==8 || x==13 && y==6 || x==8 && y==13) {
 			g2d.setPaint(Color.BLACK);
@@ -64,9 +93,7 @@ public class Peca extends JPanel {
 			}
 		}
 		
-		if(pode == true) {
-			Ellipse2D e1=new Ellipse2D.Double();
-			
+		if(pode == true) {		
 			e1.setFrame(50*y+7.5,50*x+7.5,35,35);
 			g2d.setPaint(b);
 			g2d.fill(e1);
@@ -74,9 +101,6 @@ public class Peca extends JPanel {
 		}
 		
 		if(barreira == true) {
-			Ellipse2D e2, e3;
-			e2 = e3 = new Ellipse2D.Double();
-			
 			e2.setFrame(50*y+5,50*x+5,40,40);
 			g2d.setPaint(Color.WHITE);
 			g2d.fill(e2);
