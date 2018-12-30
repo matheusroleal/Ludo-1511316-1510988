@@ -101,7 +101,11 @@ public class Peca extends JPanel {
 		}
 		
 		if(barreira == true) {
-			e2.setFrame(50*y+5,50*x+5,40,40);
+			e1.setFrame(50*y+5,50*x+5,40,40);
+			g2d.setPaint(a);
+			g2d.fill(e1);
+			
+			e2.setFrame(50*y+7.5,50*x+7.5,35,35);
 			g2d.setPaint(Color.WHITE);
 			g2d.fill(e2);
 			

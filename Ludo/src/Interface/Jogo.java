@@ -58,6 +58,10 @@ public class Jogo extends JFrame implements Observador{
 			jogadores_na_casa[6][13].pode = true; //casa preta
 			jogadores_na_casa[13][8].pode = true; //casa preta
 			jogadores_na_casa[8][1].pode = true; //casa preta
+			jogadores_na_casa[6][1].pode = true; //casa inicio vermelho
+			jogadores_na_casa[1][8].pode = true; //casa inicio verde
+			jogadores_na_casa[8][13].pode = true; //casa inicio amarela
+			jogadores_na_casa[13][6].pode = true; //casa inicio azul
 			
 			jogadores_na_casa[4][1].o1 = j1.getPeao(0);
 			jogadores_na_casa[4][1].jogadores.add(j1);

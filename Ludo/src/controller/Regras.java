@@ -192,9 +192,9 @@ public class Regras implements Observado {
     
     private Boolean checaAbrigo(int mov) throws BadLocationException, FileNotFoundException{
     	int caminho_abrigo_x, caminho_abrigo_y;
-		int pos_corr = j.getPeao(j.getNumPeao()).getLst().pos;
+    	int pos_corr = j.getPeao(j.getNumPeao()).getLst().pos;
     	boolean flag_abrigo = true;
-    	
+    	  
     	for (int i = 1; i < mov + 1 ; i++) {
     		j.getPeao(j.getNumPeao()).getProx();
     	}
@@ -204,26 +204,28 @@ public class Regras implements Observado {
     	caminho_abrigo_x = v.RetornaX();
     	caminho_abrigo_y = v.RetornaY();
 
-		//Checa se e possivel adicionar o peao naquela casa
-		if (Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1 != null && Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1.getP1().a != j.getPeao(j.getNumPeao()).getP1().a) {
-			if(!Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).pode) {
-				flag_abrigo = false;
-			}
-		}
-		
-		// Adiciona na posicao anterior a checagem
-		j.getPeao(j.getNumPeao()).getLst().posIni();
-		movePeao(pos_corr);
-		removePeaoCaminho();
-		
-		if (flag_abrigo) {
-			return true;
-		}else {
-			TextAreaLog.getTextAreaLog().printLog("Um peao de outra cor se encontra no lugar");
-			return false;
-		}
-		
+    	//Checa se e possivel adicionar o peao naquela casa
+    	if (Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1 != null && Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1.getP1().a != j.getPeao(j.getNumPeao()).getP1().a) {
+    		if(!Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).pode) {
+    			flag_abrigo = false;
+    		}else {
+    			if(corCasaInicial(caminho_abrigo_x, caminho_abrigo_y) != Color.BLACK && Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1.getP1().a != corCasaInicial(caminho_abrigo_x, caminho_abrigo_y) && j.getPeao(j.getNumPeao()).getP1().a != corCasaInicial(caminho_abrigo_x, caminho_abrigo_y)){
+    				flag_abrigo = false;
+    			}
+    		}
+    	}
 
+    	// Adiciona na posicao anterior a checagem
+    	j.getPeao(j.getNumPeao()).getLst().posIni();
+    	movePeao(pos_corr);
+    	removePeaoCaminho();
+
+		if (flag_abrigo) {
+		  return true;
+		}else {
+		  TextAreaLog.getTextAreaLog().printLog("Um peao de outra cor se encontra no lugar");
+		  return false;
+		}
     }
 
     private void movePeao(int mov) throws FileNotFoundException, BadLocationException{
@@ -529,6 +531,20 @@ public class Regras implements Observado {
         	}
     	}
     	return 0;
+    }
+    
+    public Color corCasaInicial(int caminho_abrigo_x, int caminho_abrigo_y){
+    	  if (caminho_abrigo_x == 6 && caminho_abrigo_y == 1){
+    	    return Color.RED;
+    	  }else if(caminho_abrigo_x == 1 && caminho_abrigo_y == 8){
+    	    return Color.GREEN;
+    	  }else if(caminho_abrigo_x == 8 && caminho_abrigo_y == 13){
+    	    return Color.YELLOW;
+    	  }else if(caminho_abrigo_x == 13 && caminho_abrigo_y == 6){
+    	    return Color.BLUE;
+    	  }else{
+    	    return Color.BLACK;
+    	  }
     }
 
     public void add(Observador o) {

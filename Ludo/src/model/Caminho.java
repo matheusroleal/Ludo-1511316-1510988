@@ -27,8 +27,11 @@ public class Caminho{
 			
 			// adiciona desenho do peao no estilo barreira / abrigo
 			if(o2.getP1().a == o1.getP1().a) {
+				o1.getP1().setBarreira(true);
 				o2.getP1().setBarreira(true);
 			}else {
+				o1.getP1().setPode(true);
+				o1.getP1().SetCorB(o2.getP1().a);
 				o2.getP1().setPode(true);
 				o2.getP1().SetCorB(o1.getP1().a);
 			}
@@ -44,8 +47,10 @@ public class Caminho{
 		// remove desenho do peao no estilo barreira / abrigo
 		if(o1 != null && o2 != null) {
 			if(o2.getP1().a == o1.getP1().a) {
+				o1.getP1().setBarreira(false);
 				o2.getP1().setBarreira(false);
 			}else {
+				o1.getP1().setPode(false);
 				o2.getP1().setPode(false);
 			}
 		}
