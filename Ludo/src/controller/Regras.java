@@ -1,7 +1,6 @@
 package controller;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 
 import javax.swing.text.BadLocationException;
@@ -73,9 +72,14 @@ public class Regras implements Observado {
 
     	}
 
-    	// Se o peao tiver chegado na casa final e nao for o ultimo, mudamos o peao do jogador para o seguinte
-    	if((j.getX() == defineXFinal(jogador_num) && j.getY() == defineYFinal(jogador_num)) && JogadoresController.getJogadoresController().getCont(jogador_num) != 3){
-    		peaoNoFinal();
+    	// Se o peao tiver chegado na casa final 
+    	if((j.getX() == defineXFinal(jogador_num) && j.getY() == defineYFinal(jogador_num))){
+    		// Se nao for o ultimo, mudamos o peao do jogador para o seguinte
+    		if(JogadoresController.getJogadoresController().getCont(jogador_num) != 3){
+        		peaoNoFinal();
+    		}else {
+    			defineVencedor(JogadoresController.getJogadoresController().getJogadorTurno());
+    		}
     	}
 
     	if(JogadoresController.getJogadoresController().getM() == true){
@@ -322,6 +326,69 @@ public class Regras implements Observado {
     	JogadoresController.getJogadoresController().setM(true);
     }
 
+    private void defineVencedor(int turno) throws FileNotFoundException, BadLocationException {
+    	switch (turno) {
+    	case 0:
+    		TextAreaLog.getTextAreaLog().printLog("Jogador vermelho venceu!");
+    		defineOutrasColocacoes(turno);
+    		break;
+        case 1:
+        	TextAreaLog.getTextAreaLog().printLog("Jogador verde venceu!");
+    		defineOutrasColocacoes(turno);
+    		break;
+        case 2:
+        	TextAreaLog.getTextAreaLog().printLog("Jogador amarelo venceu!");
+    		defineOutrasColocacoes(turno);
+    		break;
+        case 3:
+        	TextAreaLog.getTextAreaLog().printLog("Jogador azul venceu!");
+    		defineOutrasColocacoes(turno);
+    		break;
+    	}
+    }
+    
+	private void defineOutrasColocacoes(int turno) throws FileNotFoundException, BadLocationException {
+		int distancia_segundo,distancia_terceiro,distancia_quarto;
+		int jogador_segundo,jogador_terceiro,jogador_quarto;
+		
+		jogador_segundo = jogador_terceiro = jogador_quarto = 0;
+		distancia_segundo = distancia_terceiro = distancia_quarto = 0;
+		
+		for(int i = 0; i < 4; i++) {
+			if(i != turno) {
+				Jogador j_outra_colocacao = JogadoresController.getJogadoresController().getJogador(i);
+				int distancia = 0;
+				
+				for(int j = 0; j < 4; j++) {
+					distancia += j_outra_colocacao.getPeao(j).getPos();
+				}
+				
+				if(distancia > distancia_segundo) {
+					distancia_quarto = distancia_terceiro;
+					distancia_terceiro = distancia_segundo;
+					distancia_segundo = distancia;
+					
+					jogador_quarto = jogador_terceiro;
+					jogador_terceiro = jogador_segundo;
+					jogador_segundo = i + 1;
+				}else if(distancia > distancia_terceiro) {
+					distancia_quarto = distancia_terceiro;
+					distancia_terceiro = distancia;
+					
+					jogador_quarto = jogador_terceiro;
+					jogador_terceiro = i + 1;
+				}else {
+					distancia_quarto = distancia;
+					
+					jogador_quarto = i + 1;
+				}	
+			}
+		}
+    	TextAreaLog.getTextAreaLog().printLog("Jogador "+PegaNomeCor(jogador_segundo)+" ficou em segundo!");
+    	TextAreaLog.getTextAreaLog().printLog("Jogador "+PegaNomeCor(jogador_terceiro)+" ficou em terceiro!");
+    	TextAreaLog.getTextAreaLog().printLog("Jogador "+PegaNomeCor(jogador_quarto)+" ficou em quarto!");
+	}
+    
     private void checaFinalAntes(){
     	if(jogador_num == 1)
 			j.getPeao(j.getNumPeao()).setFim(jogador_num, j.getYFinal() - ((Vetor) j.getPeao(j.getNumPeao()).getPosCorr()).RetornaY());
@@ -438,6 +505,20 @@ public class Regras implements Observado {
         	return Color.YELLOW;
         case 4:
         	return Color.BLUE;
+    	}
+    	return null;
+    }
+    
+    private String PegaNomeCor (int jogador){
+    	switch (jogador) {
+        case 1:
+        	return "Vermelho";
+        case 2:
+        	return "Verde";
+        case 3:
+        	return "Amarelo";
+        case 4:
+        	return "Azul";
     	}
     	return null;
     }
