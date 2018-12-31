@@ -19,10 +19,11 @@ public class Regras implements Observado {
     int antigo_x, antigo_y;
     int movimento;
     int jogador_num;
+    int auxn;
     Jogador j;
     private Observador obs;
 
-    private Regras() {
+    private Regras(){
 
     	movimento = 0;
 
@@ -30,14 +31,20 @@ public class Regras implements Observado {
     	j2 = JogadoresController.getJogadoresController().getJogador(1);
     	j3 = JogadoresController.getJogadoresController().getJogador(2);
     	j4 = JogadoresController.getJogadoresController().getJogador(3);
-
+    	
     }
 
     public void AplicaRegras(int mv) throws FileNotFoundException, BadLocationException, InterruptedException {
-
+    	
+    	
     	jogador_num = JogadoresController.getJogadoresController().getJogadorTurno() + 1;
 
     	j = JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno());
+    	
+    	TextAreaLog.getTextAreaLog().printLog(""+j.getPeao(0));
+		TextAreaLog.getTextAreaLog().printLog(""+j.getPeao(1));
+		TextAreaLog.getTextAreaLog().printLog(""+j.getPeao(2));
+		TextAreaLog.getTextAreaLog().printLog(""+j.getPeao(3));
 
     	movimento = mv;
 
@@ -56,16 +63,17 @@ public class Regras implements Observado {
     		// Se movimento for 6, jogador pode jogar novamente
     		checaSeis(movimento);
 
-    		// Caso o peao esteja na reta final, verirficar se é possível mover o peao
+    		// Caso o peao esteja na reta final, verirficar se eh possivel move-lo
 				if(j.getPeao(j.getNumPeao()).getFim(jogador_num) != -1) {
     			checaFinalAntes();
     		}
 
     		// Checa se e possivel movimentar a peca
-    		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento) && checaAbrigo(movimento)) {
+    		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true) { //&& checaBarreira(movimento) && checaAbrigo(movimento)) {
 
     			// Move o peao de acordo com o valor do movimento
     			movePeao(movimento);
+    			captura();
         	}
 
     		checaFinalDepois();
@@ -84,6 +92,48 @@ public class Regras implements Observado {
     	}
     }
 
+    private void captura() throws BadLocationException, FileNotFoundException {
+        if(Jogo.getJogo().getCaminho(novo_x, novo_y).auxp != null) { //nao eh abrigo, logo vai acontecer uma captura
+            if(Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.getP1().ExibeP() != j.getPeao(j.getNumPeao()).getP1().ExibeP()) {
+                TextAreaLog.getTextAreaLog().printLog("Peca comida!");
+                
+                Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.PintaP1(new Color(0,0,0,0));
+                Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.setPosIni();
+                Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.PintaP(Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.getP1().ExibeP());
+                
+                if(Jogo.getJogo().getCaminho(novo_x, novo_y).auxj == j1)
+                    auxn = 1;
+                else if(Jogo.getJogo().getCaminho(novo_x, novo_y).auxj == j2)
+                    auxn = 2;
+                else if(Jogo.getJogo().getCaminho(novo_x, novo_y).auxj == j3)
+                    auxn = 3;
+                else
+                    auxn = 4;
+            
+            }
+            
+            //reiniciando as variaveis
+            Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.setCinco(auxn, false);
+            Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.setC(auxn, false);
+            Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.setFim(auxn, -1);
+            Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.setY(auxn, true);
+            Jogo.getJogo().getCaminho(novo_x, novo_y).auxp.setMd(auxn,0);
+        
+            Jogo.getJogo().getCaminho(novo_x, novo_y).auxp = null; //transformando variavel auxiliar em null novamente
+
+            v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+
+            antigo_x = v.RetornaX();
+            antigo_y = v.RetornaY();
+            
+            // Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
+            Jogo.getJogo().getCaminho(antigo_x, antigo_y).RemovePeao(j.getPeao(j.getNumPeao()), j);
+
+            //jogador q fizer uma captura pode andar mais 6
+            movePeao(6);    
+        }
+        
+    }
 
     private void checaSeis(int mov) throws FileNotFoundException, BadLocationException{
 
@@ -160,7 +210,7 @@ public class Regras implements Observado {
 
 			//Checa se existe peoes da mesma cor na mesma casa
 			if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null && Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2 != null) {
-				if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1.getP1().a == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2.getP1().a) {
+				if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1.getP1().ExibeP() == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2.getP1().ExibeP()) {
 					flag_barreira = false;
 				}
 			}
@@ -539,7 +589,7 @@ public class Regras implements Observado {
     	obs = null;
     }
 
-    public static Regras getRegras() throws BadLocationException {
+    public static Regras getRegras(){
     	if (instance == null) {
     		instance = new Regras();
     	}

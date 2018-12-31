@@ -17,12 +17,7 @@ public class Controlador {
 	Jogo jogo;
 	
 	private Controlador() {
-		try {
-			observado = Regras.getRegras();
-		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		observado = Regras.getRegras();
 	}
 	
 	public static Controlador getControlador() {
@@ -36,7 +31,7 @@ public class Controlador {
 		if(JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).getIndex(jogo.getJogo().getO1(x, y)) != -1)
 			JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).setNumPeao((jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(jogo.getJogo().getO1(x, y)));
 		else
-			TextAreaLog.getTextAreaLog().printLog("Esta peca nao pertence a voce!");
+			TextAreaLog.getTextAreaLog().printLog("Este peao nao pertence a voce!");
 		
 		TextAreaLog.getTextAreaLog().printLog("aqui: " + (jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(jogo.getJogo().getO1(x, y)));
 	}

@@ -94,7 +94,7 @@ public class Peca extends JPanel {
 		}
 		
 		if(pode == true) {		
-			e1.setFrame(50*y+7.5,50*x+7.5,35,35);
+			e1.setFrame(50*y+10,50*x+10,30,30);
 			g2d.setPaint(b);
 			g2d.fill(e1);
 		
