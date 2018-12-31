@@ -26,8 +26,9 @@ public class Peao {
 		fim1 = fim2 = fim3 = fim4 = -1;
 		md1 = md2 = md3 = md4 = 0; //variavel para ver se jogador excedeu vantagem ao tirar 6 no dado
 		
-		PintaP(cor_jogador); //pinta peca q anda pelo tabuleiro q inicialmente se encontra na casa vermelha
+		Pinta(cor_jogador); //pinta peca q anda pelo tabuleiro q inicialmente se encontra na casa vermelha
 		PopulaLista(cor_jogador);
+		
 	}
 	
 	public boolean getCinco(int i) {
@@ -238,8 +239,16 @@ public class Peao {
 		lst.prox();
 	}
 	
-	private void PintaP(String cor_jogador) {
+	private void Pinta(String cor_jogador) {
 		p1.a = Color.RED;
+	}
+	
+	public void PintaP(Color a) {
+		p.a = a;
+	}
+	
+	public void PintaP1(Color a) {
+		p1.a = a;
 	}
 	
 	private void PopulaLista(String cor_jogador) {

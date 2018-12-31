@@ -17,12 +17,7 @@ public class Controlador {
 	Jogo jogo;
 
 	private Controlador() {
-		try {
-			observado = Regras.getRegras();
-		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		observado = Regras.getRegras();
 	}
 
 	public static Controlador getControlador() {
