@@ -20,7 +20,6 @@ public class Regras implements Observado {
     int antigo_x, antigo_y;
     int movimento;
     int jogador_num;
-    int auxn;
     Jogador j;
     private Observador obs;
 
