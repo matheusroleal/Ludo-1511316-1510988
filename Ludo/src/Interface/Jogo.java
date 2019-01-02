@@ -171,6 +171,7 @@ public class Jogo extends JFrame implements Observador{
 				public void actionPerformed(ActionEvent e) {
 					try {
 						FluxoDados.getFluxoDados().CarregarPartida();
+						repaint();
 					} catch (IOException | JSONException | BadLocationException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

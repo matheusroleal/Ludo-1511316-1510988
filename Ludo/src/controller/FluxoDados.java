@@ -27,6 +27,9 @@ import model.Vetor;
 public class FluxoDados {
 
 	private static FluxoDados fDados = null;
+    Jogador j1, j2, j3, j4;
+    int jogador_num;
+    Jogador j;
 
 	private FluxoDados(){
 
@@ -38,61 +41,61 @@ public class FluxoDados {
 		return fDados;
 	}
 
-	public void SalvarPartida(){
+	public void SalvarPartida() {
 	    String json_str = "{}";
 	    JSONObject jsonObject;
 	    JSONArray jsonArray = new JSONArray();
 	    Jogador j;
-	    
+
 		try {
 			jsonObject = new JSONObject(json_str);
 		    for(int x = 0; x < 4; x++) {
 			    JSONArray jsonArrayInterno = new JSONArray();
 
 		    	j = JogadoresController.getJogadoresController().getJogador(x);
-		    	
+
 		    	for(int y = 0; y < 4; y++) {
 				    JSONObject jsonObjectInterno = new JSONObject(json_str);
 
-		    		
-					jsonArray.put(y, j.peoes_do_jogador.elementAt(y).getPos());	
-					
+
+					jsonArray.put(y, j.peoes_do_jogador.elementAt(y).getPos());
+
 				    jsonObjectInterno.put("c1", j.getPeao(y).getC(1));
 				    jsonObjectInterno.put("c2", j.getPeao(y).getC(2));
 				    jsonObjectInterno.put("c3", j.getPeao(y).getC(3));
 				    jsonObjectInterno.put("c4", j.getPeao(y).getC(4));
-				    
+
 				    jsonObjectInterno.put("fim1", j.getPeao(y).getFim(1));
 				    jsonObjectInterno.put("fim2", j.getPeao(y).getFim(2));
 				    jsonObjectInterno.put("fim3", j.getPeao(y).getFim(3));
 				    jsonObjectInterno.put("fim4", j.getPeao(y).getFim(4));
-				    
+
 				    jsonObjectInterno.put("cinco1",j.getPeao(y).getCinco(1));
 				    jsonObjectInterno.put("cinco2",j.getPeao(y).getCinco(2));
 				    jsonObjectInterno.put("cinco3",j.getPeao(y).getCinco(3));
 				    jsonObjectInterno.put("cinco4",j.getPeao(y).getCinco(4));
-					
+				    
 				    jsonObjectInterno.put("y1",j.getPeao(y).getY(1));
 				    jsonObjectInterno.put("y2",j.getPeao(y).getY(2));
 				    jsonObjectInterno.put("y3",j.getPeao(y).getY(3));
 				    jsonObjectInterno.put("y4",j.getPeao(y).getY(4));
-				   
+
 				    jsonObjectInterno.put("md1",j.getPeao(y).getMd(1));
 				    jsonObjectInterno.put("md2",j.getPeao(y).getMd(2));
 				    jsonObjectInterno.put("md3",j.getPeao(y).getMd(3));
 				    jsonObjectInterno.put("md4",j.getPeao(y).getMd(4));
-				    
+
 				    jsonArrayInterno.put(y, jsonObjectInterno);
-		    		 
+
 		    	}
 		    	jsonObject.put("j"+x, jsonArrayInterno.toString());
 
 		    	jsonObject.put("j"+x+"mov", jsonArray.toString());
 		    }
-		    
+
 		    jsonObject.put("turno", JogadoresController.getJogadoresController().getJogadorTurno());
 		    jsonObject.put("m", JogadoresController.getJogadoresController().getM());
-		    		    	    
+
 		    jsonObject.put("cont1", JogadoresController.getJogadoresController().getCont(1));
 		    jsonObject.put("cont2", JogadoresController.getJogadoresController().getCont(2));
 		    jsonObject.put("cont3", JogadoresController.getJogadoresController().getCont(3));
@@ -101,9 +104,9 @@ public class FluxoDados {
 		    EscreverJogo(jsonObject);
 		} catch (JSONException e) {
 			e.printStackTrace();
-		} 	
+		}
 	}
-	
+
 	private void EscreverJogo(JSONObject jsonObject) {
 	    Writer output = null;
 	    JFileChooser salvandoArquivo = new JFileChooser();
@@ -114,7 +117,7 @@ public class FluxoDados {
 				output = new BufferedWriter(new FileWriter(salvarArquivoEscolhido.getAbsolutePath()));
 				output.write(jsonObject.toString());
 			    output.close();
-				TextAreaLog.getTextAreaLog().printLog("Arquivo salvado!");
+				TextAreaLog.getTextAreaLog().printLog("Arquivo salvo!");
 		    }else {
 				TextAreaLog.getTextAreaLog().printLog("Erro ao salvar arquivo!");
 			}
@@ -126,85 +129,226 @@ public class FluxoDados {
 	}
 
 	public void CarregarPartida() throws IOException, JSONException, BadLocationException{
-	    JSONObject jsonObject;
-	    String json_str;
-		Vector<Color> cores = new Vector<>();
+	  JSONObject jsonObject;
+	  String json_str;
 		BufferedReader reader = null;
 
-	    Jogador j_nova_pos;
-	    
-		cores.insertElementAt(Color.RED, 0);
-		cores.insertElementAt(Color.GREEN, 1);
-		cores.insertElementAt(Color.YELLOW, 2);
-		cores.insertElementAt(Color.BLUE, 3);
-		
 		JFileChooser fc = new JFileChooser();
 		fc.setDialogTitle("Escolha um arquivo para carregar");
 		fc.setFileFilter(new FileNameExtensionFilter("Arquivos de Texto", "json"));
 		int returnVal = fc.showOpenDialog(Jogo.getJogo());
-		
+
 		if(returnVal==JFileChooser.APPROVE_OPTION){
 			File file = fc.getSelectedFile();
 			reader = new BufferedReader(new FileReader(file.getPath()));
-			
+
 			json_str = reader.readLine();
 
-		    reader.close();
+			reader.close();
 
 			jsonObject = new JSONObject(json_str);
 
 			JogadoresController.getJogadoresController().jogador_turno = jsonObject.getInt("turno");
-//			JogadoresController.getJogadoresController().setM(jsonObject.getBoolean("m"));
+			JogadoresController.getJogadoresController().setM(jsonObject.getBoolean("m"));
 
+			for(int x = 0; x < 4; x++) {
+			  JSONArray jsonArray = new JSONArray(jsonObject.getString("j"+x+"mov"));
+			  JSONArray jsonArrayInterno = new JSONArray(jsonObject.getString("j"+x));
+			  Jogador j_nova_pos = JogadoresController.getJogadoresController().getJogador(x);
 
-		    for(int x = 0; x < 4; x++) {
-	    	    JSONArray jsonArray = new JSONArray(jsonObject.getString("j"+x+"mov"));
-	    	    JSONArray jsonArrayInterno = new JSONArray(jsonObject.getString("j"+x));
-	    	    
-	    		JogadoresController.getJogadoresController().setCont((x+1), jsonObject.getInt("cont"+(x+1)));
-	    	    
-		    	j_nova_pos = JogadoresController.getJogadoresController().getJogador(x);
+			  jogador_num = x + 1;
+			  JogadoresController.getJogadoresController().setCont(jogador_num, jsonObject.getInt("cont"+jogador_num));
 
-		    	for(int y = 0; y < 4; y++) {
-		    		int nova_pos = (int)jsonArray.get(y);
+			  for(int y = 0; y < 4; y++) {
+				JSONObject jsonObjectInterno = new JSONObject(jsonArrayInterno.get(y).toString());
+				int nova_pos = (int)jsonArray.get(y);
 
-		    		if(nova_pos > 0) {
+				j_nova_pos.setNumPeao(y);
 
-		    			int pos = y + 1;
+				j_nova_pos.getPeao(y).setC(jogador_num, jsonObjectInterno.getBoolean("c"+jogador_num));
+				j_nova_pos.getPeao(y).setCinco(jogador_num, jsonObjectInterno.getBoolean("cinco"+jogador_num));
+				j_nova_pos.getPeao(y).setFim(jogador_num, jsonObjectInterno.getInt("fim"+jogador_num));
+				j_nova_pos.getPeao(y).setY(jogador_num, jsonObjectInterno.getBoolean("y"+jogador_num));
+				j_nova_pos.getPeao(y).setMd(jogador_num, jsonObjectInterno.getInt("md"+jogador_num));
 
-					    JSONObject jsonObjectInterno = new JSONObject(jsonArrayInterno.get(y).toString());
-
-		    			j_nova_pos.getPeao(y).setC(y, jsonObjectInterno.getBoolean("c"+pos));
-		        	    j_nova_pos.getPeao(y).setCinco(y, jsonObjectInterno.getBoolean("cinco"+pos));
-		        	    j_nova_pos.getPeao(y).setFim(y, jsonObjectInterno.getInt("fim"+pos));
-		        	    j_nova_pos.getPeao(y).setY(y, jsonObjectInterno.getBoolean("y"+pos));
-		        	    j_nova_pos.getPeao(y).setMd(y, jsonObjectInterno.getInt("md"+pos));
-		    			
-			    		j_nova_pos.peoes_do_jogador.elementAt(y).lst.posIni();
-			    		
-						for (int i = 1; i < nova_pos + 1 ; i++) {
-							j_nova_pos.peoes_do_jogador.elementAt(y).lst.prox();
-						}
-						
-						Vetor v = (Vetor) j_nova_pos.peoes_do_jogador.elementAt(y).lst.posCorr();
-						
-						int novo_x = v.RetornaX();
-						int novo_y = v.RetornaY();
-
-						Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j_nova_pos.getPeao(y), j_nova_pos);
-					//	Jogo.getJogo().getCaminho(novo_x, novo_y).numPeao = y;
-						
-						j_nova_pos.getPeao(y).getP1().PintaP(cores.elementAt(x));
-						j_nova_pos.getPeao(y).getP1().setX(novo_x);
-						j_nova_pos.getPeao(y).getP1().setY(novo_y);
-
-						Jogo.getJogo().repaint();
-
+				if(nova_pos > 0) {
+				    j_nova_pos.SetPColor(Color.WHITE);
+				    
+				    if(j_nova_pos.getNumPeao() == 0) {
+				    	j_nova_pos.SetPX(defineXInicial(jogador_num, 0));
+		    			j_nova_pos.SetPY(defineYInicial(jogador_num, 0));
 		    		}
-		    	}
-		    }
+		    		else if(j_nova_pos.getNumPeao() == 1) {
+		    			j_nova_pos.SetPX(defineXInicial(jogador_num, 1));
+		    			j_nova_pos.SetPY(defineYInicial(jogador_num, 1));
+		    		}
+		    		else if(j_nova_pos.getNumPeao() == 2) {
+		    			j_nova_pos.SetPX(defineXInicial(jogador_num, 2));
+		    			j_nova_pos.SetPY(defineYInicial(jogador_num, 2));
+		    		}
+		    		else {
+		    			j_nova_pos.SetPX(defineXInicial(jogador_num, 3));
+		    			j_nova_pos.SetPY(defineYInicial(jogador_num, 3));
+		    		}
+				    
+					j_nova_pos.getPeao(y).setPosIni();
+
+					for (int i = 1; i < nova_pos + 1 ; i++) {
+						j_nova_pos.getPeao(y).getProx();
+					}
+
+					j_nova_pos.SetP1Color(PegaCor(jogador_num));
+
+					Vetor v = (Vetor) j_nova_pos.getPeao(y).getPosCorr();
+
+					int novo_x = v.RetornaX();
+					int novo_y = v.RetornaY();
+
+					j_nova_pos.SetP1X(novo_x);
+					j_nova_pos.SetP1Y(novo_y);
+
+					Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j_nova_pos.getPeao(y), j_nova_pos);
+				}
+			  }
+			}
+
+			TextAreaLog.getTextAreaLog().printLog("Jogo carregado!");
+    		ChamaProxJogador(JogadoresController.getJogadoresController().getJogadorTurno());
+
 		}else {
 			TextAreaLog.getTextAreaLog().printLog("Erro ao escolher arquivo!");
 		}
 	}
+	
+	private void ChamaProxJogador(int turno) throws FileNotFoundException, BadLocationException{
+    	switch (turno) {
+    	case 0:
+    		TextAreaLog.getTextAreaLog().printLog("Vez do jogador vermelho!");
+    		break;
+        case 1:
+        	TextAreaLog.getTextAreaLog().printLog("Vez do jogador verde!");
+    		break;
+        case 2:
+        	TextAreaLog.getTextAreaLog().printLog("Vez do jogador amarelo!");
+    		break;
+        case 3:
+        	TextAreaLog.getTextAreaLog().printLog("Vez do jogador azul!");
+    		break;
+    	}
+    }
+
+	private Color PegaCor (int jogador){
+    	switch (jogador) {
+        case 1:
+        	return Color.RED;
+        case 2:
+        	return Color.GREEN;
+        case 3:
+        	return Color.YELLOW;
+        case 4:
+        	return Color.BLUE;
+    	}
+    	return null;
+    }
+	
+	private int defineXInicial(int jogador, int peao){
+    	switch (jogador) {
+        case 1:
+        	switch (peao) {
+        	case 0:
+        		return 4;
+        	case 1:
+        		return 4;
+        	case 2:
+        		return 1;
+        	case 3:
+        		return 1;
+        	}
+        case 2:
+        	switch (peao) {
+        	case 0:
+        		return 1;
+        	case 1:
+        		return 1;
+        	case 2:
+        		return 4;
+        	case 3:
+        		return 4;
+        	}
+        case 3:
+        	switch (peao) {
+        	case 0:
+        		return 10;
+        	case 1:
+        		return 10;
+        	case 2:
+        		return 13;
+        	case 3:
+        		return 13;
+        	}
+        case 4:
+        	switch (peao) {
+        	case 0:
+        		return 13;
+        	case 1:
+        		return 13;
+        	case 2:
+        		return 10;
+        	case 3:
+        		return 10;
+        	}
+    	}
+    	return 0;
+    }
+
+    private int defineYInicial(int jogador, int peao){
+    	switch (jogador) {
+    	case 1:
+    		switch (peao) {
+    		case 0:
+    			return 1;
+    		case 1:
+    			return 4;
+    		case 2:
+    			return 1;
+    		case 3:
+    			return 4;
+    		}
+        case 2:
+        	switch (peao) {
+        	case 0:
+        		return 10;
+        	case 1:
+        		return 13;
+        	case 2:
+        		return 10;
+        	case 3:
+        		return 13;
+        	}
+        case 3:
+        	switch (peao) {
+        	case 0:
+        		return 13;
+        	case 1:
+        		return 10;
+        	case 2:
+        		return 13;
+        	case 3:
+        		return 10;
+        	}
+        case 4:
+        	switch (peao) {
+        	case 0:
+        		return 4;
+        	case 1:
+        		return 1;
+        	case 2:
+        		return 4;
+        	case 3:
+        		return 1;
+        	}
+    	}
+    	return 0;
+    }
+    
 }

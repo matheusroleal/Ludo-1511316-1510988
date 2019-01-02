@@ -7,6 +7,7 @@ import javax.swing.text.BadLocationException;
 import org.json.JSONException;
 
 import controller.FluxoDados;
+import model.TextAreaLog;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -65,6 +66,7 @@ public class Inicializador extends JFrame {
 					Jogo.getJogo().setVisible(true);
 					Inicializador.getInicializador().setVisible(false);
 					FluxoDados.getFluxoDados().CarregarPartida();
+					Jogo.getJogo().repaint();
 				} catch (IOException | JSONException | BadLocationException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
