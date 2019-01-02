@@ -52,6 +52,7 @@ public class Regras implements Observado {
     	else if(movimento == 5) {
     		int y = 0;
     		
+    		// Encontra um peao que nao foi usado ainda
     		while (y < 4 && j.getPeao(y).getPos() != 0) {
     			y++;
     		}
@@ -59,27 +60,29 @@ public class Regras implements Observado {
     		if(y < 4) {
         		j.setNumPeao(y);
         		checaCinco(movimento);
-    		}else {
-        		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
-        		removePeaoCaminho();
-
-        		// Se movimento for 6, jogador pode jogar novamente
-        		checaSeis(movimento);
-
-        		// Caso o peao esteja na reta final, verirficar se eh possivel move-lo
-    			if(j.getPeao(j.getNumPeao()).getFim(jogador_num) != -1) {
-        			checaFinalAntes();
-        		}
-
-        		// Checa se e possivel movimentar a peca
-        		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento) && checaAbrigo(movimento)) {
-        			checaCaptura(movimento);
-        			
-        			// Move o peao de acordo com o valor do movimento
-        			movePeao(movimento);
-            	}
-
-        		checaFinalDepois();
+    		}
+    		//Caso nao haja peao nao utilizado, usamos o peao pre selecionado
+    		else {
+	    		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
+	    		removePeaoCaminho();
+	
+	    		// Se movimento for 6, jogador pode jogar novamente
+	    		checaSeis(movimento);
+	
+	    		// Caso o peao esteja na reta final, verirficar se eh possivel move-lo
+				if(j.getPeao(j.getNumPeao()).getFim(jogador_num) != -1) {
+	    			checaFinalAntes();
+	    		}
+	
+	    		// Checa se e possivel movimentar a peca
+	    		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento) && checaAbrigo(movimento)) {
+	    			checaCaptura(movimento);
+	    			
+	    			// Move o peao de acordo com o valor do movimento
+	    			movePeao(movimento);
+	        	}
+	
+	    		checaFinalDepois();
     		}
     		
     	}
@@ -206,6 +209,7 @@ public class Regras implements Observado {
     private void checaSeis(int mov) throws FileNotFoundException, BadLocationException{
 
     	if(mov == 6) {
+    		checaDesmontaBarreira();
     		JogadoresController.getJogadoresController().setM(false);
     		j.getPeao(j.getNumPeao()).setMd(jogador_num,1);
 
@@ -262,6 +266,18 @@ public class Regras implements Observado {
     	}
     }
 
+    private void checaDesmontaBarreira() {
+    	int y = 0;
+		//Verifica se existe barreira para ser desmontada
+		while (y < 4 && j.getPeao(y).getP1().getBarreira() == false) {
+			y++;
+		}
+		
+		if(y < 4) {
+    		j.setNumPeao(y);
+		}
+    }
+    
     private Boolean checaBarreira(int mov) throws BadLocationException, FileNotFoundException{
 		int pos_corr = j.getPeao(j.getNumPeao()).getLst().pos;
 		int i = 1;
