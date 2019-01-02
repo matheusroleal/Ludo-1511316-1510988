@@ -33,6 +33,10 @@ public class Peca extends JPanel {
 	public void setY(int novo_y) {
 		y = novo_y;
 	}
+	
+	public Boolean getBarreira() {
+		return barreira;
+	}
 
 	public void setBarreira(boolean nova_barreira) {
 		barreira = nova_barreira;
