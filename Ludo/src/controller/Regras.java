@@ -45,8 +45,43 @@ public class Regras implements Observado {
     	// Se cincoX for false quer dizer que o jogador ainda n tirou o numero 5 no dado para poder sair da casa inicial
     	if (j.getPeao(j.getNumPeao()).getCinco(jogador_num) == false){
 
-    		// Se o movimento for 5, jogador pode colocar peca na casa de saida
+    		// Se o movimento for 5, jogador pode colocar peao na casa de saida
     		checaCinco(movimento);
+    	}
+    	// Se ele tirar mais um cinco, devemos botar um peao na casa de saida   
+    	else if(movimento == 5) {
+    		int y = 0;
+    		
+    		while (y < 4 && j.getPeao(y).getPos() != 0) {
+    			y++;
+    		}
+    		
+    		if(y < 4) {
+        		j.setNumPeao(y);
+        		checaCinco(movimento);
+    		}else {
+        		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
+        		removePeaoCaminho();
+
+        		// Se movimento for 6, jogador pode jogar novamente
+        		checaSeis(movimento);
+
+        		// Caso o peao esteja na reta final, verirficar se eh possivel move-lo
+    			if(j.getPeao(j.getNumPeao()).getFim(jogador_num) != -1) {
+        			checaFinalAntes();
+        		}
+
+        		// Checa se e possivel movimentar a peca
+        		if(j.getPeao(j.getNumPeao()).getY(jogador_num) == true && checaBarreira(movimento) && checaAbrigo(movimento)) {
+        			checaCaptura(movimento);
+        			
+        			// Move o peao de acordo com o valor do movimento
+        			movePeao(movimento);
+            	}
+
+        		checaFinalDepois();
+    		}
+    		
     	}
     	// Quando cinco for true, quer dizer que o peao ja esta no tabuleiro e vai andar por ele
     	else{
@@ -58,7 +93,7 @@ public class Regras implements Observado {
     		checaSeis(movimento);
 
     		// Caso o peao esteja na reta final, verirficar se eh possivel move-lo
-				if(j.getPeao(j.getNumPeao()).getFim(jogador_num) != -1) {
+			if(j.getPeao(j.getNumPeao()).getFim(jogador_num) != -1) {
     			checaFinalAntes();
     		}
 
