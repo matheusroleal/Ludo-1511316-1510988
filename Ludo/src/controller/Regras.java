@@ -59,8 +59,10 @@ public class Regras implements Observado {
 
     		if(y < 4) {
         		j.setNumPeao(y);
+						// Caso o jogador jogue apos ter tirado 6
 						JogadoresController.getJogadoresController().setM(true);
     				j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
+						// Se exite peao para sair, jogador pode colocar peao na casa de saida
         		checaCinco(movimento);
     		}
     		//Caso nao haja peao nao utilizado, usamos o peao pre selecionado
@@ -153,9 +155,8 @@ public class Regras implements Observado {
     		    Jogador j_remover = JogadoresController.getJogadoresController().getJogador(jogador_num_remover - 1);
 
     		    j_remover.SetP1Color(new Color(0,0,0,0));
-    			j_remover.getPeao(j_remover.getNumPeao()).setPosIni();
-
     			j_remover.setNumPeao((Jogo.getJogo().jogadores_na_casa[caminho_abrigo_x][caminho_abrigo_y].jogadores.firstElement()).getIndex(Jogo.getJogo().getO1(caminho_abrigo_x, caminho_abrigo_y)));
+				j_remover.getPeao(j_remover.getNumPeao()).setPosIni();
 
     			j_remover.SetPColor(PegaCor(jogador_num_remover));
 
@@ -786,10 +787,10 @@ public class Regras implements Observado {
     	return 0;
     }
 
-		private boolean checaPossibilidadeSair(){
+		private boolean checaPossibilidadeSair() throws BadLocationException{
 			if(Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o1 == null && Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o2 == null){
 				return true;
-			}else if(Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o1.a != corCasaInicial(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)) && Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o2 == null){
+			}else if(Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o1.getP1().ExibeCor() != corCasaInicial(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)) && Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o2 == null){
 				return true;
 			}else{
 				return false;
