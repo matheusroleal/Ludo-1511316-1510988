@@ -1,13 +1,11 @@
 package Interface;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 
 import org.json.JSONException;
 
 import controller.FluxoDados;
-import model.TextAreaLog;
 
 import java.awt.*;
 import java.awt.event.*;

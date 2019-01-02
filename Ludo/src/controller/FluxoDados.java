@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Vector;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -27,9 +26,7 @@ import model.Vetor;
 public class FluxoDados {
 
 	private static FluxoDados fDados = null;
-    Jogador j1, j2, j3, j4;
     int jogador_num;
-    Jogador j;
 
 	private FluxoDados(){
 
