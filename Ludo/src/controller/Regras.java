@@ -59,10 +59,10 @@ public class Regras implements Observado {
 
     		if(y < 4) {
         		j.setNumPeao(y);
-						// Caso o jogador jogue apos ter tirado 6
-						JogadoresController.getJogadoresController().setM(true);
-    				j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
-						// Se exite peao para sair, jogador pode colocar peao na casa de saida
+				// Caso o jogador jogue apos ter tirado 6
+				JogadoresController.getJogadoresController().setM(true);
+    			j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
+    			// Se exite peao para sair, jogador pode colocar peao na casa de saida
         		checaCinco(movimento);
     		}
     		//Caso nao haja peao nao utilizado, usamos o peao pre selecionado
@@ -154,10 +154,10 @@ public class Regras implements Observado {
     		    int jogador_num_remover = getJogadorNum(Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1.getP1().ExibeCor());
     		    Jogador j_remover = JogadoresController.getJogadoresController().getJogador(jogador_num_remover - 1);
 
-    		    j_remover.SetP1Color(new Color(0,0,0,0));
     			j_remover.setNumPeao((Jogo.getJogo().jogadores_na_casa[caminho_abrigo_x][caminho_abrigo_y].jogadores.firstElement()).getIndex(Jogo.getJogo().getO1(caminho_abrigo_x, caminho_abrigo_y)));
 				j_remover.getPeao(j_remover.getNumPeao()).setPosIni();
-
+    		    
+				j_remover.SetP1Color(new Color(0,0,0,0));
     			j_remover.SetPColor(PegaCor(jogador_num_remover));
 
     			if(j_remover.getNumPeao() == 0) { //se for o primeiro peao
