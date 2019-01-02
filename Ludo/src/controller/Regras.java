@@ -59,6 +59,8 @@ public class Regras implements Observado {
 
     		if(y < 4) {
         		j.setNumPeao(y);
+						JogadoresController.getJogadoresController().setM(true);
+    				j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
         		checaCinco(movimento);
     		}
     		//Caso nao haja peao nao utilizado, usamos o peao pre selecionado
