@@ -43,7 +43,7 @@ public class Regras implements Observado {
     	movimento = mv;
 
     	// Se cincoX for false quer dizer que o jogador ainda n tirou o numero 5 no dado para poder sair da casa inicial
-    	if (j.getPeao(j.getNumPeao()).getCinco(jogador_num) == false){
+    	if (j.getPeao(j.getNumPeao()).getCinco(jogador_num) == false && checaPossibilidadeSair()){
 
     		// Se o movimento for 5, jogador pode colocar peao na casa de saida
     		checaCinco(movimento);
@@ -131,7 +131,7 @@ public class Regras implements Observado {
     	}
 
     }
-    
+
     public void aplicaClick() {
 		obs.notify(2, this);
     }
@@ -163,29 +163,29 @@ public class Regras implements Observado {
 				j_remover.SetP1Color(new Color(0,0,0,0));
     			j_remover.SetPColor(PegaCor(jogador_num_remover));
 
-    			if(j_remover.getNumPeao() == 0) { //se for o primeiro peao
+					if(j_remover.getNumPeao() == 0) { //se for o primeiro peao
     				j_remover.SetPX(defineXInicial(jogador_num_remover, 0));
     				j_remover.SetPY(defineYInicial(jogador_num_remover, 0));
-    				j_remover.SetP1X(defineXCasaInicial(jogador_num));
-    				j_remover.SetP1Y(defineYCasaInicial(jogador_num));
+    				j_remover.SetP1X(defineXInicial(jogador_num_remover, 0));
+    				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 0));
     			}
     			else if(j_remover.getNumPeao() == 1) {
     				j_remover.SetPX(defineXInicial(jogador_num_remover, 1));
     				j_remover.SetPY(defineYInicial(jogador_num_remover, 1));
-    				j_remover.SetP1X(defineXCasaInicial(jogador_num));
-    				j_remover.SetP1Y(defineYCasaInicial(jogador_num));
+    				j_remover.SetP1X(defineXInicial(jogador_num_remover, 1));
+    				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 1));
     			}
     			else if(j_remover.getNumPeao() == 2) {
     				j_remover.SetPX(defineXInicial(jogador_num_remover, 2));
     				j_remover.SetPY(defineYInicial(jogador_num_remover, 2));
-    				j_remover.SetP1X(defineXCasaInicial(jogador_num));
-    				j_remover.SetP1Y(defineYCasaInicial(jogador_num));
+    				j_remover.SetP1X(defineXInicial(jogador_num_remover, 2));
+    				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 2));
     			}
     			else {
     				j_remover.SetPX(defineXInicial(jogador_num_remover, 3));
     				j_remover.SetPY(defineYInicial(jogador_num_remover, 3));
-    				j_remover.SetP1X(defineXCasaInicial(jogador_num));
-    				j_remover.SetP1Y(defineYCasaInicial(jogador_num));
+    				j_remover.SetP1X(defineXInicial(jogador_num_remover, 3));
+    				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 3));
     			}
 
     		    //reiniciando as variaveis
@@ -226,30 +226,30 @@ public class Regras implements Observado {
 
     				j.SetPColor(PegaCor(jogador_num));
 
-    				if(j.getNumPeao() == 0) { //se for o primeiro peao
-    					j.SetPX(defineXInicial(jogador_num, 0));
-    					j.SetPY(defineYInicial(jogador_num, 0));
-    					j.SetP1X(defineXCasaInicial(jogador_num));
-    					j.SetP1Y(defineYCasaInicial(jogador_num));
-    				}
-    				else if(j.getNumPeao() == 1) {
-    					j.SetPX(defineXInicial(jogador_num, 1));
-    					j.SetPY(defineYInicial(jogador_num, 1));
-    					j.SetP1X(defineXCasaInicial(jogador_num));
-    					j.SetP1Y(defineYCasaInicial(jogador_num));
-    				}
-    				else if(j.getNumPeao() == 2) {
-    					j.SetPX(defineXInicial(jogador_num, 2));
-    					j.SetPY(defineYInicial(jogador_num, 2));
-    					j.SetP1X(defineXCasaInicial(jogador_num));
-    					j.SetP1Y(defineYCasaInicial(jogador_num));
-    				}
-    				else {
-    					j.SetPX(defineXInicial(jogador_num, 3));
-    					j.SetPY(defineYInicial(jogador_num, 3));
-    					j.SetP1X(defineXCasaInicial(jogador_num));
-    					j.SetP1Y(defineYCasaInicial(jogador_num));
-    				}
+						if(j.getNumPeao() == 0) { //se for o primeiro peao
+							j.SetPX(defineXInicial(jogador_num, 0));
+							j.SetPY(defineYInicial(jogador_num, 0));
+							j.SetP1X(defineXInicial(jogador_num, 0));
+							j.SetP1Y(defineYInicial(jogador_num, 0));
+						}
+						else if(j.getNumPeao() == 1) {
+							j.SetPX(defineXInicial(jogador_num, 1));
+							j.SetPY(defineYInicial(jogador_num, 1));
+							j.SetP1X(defineXInicial(jogador_num, 1));
+							j.SetP1Y(defineYInicial(jogador_num, 1));
+						}
+						else if(j.getNumPeao() == 2) {
+							j.SetPX(defineXInicial(jogador_num, 2));
+							j.SetPY(defineYInicial(jogador_num, 2));
+							j.SetP1X(defineXInicial(jogador_num, 2));
+							j.SetP1Y(defineYInicial(jogador_num, 2));
+						}
+						else {
+							j.SetPX(defineXInicial(jogador_num, 3));
+							j.SetPY(defineYInicial(jogador_num, 3));
+							j.SetP1X(defineXInicial(jogador_num, 3));
+							j.SetP1Y(defineYInicial(jogador_num, 3));
+						}
 
     				j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
     				j.getPeao(j.getNumPeao()).setCinco(jogador_num, false);
@@ -325,6 +325,15 @@ public class Regras implements Observado {
 			return true;
 		}else {
 	      TextAreaLog.getTextAreaLog().printLog("Existe uma barreira no caminho!");
+				v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+
+		    	novo_x = v.RetornaX();
+		    	novo_y = v.RetornaY();
+
+		    	j.SetP1X(novo_x);
+		    	j.SetP1Y(novo_y);
+
+		    	Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
 		}
 
 		return false;
@@ -363,6 +372,15 @@ public class Regras implements Observado {
 		  return true;
 		}else {
 		  TextAreaLog.getTextAreaLog().printLog("Um peao de outra cor se encontra no lugar");
+			v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+
+	    	novo_x = v.RetornaX();
+	    	novo_y = v.RetornaY();
+
+	    	j.SetP1X(novo_x);
+	    	j.SetP1Y(novo_y);
+
+	    	Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
 		  return false;
 		}
     }
