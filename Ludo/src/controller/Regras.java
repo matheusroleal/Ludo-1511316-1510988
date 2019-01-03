@@ -163,26 +163,26 @@ public class Regras implements Observado {
     			if(j_remover.getNumPeao() == 0) { //se for o primeiro peao
     				j_remover.SetPX(defineXInicial(jogador_num_remover, 0));
     				j_remover.SetPY(defineYInicial(jogador_num_remover, 0));
-    				j_remover.SetP1X(defineXInicial(jogador_num_remover, 0));
-    				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 0));
+    				j_remover.SetP1X(defineXCasaInicial(jogador_num));
+    				j_remover.SetP1Y(defineYCasaInicial(jogador_num));
     			}
     			else if(j_remover.getNumPeao() == 1) {
     				j_remover.SetPX(defineXInicial(jogador_num_remover, 1));
     				j_remover.SetPY(defineYInicial(jogador_num_remover, 1));
-    				j_remover.SetP1X(defineXInicial(jogador_num_remover, 1));
-    				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 1));
+    				j_remover.SetP1X(defineXCasaInicial(jogador_num));
+    				j_remover.SetP1Y(defineYCasaInicial(jogador_num));
     			}
     			else if(j_remover.getNumPeao() == 2) {
     				j_remover.SetPX(defineXInicial(jogador_num_remover, 2));
     				j_remover.SetPY(defineYInicial(jogador_num_remover, 2));
-    				j_remover.SetP1X(defineXInicial(jogador_num_remover, 2));
-    				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 2));
+    				j_remover.SetP1X(defineXCasaInicial(jogador_num));
+    				j_remover.SetP1Y(defineYCasaInicial(jogador_num));
     			}
     			else {
     				j_remover.SetPX(defineXInicial(jogador_num_remover, 3));
     				j_remover.SetPY(defineYInicial(jogador_num_remover, 3));
-    				j_remover.SetP1X(defineXInicial(jogador_num_remover, 3));
-    				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 3));
+    				j_remover.SetP1X(defineXCasaInicial(jogador_num));
+    				j_remover.SetP1Y(defineYCasaInicial(jogador_num));
     			}
 
     		    //reiniciando as variaveis
@@ -226,26 +226,26 @@ public class Regras implements Observado {
     				if(j.getNumPeao() == 0) { //se for o primeiro peao
     					j.SetPX(defineXInicial(jogador_num, 0));
     					j.SetPY(defineYInicial(jogador_num, 0));
-    					j.SetP1X(defineXInicial(jogador_num, 0));
-    					j.SetP1Y(defineYInicial(jogador_num, 0));
+    					j.SetP1X(defineXCasaInicial(jogador_num));
+    					j.SetP1Y(defineYCasaInicial(jogador_num));
     				}
     				else if(j.getNumPeao() == 1) {
     					j.SetPX(defineXInicial(jogador_num, 1));
     					j.SetPY(defineYInicial(jogador_num, 1));
-    					j.SetP1X(defineXInicial(jogador_num, 1));
-    					j.SetP1Y(defineYInicial(jogador_num, 1));
+    					j.SetP1X(defineXCasaInicial(jogador_num));
+    					j.SetP1Y(defineYCasaInicial(jogador_num));
     				}
     				else if(j.getNumPeao() == 2) {
     					j.SetPX(defineXInicial(jogador_num, 2));
     					j.SetPY(defineYInicial(jogador_num, 2));
-    					j.SetP1X(defineXInicial(jogador_num, 2));
-    					j.SetP1Y(defineYInicial(jogador_num, 2));
+    					j.SetP1X(defineXCasaInicial(jogador_num));
+    					j.SetP1Y(defineYCasaInicial(jogador_num));
     				}
     				else {
     					j.SetPX(defineXInicial(jogador_num, 3));
     					j.SetPY(defineYInicial(jogador_num, 3));
-    					j.SetP1X(defineXInicial(jogador_num, 3));
-    					j.SetP1Y(defineYInicial(jogador_num, 3));
+    					j.SetP1X(defineXCasaInicial(jogador_num));
+    					j.SetP1Y(defineYCasaInicial(jogador_num));
     				}
 
     				j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
@@ -293,7 +293,7 @@ public class Regras implements Observado {
 		caminho_barreira_y = v.RetornaY();
 
 		// move o peao pela lista, checando casa a casa se existe barreiras no caminho
-		while(i < (mov +1) && flag_barreira){
+		while(i < (mov +2) && flag_barreira){
 
 			//Checa se existe peoes da mesma cor na mesma casa
 			if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null && Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2 != null) {
