@@ -213,7 +213,11 @@ public class Regras implements Observado {
     		    Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).RemovePeao(p_comido, j_remover);
 
     		    //jogador q fizer uma captura pode andar mais 6
-    			movimento+=6;
+    		    if(checaBarreira(movimento+6) && checaAbrigo(movimento+6) && checaCasa(movimento+6)) {
+        			movimento+=6;
+    		    }else {
+    		    	removePeaoCaminho();
+    		    }
 
     		    TextAreaLog.getTextAreaLog().printLog("Peca comida!");
     		}
@@ -859,17 +863,17 @@ public class Regras implements Observado {
 	}
 
     public Color corCasaInicial(int caminho_abrigo_x, int caminho_abrigo_y){
-    	  if (caminho_abrigo_x == 6 && caminho_abrigo_y == 1){
-    	    return Color.RED;
-    	  }else if(caminho_abrigo_x == 1 && caminho_abrigo_y == 8){
-    	    return Color.GREEN;
-    	  }else if(caminho_abrigo_x == 8 && caminho_abrigo_y == 13){
-    	    return Color.YELLOW;
-    	  }else if(caminho_abrigo_x == 13 && caminho_abrigo_y == 6){
-    	    return Color.BLUE;
-    	  }else{
-    	    return Color.BLACK;
-    	  }
+  if (caminho_abrigo_x == 6 && caminho_abrigo_y == 1){
+    return Color.RED;
+  }else if(caminho_abrigo_x == 1 && caminho_abrigo_y == 8){
+    return Color.GREEN;
+  }else if(caminho_abrigo_x == 8 && caminho_abrigo_y == 13){
+    return Color.YELLOW;
+  }else if(caminho_abrigo_x == 13 && caminho_abrigo_y == 6){
+    return Color.BLUE;
+  }else{
+    return Color.BLACK;
+  }
     }
 
     public void add(Observador o) {
