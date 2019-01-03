@@ -325,19 +325,23 @@ public class Regras implements Observado {
 			return true;
 		}else {
 	      TextAreaLog.getTextAreaLog().printLog("Existe uma barreira no caminho!");
-				v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
-
-		    	novo_x = v.RetornaX();
-		    	novo_y = v.RetornaY();
-
-		    	j.SetP1X(novo_x);
-		    	j.SetP1Y(novo_y);
-
-		    	Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
+				adicionaPeaoCaminho();
 		}
 
 		return false;
     }
+
+		private void adicionaPeaoCaminho(){
+				v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
+
+				novo_x = v.RetornaX();
+				novo_y = v.RetornaY();
+
+				j.SetP1X(novo_x);
+				j.SetP1Y(novo_y);
+
+				Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
+		}
 
     private Boolean checaAbrigo(int mov) throws BadLocationException, FileNotFoundException{
     	int caminho_abrigo_x, caminho_abrigo_y;
@@ -372,15 +376,7 @@ public class Regras implements Observado {
 		  return true;
 		}else {
 		  TextAreaLog.getTextAreaLog().printLog("Um peao de outra cor se encontra no lugar");
-			v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
-
-	    	novo_x = v.RetornaX();
-	    	novo_y = v.RetornaY();
-
-	    	j.SetP1X(novo_x);
-	    	j.SetP1Y(novo_y);
-
-	    	Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
+			adicionaPeaoCaminho();
 		  return false;
 		}
     }
