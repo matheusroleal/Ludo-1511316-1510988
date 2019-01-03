@@ -143,7 +143,7 @@ public class Jogo extends JFrame implements Observador{
 			this.getContentPane().add(s.btn);
 			this.getContentPane().add(c.btn);
 
-			d.dado_btn.setEnabled(true);
+			d.dado_btn.setEnabled(false);
 
 			d.dado_btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -318,6 +318,10 @@ public class Jogo extends JFrame implements Observador{
 	public void notify(int i, Observado o){
 		if (i == 1) {
 			repaint();
+		}else if(i == 2) {
+			d.dado_btn.setEnabled(true);
+		}else if(i == 3) {
+			d.dado_btn.setEnabled(false);
 		}
 	}
 

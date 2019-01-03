@@ -127,8 +127,13 @@ public class Regras implements Observado {
     		JogadoresController.getJogadoresController().MudaTurno();
     		ChamaProxJogador(JogadoresController.getJogadoresController().getJogadorTurno());
   	      	TextAreaLog.getTextAreaLog().printLog("Selecione o peao antes de jogar!");
+			obs.notify(3, this);
     	}
 
+    }
+    
+    public void aplicaClick() {
+		obs.notify(2, this);
     }
 
     private void checaCaptura(int mov) throws BadLocationException, FileNotFoundException {
@@ -480,11 +485,7 @@ public class Regras implements Observado {
 	    	j.SetP1Y(novo_y);
 
 	    	Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
-  	      	TextAreaLog.getTextAreaLog().printLog("oi12!");
-
 		}else {
-  	      	TextAreaLog.getTextAreaLog().printLog("oi2!");
-
 			j.getPeao(j.getNumPeao()).setY(jogador_num, true);
 		}
 
