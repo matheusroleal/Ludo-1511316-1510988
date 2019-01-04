@@ -833,6 +833,18 @@ public class Regras implements Observado {
 		}else if(Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o1.getP1().ExibeCor() != corCasaInicial(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)) && Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o2 == null){
 			return true;
 		}else{
+			// Caso voce erroneamente selecione um peao que nao esta em jogo
+			if(j.getPeao(j.getNumPeao()).getCinco(jogador_num) == false) {
+				int y = 0;
+	    		// Encontra um peao que foi usado
+	    		while (y < 4 && j.getPeao(y).getCinco(jogador_num) == false) {
+	    			y++;
+	    		}
+
+	    		if(y < 4) {
+	        		j.setNumPeao(y);
+	    		}
+			}
 			return false;
 		}
 	}
