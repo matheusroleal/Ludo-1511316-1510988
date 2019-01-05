@@ -44,9 +44,20 @@ public class Regras implements Observado {
 
     	// Se cincoX for false quer dizer que o jogador ainda n tirou o numero 5 no dado para poder sair da casa inicial
     	if (j.getPeao(j.getNumPeao()).getCinco(jogador_num) == false && checaPossibilidadeSair()){
-
+    		boolean flag_move_seis = checaComeParaSair();
+			
     		// Se o movimento for 5, jogador pode colocar peao na casa de saida
     		checaCinco(movimento);
+    		
+    		if(flag_move_seis) {
+	    		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
+	    		removePeaoCaminho();
+	    		
+    			checaCaptura(6);
+
+    			// Move o peao de acordo com o valor do movimento
+    			movePeao(6);
+    		}
     	}
     	// Se ele tirar mais um cinco, devemos botar um peao na casa de saida
     	else if(movimento == 5 && checaPossibilidadeSair()) {
@@ -59,11 +70,25 @@ public class Regras implements Observado {
 
     		if(y < 4) {
         		j.setNumPeao(y);
-				// Caso o jogador jogue apos ter tirado 6
+
+    			// Caso o jogador jogue apos ter tirado 6
 				JogadoresController.getJogadoresController().setM(true);
     			j.getPeao(j.getNumPeao()).setMd(jogador_num,0);
+    			        		
+    			boolean flag_move_seis = checaComeParaSair();
+    			
     			// Se exite peao para sair, jogador pode colocar peao na casa de saida
         		checaCinco(movimento);
+        		
+        		if(flag_move_seis) {
+    	    		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
+    	    		removePeaoCaminho();
+    	    		
+        			checaCaptura(6);
+
+        			// Move o peao de acordo com o valor do movimento
+        			movePeao(6);
+        		}
     		}
     		//Caso nao haja peao nao utilizado, usamos o peao pre selecionado
     		else {
@@ -148,6 +173,65 @@ public class Regras implements Observado {
 
     public void aplicaClick() {
 		obs.notify(2, this);
+    }
+    
+    private boolean checaComeParaSair() throws FileNotFoundException, BadLocationException {
+		if(Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o1 != null && Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o1.getP1().ExibeCor() != corCasaInicial(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)) && Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o2 == null){
+			Peao p_comido = Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o1;
+		    int jogador_num_remover = getJogadorNum(Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).o1.getP1().ExibeCor());
+		    Jogador j_remover = JogadoresController.getJogadoresController().getJogador(jogador_num_remover - 1);
+
+			j_remover.setNumPeao((Jogo.getJogo().jogadores_na_casa[defineXCasaInicial(jogador_num)][defineYCasaInicial(jogador_num)].jogadores.firstElement()).getIndex(Jogo.getJogo().getO1(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num))));
+			j_remover.getPeao(j_remover.getNumPeao()).setPosIni();
+
+			j_remover.SetP1Color(new Color(0,0,0,0));
+			j_remover.SetPColor(PegaCor(jogador_num_remover));
+
+				if(j_remover.getNumPeao() == 0) { //se for o primeiro peao
+				j_remover.SetPX(defineXInicial(jogador_num_remover, 0));
+				j_remover.SetPY(defineYInicial(jogador_num_remover, 0));
+				j_remover.SetP1X(defineXInicial(jogador_num_remover, 0));
+				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 0));
+			}
+			else if(j_remover.getNumPeao() == 1) {
+				j_remover.SetPX(defineXInicial(jogador_num_remover, 1));
+				j_remover.SetPY(defineYInicial(jogador_num_remover, 1));
+				j_remover.SetP1X(defineXInicial(jogador_num_remover, 1));
+				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 1));
+			}
+			else if(j_remover.getNumPeao() == 2) {
+				j_remover.SetPX(defineXInicial(jogador_num_remover, 2));
+				j_remover.SetPY(defineYInicial(jogador_num_remover, 2));
+				j_remover.SetP1X(defineXInicial(jogador_num_remover, 2));
+				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 2));
+			}
+			else {
+				j_remover.SetPX(defineXInicial(jogador_num_remover, 3));
+				j_remover.SetPY(defineYInicial(jogador_num_remover, 3));
+				j_remover.SetP1X(defineXInicial(jogador_num_remover, 3));
+				j_remover.SetP1Y(defineYInicial(jogador_num_remover, 3));
+			}
+
+		    //reiniciando as variaveis
+		    p_comido.setCinco(jogador_num_remover, false);
+		    p_comido.setC(jogador_num_remover, false);
+		    p_comido.setFim(jogador_num_remover, -1);
+		    p_comido.setY(jogador_num_remover, true);
+		    p_comido.setMd(jogador_num_remover,0);
+
+		    // Necessario remover o peao da casa que estava antes para adiciona-lo ao inicio
+		    Jogo.getJogo().getCaminho(defineXCasaInicial(jogador_num), defineYCasaInicial(jogador_num)).RemovePeao(p_comido, j_remover);
+
+		    TextAreaLog.getTextAreaLog().printLog("Peca comida!");
+
+		    //jogador q fizer uma captura pode andar mais 6
+		    if(checaBarreira(6) && checaAbrigo(6) && checaCasa(6)) {
+		    	return true;
+		    }else {
+		    	return false;
+		    }	    
+		}
+		return false;
     }
 
     private void checaCaptura(int mov) throws BadLocationException, FileNotFoundException {
@@ -309,20 +393,8 @@ public class Regras implements Observado {
 		int caminho_barreira_x, caminho_barreira_y;
 		boolean flag_barreira = true;
 
-		v = (Vetor) j.getPeao(j.getNumPeao()).getPosCorr();
-
-		caminho_barreira_x = v.RetornaX();
-		caminho_barreira_y = v.RetornaY();
-
 		// move o peao pela lista, checando casa a casa se existe barreiras no caminho
 		while(i < (mov +1) && flag_barreira){
-
-			//Checa se existe peoes da mesma cor na mesma casa
-			if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null && Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2 != null) {
-				if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1.getP1().ExibeCor() == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2.getP1().ExibeCor()) {
-					flag_barreira = false;
-				}
-			}
 
 			j.getPeao(j.getNumPeao()).getProx();
 
@@ -330,6 +402,13 @@ public class Regras implements Observado {
 
 			caminho_barreira_x = v.RetornaX();
 			caminho_barreira_y = v.RetornaY();
+			
+			//Checa se existe peoes da mesma cor na mesma casa
+			if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null && Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2 != null) {
+				if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1.getP1().ExibeCor() == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2.getP1().ExibeCor()) {
+					flag_barreira = false;
+				}
+			}
 
 			i++;
 
@@ -343,9 +422,9 @@ public class Regras implements Observado {
 		if(flag_barreira) {
 			return true;
 		}else {
-	      TextAreaLog.getTextAreaLog().printLog("Existe uma barreira no caminho!");
-	      adicionaPeaoCaminho();
-	      return false;
+			TextAreaLog.getTextAreaLog().printLog("Existe uma barreira no caminho!");
+			adicionaPeaoCaminho();
+			return false;
 		}
 
     }
