@@ -290,7 +290,7 @@ public class Regras implements Observado {
     	}
     }
 
-    private void checaDesmontaBarreira() {
+    private void checaDesmontaBarreira() throws FileNotFoundException, BadLocationException {
     	int y = 0;
 		//Verifica se existe barreira para ser desmontada
 		while (y < 4 && j.getPeao(y).getP1().getBarreira() == false) {
@@ -298,6 +298,7 @@ public class Regras implements Observado {
 		}
 
 		if(y < 4) {
+			adicionaPeaoCaminho();
     		j.setNumPeao(y);
 		}
     }
