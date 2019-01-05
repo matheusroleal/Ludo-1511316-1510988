@@ -228,6 +228,7 @@ public class Regras implements Observado {
 		    if(checaBarreira(6) && checaAbrigo(6) && checaCasa(6)) {
 		    	return true;
 		    }else {
+				removePeaoCaminho();
 		    	return false;
 		    }	    
 		}
@@ -382,8 +383,16 @@ public class Regras implements Observado {
 		}
 
 		if(y < 4) {
+			int pos_corr = j.getPeao(j.getNumPeao()).getLst().pos;
 			adicionaPeaoCaminho();
     		j.setNumPeao(y);
+    		if(checaBarreira(6) && checaAbrigo(6) && checaCasa(6)) {
+    			TextAreaLog.getTextAreaLog().printLog("Pode ir!");    	
+		    }else {
+	    		j.setNumPeao(pos_corr);
+	    		removePeaoCaminho();
+				TextAreaLog.getTextAreaLog().printLog("Volta para o antigo");
+		    }
 		}
     }
 
