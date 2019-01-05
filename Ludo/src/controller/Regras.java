@@ -344,9 +344,9 @@ public class Regras implements Observado {
 		}else {
 	      TextAreaLog.getTextAreaLog().printLog("Existe uma barreira no caminho!");
 	      adicionaPeaoCaminho();
+	      return false;
 		}
 
-		return false;
     }
 
 	private void adicionaPeaoCaminho() throws FileNotFoundException, BadLocationException{
