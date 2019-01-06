@@ -26,7 +26,7 @@ public class Controlador {
 		return controlador;
 	}
 
-	public void getPosicao(int x, int y) throws BadLocationException, FileNotFoundException {
+	public void getPosicao(int x, int y) throws BadLocationException, FileNotFoundException, InterruptedException {
 		
 		if(JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).getIndex(jogo.getJogo().getO1(x, y)) != -1){
 			JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).setNumPeao((jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(jogo.getJogo().getO1(x, y)));

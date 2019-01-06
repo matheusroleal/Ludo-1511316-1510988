@@ -21,8 +21,10 @@ public class Regras implements Observado {
     int jogador_num;
     Jogador j;
     private Observador obs;
+    boolean flag_malandra;
 
     private Regras(){
+    	flag_malandra = false;
 
     	movimento = 0;
 
@@ -34,7 +36,7 @@ public class Regras implements Observado {
     }
 
     public void AplicaRegras(int mv) throws FileNotFoundException, BadLocationException, InterruptedException {
-
+    	flag_malandra = false;
 
     	jogador_num = JogadoresController.getJogadoresController().getJogadorTurno() + 1;
 
@@ -171,8 +173,11 @@ public class Regras implements Observado {
 
     }
 
-    public void aplicaClick() {
+    public void aplicaClick() throws FileNotFoundException, BadLocationException, InterruptedException {
 		obs.notify(2, this);
+		if(flag_malandra) {
+			AplicaRegras(6);
+		}
     }
     
     private boolean checaComeParaSair() throws FileNotFoundException, BadLocationException {
@@ -522,7 +527,8 @@ public class Regras implements Observado {
     	
     	// Reiniciando as variavies para novo peao
     	JogadoresController.getJogadoresController().setM(false);
-		TextAreaLog.getTextAreaLog().printLog("Selecione um peao e jogue 6!");
+		TextAreaLog.getTextAreaLog().printLog("Selecione um peao e ande 6!");
+		flag_malandra = true;
     }
 
     private void defineVencedor(int turno) throws FileNotFoundException, BadLocationException {
