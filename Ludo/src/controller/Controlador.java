@@ -28,19 +28,20 @@ public class Controlador {
 
 	public void getPosicao(int x, int y) throws BadLocationException, FileNotFoundException, InterruptedException {
 		
-		if(JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).getIndex(jogo.getJogo().getO1(x, y)) != -1){
-			JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).setNumPeao((jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(jogo.getJogo().getO1(x, y)));
+		if(JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).getIndex(Jogo.getJogo().getO1(x, y)) != -1){
+			JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).setNumPeao((Jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(Jogo.getJogo().getO1(x, y)));
+			TextAreaLog.getTextAreaLog().printLog("Voce selecionou o peao : " + ((Jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(Jogo.getJogo().getO1(x, y)) + 1));
 			Regras.getRegras().aplicaClick();
 		}
-		else if(JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).getIndex(jogo.getJogo().getO2(x, y)) != -1){
-			JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).setNumPeao((jogo.getJogo().jogadores_na_casa[x][y].jogadores.lastElement()).getIndex(jogo.getJogo().getO2(x, y)));
+		else if(JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).getIndex(Jogo.getJogo().getO2(x, y)) != -1){
+			JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).setNumPeao((Jogo.getJogo().jogadores_na_casa[x][y].jogadores.lastElement()).getIndex(Jogo.getJogo().getO2(x, y)));
+			TextAreaLog.getTextAreaLog().printLog("Voce selecionou o peao : " + ((Jogo.getJogo().jogadores_na_casa[x][y].jogadores.lastElement()).getIndex(Jogo.getJogo().getO2(x, y)) + 1));
 			Regras.getRegras().aplicaClick();
 		}
 		else{
 			TextAreaLog.getTextAreaLog().printLog("Esta peca nao pertence a voce!");
 		}
 
-		TextAreaLog.getTextAreaLog().printLog("Voce selecionou o peao : " + ((jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(jogo.getJogo().getO1(x, y)) + 1));
 	}
 
 	public void registra(Observador o) {
