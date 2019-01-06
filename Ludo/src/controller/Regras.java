@@ -247,7 +247,7 @@ public class Regras implements Observado {
 
     	caminho_abrigo_x = v.RetornaX();
     	caminho_abrigo_y = v.RetornaY();
-
+    	
     	//Checa se e possivel adicionar o peao naquela casa
     	if (Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1 != null && Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).o1.getP1().a != j.getPeao(j.getNumPeao()).getP1().a) {
     		// Nesse caso a captura eh executada
@@ -298,8 +298,9 @@ public class Regras implements Observado {
     		    Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).RemovePeao(p_comido, j_remover);
 
     		    //jogador q fizer uma captura pode andar mais 6
-    		    if(checaBarreira(movimento+6) && checaAbrigo(movimento+6) && checaCasa(movimento+6)) {
-        			movimento+=6;
+    		    if(checaBarreira(6) && checaAbrigo(6) && checaCasa(6)) {
+        			checaCaptura(6);
+        			movimento = movimento + 6;
     		    }else {
     		    	removePeaoCaminho();
     		    }
