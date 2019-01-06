@@ -318,7 +318,7 @@ public class Regras implements Observado {
 
     private void checaSeis(int mov) throws FileNotFoundException, BadLocationException{
 
-    	if(mov == 6) {
+    	if(mov == 6 && j.getPeao(j.getNumPeao()).getFim(jogador_num) == -1) {
     		checaDesmontaBarreira();
     		JogadoresController.getJogadoresController().setM(false);
     		j.getPeao(j.getNumPeao()).setMd(jogador_num,1);
@@ -433,7 +433,6 @@ public class Regras implements Observado {
 		}else {
 			TextAreaLog.getTextAreaLog().printLog("Existe uma barreira no caminho!");
 			adicionaPeaoCaminho();
-			TextAreaLog.getTextAreaLog().printLog("teste!");
 			return false;
 		}
 
