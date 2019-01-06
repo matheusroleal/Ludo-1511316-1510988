@@ -21,10 +21,10 @@ public class Regras implements Observado {
     int jogador_num;
     Jogador j;
     private Observador obs;
-    boolean flag_malandra;
+    boolean peao_final_joga_novamente;
 
     private Regras(){
-    	flag_malandra = false;
+    	peao_final_joga_novamente = false;
 
     	movimento = 0;
 
@@ -36,8 +36,7 @@ public class Regras implements Observado {
     }
 
     public void AplicaRegras(int mv) throws FileNotFoundException, BadLocationException, InterruptedException {
-    	flag_malandra = false;
-
+    	
     	jogador_num = JogadoresController.getJogadoresController().getJogadorTurno() + 1;
 
     	j = JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno());
@@ -128,8 +127,15 @@ public class Regras implements Observado {
     		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
     		removePeaoCaminho();
 
-    		// Se movimento for 6, jogador pode jogar novamente
-    		checaSeis(movimento);
+    		// Se movimento for 6, jogador pode jogar novamente, caso nao seja o move 6 do peao chegando no final
+    		if(!peao_final_joga_novamente) {
+    			checaSeis(movimento);
+    		}
+    		
+    		if(peao_final_joga_novamente) {
+    	    	JogadoresController.getJogadoresController().setM(true);
+    	    	peao_final_joga_novamente = false;
+        	}
 
     		// Caso o peao esteja na reta final, verirficar se eh possivel move-lo
 			if(j.getPeao(j.getNumPeao()).getFim(jogador_num) != -1) {
@@ -164,7 +170,6 @@ public class Regras implements Observado {
     	}
 
     	if(JogadoresController.getJogadoresController().getM() == true){
-
     		JogadoresController.getJogadoresController().MudaTurno();
     		ChamaProxJogador(JogadoresController.getJogadoresController().getJogadorTurno());
   	      	TextAreaLog.getTextAreaLog().printLog("Selecione o peao antes de jogar!");
@@ -175,7 +180,7 @@ public class Regras implements Observado {
 
     public void aplicaClick() throws FileNotFoundException, BadLocationException, InterruptedException {
 		obs.notify(2, this);
-		if(flag_malandra) {
+		if(peao_final_joga_novamente) {
 			AplicaRegras(6);
 		}
     }
@@ -418,13 +423,11 @@ public class Regras implements Observado {
 			caminho_barreira_y = v.RetornaY();
 			
 			//Checa se existe peoes da mesma cor na mesma casa
-			if(!((j.getX() == defineXFinal(jogador_num) && j.getY() == defineYFinal(jogador_num)))) {
-				if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null && Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2 != null) {
-					if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1.getP1().ExibeCor() == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2.getP1().ExibeCor()) {
-						flag_barreira = false;
-					}
-				}	
-			}
+			if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null && Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2 != null) {
+				if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1.getP1().ExibeCor() == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2.getP1().ExibeCor()) {
+					flag_barreira = false;
+				}
+			}	
 
 			i++;
 
@@ -508,8 +511,9 @@ public class Regras implements Observado {
     	j.SetP1X(novo_x);
     	j.SetP1Y(novo_y);
 
-    	Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
-
+		if(!((j.getX() == defineXFinal(jogador_num) && j.getY() == defineYFinal(jogador_num)))) {
+			Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j.getPeao(j.getNumPeao()), j);
+		}
     	obs.notify(1, this);
     }
 
@@ -524,11 +528,10 @@ public class Regras implements Observado {
 
     private void peaoNoFinal() throws FileNotFoundException, BadLocationException{
     	JogadoresController.getJogadoresController().setCont(jogador_num,(1+JogadoresController.getJogadoresController().getCont(jogador_num)));
-    	
     	// Reiniciando as variavies para novo peao
+		TextAreaLog.getTextAreaLog().printLog("Selecione um peao!");
+		peao_final_joga_novamente = true;
     	JogadoresController.getJogadoresController().setM(false);
-		TextAreaLog.getTextAreaLog().printLog("Selecione um peao e ande 6!");
-		flag_malandra = true;
     }
 
     private void defineVencedor(int turno) throws FileNotFoundException, BadLocationException {
