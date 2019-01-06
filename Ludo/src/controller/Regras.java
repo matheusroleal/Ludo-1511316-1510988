@@ -50,21 +50,17 @@ public class Regras implements Observado {
     		// Se o movimento for 5, jogador pode colocar peao na casa de saida
     		checaCinco(movimento);
     		
-    		if(flag_move_seis) {
-
-	    		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
-	    		removePeaoCaminho();
-	    		
-    			checaCaptura(6);
-
-    			// Move o peao de acordo com o valor do movimento
-    			movePeao(6);
-    		}
-    		
     		if(peao_final_joga_novamente) {
     	    	JogadoresController.getJogadoresController().setM(true);
     	    	peao_final_joga_novamente = false;
         	}
+    		
+    		if(flag_move_seis) {
+    			TextAreaLog.getTextAreaLog().printLog("Selecione um peao!");
+    			peao_final_joga_novamente = true;
+    	    	JogadoresController.getJogadoresController().setM(false);
+    		}
+    		
     	}
     	// Se ele tirar mais um cinco, devemos botar um peao na casa de saida
     	else if(movimento == 5 && checaPossibilidadeSair()) {
@@ -90,13 +86,9 @@ public class Regras implements Observado {
         		checaCinco(movimento);
         		
         		if(flag_move_seis) {
-    	    		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
-    	    		removePeaoCaminho();
-    	    		
-        			checaCaptura(6);
-
-        			// Move o peao de acordo com o valor do movimento
-        			movePeao(6);
+        			TextAreaLog.getTextAreaLog().printLog("Selecione um peao!");
+        			peao_final_joga_novamente = true;
+        	    	JogadoresController.getJogadoresController().setM(false);
         		}
     		}
     		//Caso nao haja peao nao utilizado, usamos o peao pre selecionado
@@ -945,17 +937,17 @@ public class Regras implements Observado {
 	    		while (y < 4 && j.getPeao(y).getCinco(jogador_num) == false) {
 	    			y++;
 	    		}
-
 	    		if(y < 4) {
-	        		int x = 0;
 	        		j.setNumPeao(y);
-		    		// Zera para geral
-		    		while (x < 4) {
-		    			j.getPeao(x).setMd(jogador_num, 0);
-		    			x++;
-		    		}
 	    		}
 			}
+    		int x = 0;
+			JogadoresController.getJogadoresController().setM(true);
+    		// Zera para geral
+    		while (x < 4) {
+    			j.getPeao(x).setMd(jogador_num, 0);
+    			x++;
+    		}
 			return false;
 		}
 	}
