@@ -413,10 +413,12 @@ public class Regras implements Observado {
 			caminho_barreira_y = v.RetornaY();
 			
 			//Checa se existe peoes da mesma cor na mesma casa
-			if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null && Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2 != null) {
-				if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1.getP1().ExibeCor() == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2.getP1().ExibeCor()) {
-					flag_barreira = false;
-				}
+			if(!((j.getX() == defineXFinal(jogador_num) && j.getY() == defineYFinal(jogador_num)))) {
+				if (Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1 != null && Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2 != null) {
+					if(Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o1.getP1().ExibeCor() == Jogo.getJogo().getCaminho(caminho_barreira_x, caminho_barreira_y).o2.getP1().ExibeCor()) {
+						flag_barreira = false;
+					}
+				}	
 			}
 
 			i++;
@@ -515,17 +517,12 @@ public class Regras implements Observado {
   		Jogo.getJogo().getCaminho(antigo_x, antigo_y).RemovePeao(j.getPeao(j.getNumPeao()), j);
     }
 
-    private void peaoNoFinal(){
-    	j.mudaPeao();
+    private void peaoNoFinal() throws FileNotFoundException, BadLocationException{
     	JogadoresController.getJogadoresController().setCont(jogador_num,(1+JogadoresController.getJogadoresController().getCont(jogador_num)));
-
+    	
     	// Reiniciando as variavies para novo peao
-//    	j.getPeao(j.getNumPeao()).setCinco(jogador_num, false);
-//    	j.getPeao(j.getNumPeao()).setC(jogador_num, false);
-    	j.getPeao(j.getNumPeao()).setFim(jogador_num, -1);
-    	j.getPeao(j.getNumPeao()).setY(jogador_num, true);
-    	j.getPeao(j.getNumPeao()).setMd(jogador_num, 0);
-    	JogadoresController.getJogadoresController().setM(true);
+    	JogadoresController.getJogadoresController().setM(false);
+		TextAreaLog.getTextAreaLog().printLog("Selecione um peao e jogue 6!");
     }
 
     private void defineVencedor(int turno) throws FileNotFoundException, BadLocationException {
