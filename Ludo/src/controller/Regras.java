@@ -145,7 +145,7 @@ public class Regras implements Observado {
             			movePeao(movimento);
     				}
         	}
-    		
+
     		checaFinalDepois();
 
     	}
@@ -520,8 +520,8 @@ public class Regras implements Observado {
     	JogadoresController.getJogadoresController().setCont(jogador_num,(1+JogadoresController.getJogadoresController().getCont(jogador_num)));
 
     	// Reiniciando as variavies para novo peao
-    	j.getPeao(j.getNumPeao()).setCinco(jogador_num, false);
-    	j.getPeao(j.getNumPeao()).setC(jogador_num, false);
+//    	j.getPeao(j.getNumPeao()).setCinco(jogador_num, false);
+//    	j.getPeao(j.getNumPeao()).setC(jogador_num, false);
     	j.getPeao(j.getNumPeao()).setFim(jogador_num, -1);
     	j.getPeao(j.getNumPeao()).setY(jogador_num, true);
     	j.getPeao(j.getNumPeao()).setMd(jogador_num, 0);
