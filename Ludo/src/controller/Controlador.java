@@ -27,9 +27,13 @@ public class Controlador {
 	}
 
 	public void getPosicao(int x, int y) throws BadLocationException, FileNotFoundException {
-
+		
 		if(JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).getIndex(jogo.getJogo().getO1(x, y)) != -1){
 			JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).setNumPeao((jogo.getJogo().jogadores_na_casa[x][y].jogadores.firstElement()).getIndex(jogo.getJogo().getO1(x, y)));
+			Regras.getRegras().aplicaClick();
+		}
+		else if(JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).getIndex(jogo.getJogo().getO2(x, y)) != -1){
+			JogadoresController.getJogadoresController().getJogador(JogadoresController.getJogadoresController().getJogadorTurno()).setNumPeao((jogo.getJogo().jogadores_na_casa[x][y].jogadores.lastElement()).getIndex(jogo.getJogo().getO2(x, y)));
 			Regras.getRegras().aplicaClick();
 		}
 		else{
