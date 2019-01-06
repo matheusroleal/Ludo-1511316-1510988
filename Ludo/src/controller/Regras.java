@@ -384,15 +384,14 @@ public class Regras implements Observado {
 		}
 
 		if(y < 4) {
-			int pos_corr = j.getPeao(j.getNumPeao()).getLst().pos;
+			int num_corr = j.getNumPeao();
 			adicionaPeaoCaminho();
     		j.setNumPeao(y);
     		if(checaBarreira(6) && checaAbrigo(6) && checaCasa(6)) {
-    			TextAreaLog.getTextAreaLog().printLog("Pode ir!");    	
+    			j.getPeao(num_corr).setMd(jogador_num, 0);
 		    }else {
-	    		j.setNumPeao(pos_corr);
+	    		j.setNumPeao(num_corr);
 	    		removePeaoCaminho();
-				TextAreaLog.getTextAreaLog().printLog("Volta para o antigo");
 		    }
 		}
     }
@@ -434,6 +433,7 @@ public class Regras implements Observado {
 		}else {
 			TextAreaLog.getTextAreaLog().printLog("Existe uma barreira no caminho!");
 			adicionaPeaoCaminho();
+			TextAreaLog.getTextAreaLog().printLog("teste!");
 			return false;
 		}
 
