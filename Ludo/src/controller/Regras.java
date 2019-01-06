@@ -51,6 +51,7 @@ public class Regras implements Observado {
     		checaCinco(movimento);
     		
     		if(flag_move_seis) {
+
 	    		// Necessario remover o peao da casa que estava antes para adiciona-lo a casa nova
 	    		removePeaoCaminho();
 	    		
@@ -75,6 +76,8 @@ public class Regras implements Observado {
     		}
 
     		if(y < 4) {
+    			j.getPeao(j.getNumPeao()).setMd(jogador_num, 0);
+
         		j.setNumPeao(y);
 
     			// Caso o jogador jogue apos ter tirado 6
@@ -944,7 +947,13 @@ public class Regras implements Observado {
 	    		}
 
 	    		if(y < 4) {
+	        		int x = 0;
 	        		j.setNumPeao(y);
+		    		// Zera para geral
+		    		while (x < 4) {
+		    			j.getPeao(x).setMd(jogador_num, 0);
+		    			x++;
+		    		}
 	    		}
 			}
 			return false;
