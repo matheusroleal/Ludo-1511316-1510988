@@ -23,9 +23,13 @@ public class Caminho{
 	public void AdicionaPeao(Peao p, Jogador j) throws FileNotFoundException, BadLocationException {
 		if(o1 == null) {
 			o1 = p;
+			
+			jogadores.addElement(j);
 		}
 		else if(o2 == null) {
 			o2 = p;
+			
+			jogadores.addElement(j);
 
 			// adiciona desenho do peao no estilo barreira / abrigo
 			if(o2.getP1().a == o1.getP1().a) {
@@ -38,8 +42,6 @@ public class Caminho{
 				o2.getP1().SetCorB(o1.getP1().a);
 			}
 		}
-
-		jogadores.addElement(j);
 	}
 
 	public void RemovePeao(Peao p, Jogador j) throws FileNotFoundException, BadLocationException {
@@ -58,13 +60,15 @@ public class Caminho{
 		if(o1 == p) {
 			o1 = o2;
 			o2 = null;
+			if(!jogadores.isEmpty()) {
+				jogadores.remove(jogadores.indexOf(j));
+			}
 		}
 		else if(o2 == p){
 			o2 = null;
-		}
-
-		if(!jogadores.isEmpty()) {
-			jogadores.remove(jogadores.indexOf(j));
+			if(!jogadores.isEmpty()) {
+				jogadores.remove(jogadores.indexOf(j));
+			}
 		}
 	}
 }
