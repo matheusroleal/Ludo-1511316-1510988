@@ -969,11 +969,9 @@ public class Regras implements Observado {
     	removePeaoCaminho();
 
 		if(Jogo.getJogo().getCaminho(casa_x, casa_y).o1 != null && Jogo.getJogo().getCaminho(casa_x, casa_y).o2 != null){
-			if(Jogo.getJogo().getCaminho(casa_x, casa_y).o1.getP1().ExibeCor() == Jogo.getJogo().getCaminho(casa_x, casa_y).o2.getP1().ExibeCor()){
-				adicionaPeaoCaminho();
-	        	TextAreaLog.getTextAreaLog().printLog("Barreira na casa!");
-				return false;	
-			}
+			adicionaPeaoCaminho();
+	    	TextAreaLog.getTextAreaLog().printLog("Casa lotada!");
+			return false;	
 		}
 
 		return true;
