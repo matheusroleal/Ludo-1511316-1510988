@@ -128,7 +128,7 @@ public class Regras implements Observado {
     		removePeaoCaminho();
 
     		// Se movimento for 6, jogador pode jogar novamente, caso nao seja o move 6 do peao chegando no final
-    		if(j.getPeao(j.getNumPeao()).getFim(jogador_num) == -1) {
+    		if(!peao_final_joga_novamente) {
     			checaSeis(movimento);
     		}
     		
@@ -310,9 +310,12 @@ public class Regras implements Observado {
     		    Jogo.getJogo().getCaminho(caminho_abrigo_x, caminho_abrigo_y).RemovePeao(p_comido, j_remover);
 
     		    //jogador q fizer uma captura pode andar mais 6
-    			TextAreaLog.getTextAreaLog().printLog("Selecione um peao!");
-    			peao_final_joga_novamente = true;
-    	    	JogadoresController.getJogadoresController().setM(false);
+    		    if(checaBarreira(6) && checaAbrigo(6) && checaCasa(6)) {
+        			checaCaptura(6);
+        			movimento = movimento + 6;
+    		    }else {
+    		    	removePeaoCaminho();
+    		    }
 
     		    TextAreaLog.getTextAreaLog().printLog("Peca comida!");
     		}
