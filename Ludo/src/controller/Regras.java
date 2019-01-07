@@ -128,7 +128,7 @@ public class Regras implements Observado {
     		removePeaoCaminho();
 
     		// Se movimento for 6, jogador pode jogar novamente, caso nao seja o move 6 do peao chegando no final
-    		if(!peao_final_joga_novamente) {
+    		if(j.getPeao(j.getNumPeao()).getFim(jogador_num) == -1) {
     			checaSeis(movimento);
     		}
     		
