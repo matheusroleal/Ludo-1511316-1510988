@@ -203,8 +203,12 @@ public class FluxoDados {
 
 					j_nova_pos.SetP1X(novo_x);
 					j_nova_pos.SetP1Y(novo_y);
+					
+					
+					if(!((j_nova_pos.getX() == defineXFinal(jogador_num) && j_nova_pos.getY() == defineYFinal(jogador_num)))) {
 
-					Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j_nova_pos.getPeao(y), j_nova_pos);
+						Jogo.getJogo().getCaminho(novo_x, novo_y).AdicionaPeao(j_nova_pos.getPeao(y), j_nova_pos);
+					}		
 				}
 			  }
 			}
@@ -344,6 +348,34 @@ public class FluxoDados {
         	case 3:
         		return 1;
         	}
+    	}
+    	return 0;
+    }
+    
+    private int defineXFinal (int jogador){
+    	switch (jogador) {
+        case 1:
+        	return 7;
+        case 2:
+        	return 6;
+        case 3:
+        	return 7;
+        case 4:
+        	return 8;
+    	}
+    	return 0;
+    }
+
+    private int defineYFinal (int jogador){
+    	switch (jogador) {
+        case 1:
+        	return 6;
+        case 2:
+        	return 7;
+        case 3:
+        	return 8;
+        case 4:
+        	return 7;
     	}
     	return 0;
     }
