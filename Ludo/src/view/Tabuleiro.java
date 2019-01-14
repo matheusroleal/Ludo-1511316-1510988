@@ -1,3 +1,5 @@
+package view;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
@@ -153,7 +155,7 @@ public class Tabuleiro extends JPanel {
 		CasaInicial(g2d, Color.BLUE, 9,0);		
 		CasaInicial(g2d, Color.YELLOW, 9,9);
 		
-		//locais onde peões ficam no início do jogo
+		//locais onde peï¿½es ficam no inï¿½cio do jogo
 		casas[1][1] = new Ellipse2D.Double();
 		casas[1][1] = Inicio(g2d, 50, 50);
 		casas[1][4] = new Ellipse2D.Double();
@@ -187,7 +189,7 @@ public class Tabuleiro extends JPanel {
 		casas[13][13] = new Ellipse2D.Double();
 		casas[13][13] = Inicio(g2d, 50*13, 50*13);
 		
-		//casas de saída
+		//casas de saï¿½da
 		cordx[0] = 50+10;
 		cordy[0] = 50*6+10;
 		cordx[1] = 50*2-10;
@@ -231,6 +233,54 @@ public class Tabuleiro extends JPanel {
 		casas[13][6] = new Polygon(cordx, cordy, 3);
 		g2d.setPaint(Color.WHITE);
 		g2d.fill((Shape) casas[13][6]);
+		
+		Ellipse2D vm1, vm2, vm3, vm4;
+		vm1 = vm2 = vm3 = vm4 =new Ellipse2D.Double();
+		vm1.setFrame(50+5,50+5,40,40);
+		g2d.setPaint(Color.RED);
+		g2d.fill(vm1);
+		vm2.setFrame(50*4+5,50+5,40,40);
+		g2d.fill(vm2);
+		vm3.setFrame(50+5,50*4+5,40,40);
+		g2d.fill(vm3);
+		vm4.setFrame(50*4+5,50*4+5,40,40);
+		g2d.fill(vm4);
+		
+		Ellipse2D vd1, vd2, vd3, vd4;
+		vd1 = vd2 = vd3 = vd4 =new Ellipse2D.Double();
+		vd1.setFrame(50*10+5,50+5,40,40);
+		g2d.setPaint(Color.GREEN);
+		g2d.fill(vd1);
+		vd2.setFrame(50*13+5,50+5,40,40);
+		g2d.fill(vd2);
+		vd3.setFrame(50*10+5,50*4+5,40,40);
+		g2d.fill(vd3);
+		vd4.setFrame(50*13+5,50*4+5,40,40);
+		g2d.fill(vd4);
+		
+		Ellipse2D am1, am2, am3, am4;
+		am1 = am2 = am3 = am4 =new Ellipse2D.Double();
+		am1.setFrame(50*10+5,50*10+5,40,40);
+		g2d.setPaint(Color.YELLOW);
+		g2d.fill(am1);
+		am2.setFrame(50*13+5,50*10+5,40,40);
+		g2d.fill(am2);
+		am3.setFrame(50*10+5,50*13+5,40,40);
+		g2d.fill(am3);
+		am4.setFrame(50*13+5,50*13+5,40,40);
+		g2d.fill(am4);
+		
+		Ellipse2D az1, az2, az3, az4;
+		az1 = az2 = az3 = az4 =new Ellipse2D.Double();
+		az1.setFrame(50+5,50*10+5,40,40);
+		g2d.setPaint(Color.BLUE);
+		g2d.fill(az1);
+		az2.setFrame(50*4+5,50*10+5,40,40);
+		g2d.fill(az2);
+		az3.setFrame(50+5,50*13+5,40,40);
+		g2d.fill(az3);
+		az4.setFrame(50*4+5,50*13+5,40,40);
+		g2d.fill(az4);
 	}
 	
 }
