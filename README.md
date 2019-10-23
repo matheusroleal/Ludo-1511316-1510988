@@ -10,9 +10,9 @@ At the beginning of the game, each player's four tokens are out of play and stag
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Ludo_paths.svg/260px-Ludo_paths.svg.png)
 
 
-### How to Configure and Run
+### Run Configuration
 
-### Pre Requesites
+### Prerequisites
 
 1. Eclipse
 2. Java 10
